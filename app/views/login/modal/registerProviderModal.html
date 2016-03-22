@@ -1,0 +1,166 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 1000px;
+    height: auto;
+    margin-top:-150px;
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+  .myform-lable-width {
+    width: 160px;
+  }
+  .myform-input-width {
+    width: 198px;
+    float: right;
+  }
+</style>
+<div class="am-g">
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-6">
+      <div class="am-input-group">
+          <span class="am-input-group-label" style="background: transparent; border: none;">
+            省/直辖市：
+          </span>
+        <ui-select ng-model="formData.province" ng-change="setProvince(formData.province)"  ng-disabled="false" style="width:208px" title="选择省份">
+          <ui-select-match placeholder="搜索省/直辖市">{{$select.selected.name}}</ui-select-match>
+          <ui-select-choices repeat="division in divisions | filter: $select.search">
+            <div ng-bind-html="division.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+    <div class="am-u-sm-6">
+      <div class="am-input-group">
+          <span class="am-input-group-label" style="background: transparent; border: none;">
+            地级市/区：
+          </span>
+        <ui-select ng-model="formData.city"  ng-disabled="false" style="width:208px" title="选择市">
+          <ui-select-match placeholder="搜索市">{{$select.selected.name}}</ui-select-match>
+          <ui-select-choices repeat="city in formData.province.cities | filter: $select.search">
+            <div ng-bind-html="city.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-12">
+      <div class="am-input-group">
+          <span class="am-input-group-label" style="background: transparent; border: none;">
+            具体地址：
+          </span>
+        <textarea type="text" class="am-form-field leaderData" placeholder="输入具体地址..." ng-model="formData.address"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-6">
+      <div class="am-input-group">
+            <span class="am-input-group-label myform-lable-width" style="background: transparent; border: none;">
+              单位名称：
+            </span>
+        <input type="text" class="am-form-field am-radius" placeholder="输入单位名称..." ng-model="formData.merchantName" />
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-6">
+      <div class="am-input-group">
+          <span class="am-input-group-label myform-lable-width" style="background: transparent; border: none;">
+            单位类型：
+          </span>
+        <select class="form-control myform-input-width" ng-model="formData.providerType" ng-change="chooseProviderType()">
+          <option value="fabric">面料商</option>
+          <option value="accessory">辅料商</option>
+          <option value="factory">工厂</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-12">
+      <div class="am-input-group">
+        <span class="am-input-group-label" style="background: transparent; border: none;">
+          业务说明：
+        </span>
+        <div class="am-form-group" style="padding-top: 12px">
+          <label class="am-checkbox-inline" ng-repeat="business in businesses">
+            <input type="checkbox" checklist-model="formData.business" checklist-value="business.shortName"> {{business.fullName}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-6">
+      <div class="am-input-group">
+        <span class="am-input-group-label myform-lable-width" style="background: transparent; border: none;">
+          联系人：
+        </span>
+        <input type="text" class="am-form-field am-radius myform-input-width" placeholder="必填" ng-model="formData.contact" />
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-6">
+      <div class="am-input-group">
+            <span class="am-input-group-label myform-lable-width" style="background: transparent; border: none;">
+              联系电话 ：
+            </span>
+        <input type="text" class="am-form-field am-radius myform-input-width" placeholder="必填" ng-model="formData.phone" />
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-6">
+      <div class="am-input-group">
+            <span class="am-input-group-label myform-lable-width" style="background: transparent; border: none;">
+              邮箱   ：
+            </span>
+        <input type="text" class="am-form-field am-radius myform-input-width" placeholder="可不填" ng-model="formData.email" />
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-6">
+      <div class="am-input-group">
+            <span class="am-input-group-label myform-lable-width" style="background: transparent; border: none;">
+              QQ   ：
+            </span>
+        <input type="text" class="am-form-field am-radius myform-input-width" placeholder="可不填" ng-model="formData.qq" />
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12" style="margin-top: 40px">
+    <div class="am-u-sm-6">
+      <div class="am-input-group">
+            <span class="am-input-group-label myform-lable-width" style="background: transparent; border: none;">
+              网址：
+            </span>
+        <input type="text" class="am-form-field am-radius myform-input-width" placeholder="可不填" ng-model="formData.website" />
+      </div>
+    </div>
+  </div>
+
+  <div class="am-u-sm-10" style="margin-top: 40px">
+    <div class="am-u-sm-11">
+      <a class="am-btn am-btn-primary am-radius" style="margin-left: 400px" ng-click="validate()" >检查填写</a>
+      <a ng-if="checkPass" class="am-btn am-btn-warning am-radius am-fr" ng-click="confirm(submitData)" >提交注册<span class="am-icon-angle-double-right"></span></a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-12">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="tailor.provider.fabric()">定制供应商</a></li>
+        <li><a href="" ui-sref="tailor.provider.fabric()">面料供应商</a></li>
+        <li class="am-active">{{shortName}}&nbsp已注销</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g">
+    <div class="am-u-sm-12">
+      <p class="am-text-sm" style="margin-top: 10px">*以下是所有断货的产品，请留意，请从面料本中划掉。</p>
+
+      <table class="am-table am-table-striped am-table-hover table-main">
+        <thead>
+        <tr>
+          <th class="table-id">序号</th>
+          <th class="table-title">货号</th>
+          <th class="table-type">色号</th>
+          <th class="table-author">料侧</th>
+          <th class="table-date">状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items">
+          <td>{{$index+1}}</td>
+          <td>{{item.productNumber}}</td>
+          <td>{{item.color}}</td>
+          <td>{{item.book}}</td>
+          <td class=" am-text-danger">已注销</td>
+        </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+
+
+</div>

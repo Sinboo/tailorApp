@@ -1,0 +1,17 @@
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">
+    <ul class="am-list admin-sidebar-list">
+      <li><a class="am-text-md" ui-sref="tailor.repertory.quickQuery({fabricId: fabricId, shortName: shortName})"  ><span ng-class="getClass('quickQuery')">快速查询</span> </a></li>
+      <li><a class="am-text-md" ui-sref="tailor.repertory.outOfStock({fabricId: fabricId, shortName: shortName})"  ><span ng-class="getClass('outOfStock')">暂时缺货</span> </a></li>
+      <li><a class="am-text-md" ui-sref="tailor.repertory.canceled({fabricId: fabricId, shortName: shortName})"  ><span ng-class="getClass('canceled')">已注销</span> </a></li>
+    </ul>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+
+  <div ui-view></div>
+
+  <!-- content end -->
+</div>

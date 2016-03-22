@@ -1,0 +1,25 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    margin-top: 250px;
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <form>
+    <div class="am-form-group">
+      <div class="am-u-sm-12 am-u-sm-offset-1 ">
+        <button type="button" class="am-btn am-btn-secondary" ng-click=closeThisDialog("platform")>优裁供应商</button>
+        <button type="button" class="am-btn am-btn-primary" style="margin-left: 60px" ng-click=confirm("NoPlatform")>非优裁供应商</button>
+      </div>
+    </div>
+  </form>
+  <br>
+  <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+</div>

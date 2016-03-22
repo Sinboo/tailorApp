@@ -1,0 +1,102 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+  .more-button {
+    margin-top: 10px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-6">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="provider.businessManage.repertoryAndPrice()">业务管理</a></li>
+        <li class="am-active">缺货管理</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding">
+
+    <div class="am-u-sm-10">
+      <div class="am-u-sm-4">
+        <div class="am-input-group">
+          <input type="text" class="am-form-field" placeholder="输入面料号(必填)" ng-model="productNumber"/>
+        </div>
+      </div>
+      <div class="am-u-sm-8">
+        <div class="am-u-sm-9">
+          <div class="am-input-group">
+            <input type="text" class="am-form-field" placeholder="输入色号(选填)" ng-model="color"/>
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-primary" type="button" ng-click="quickQueryProduct(productNumber, color)">快速查询</button>
+          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g" ng-if="quickQueryShow" style="margin-top: 40px; margin-left: 20px">
+      <div class="am-u-sm-10">
+        <table class="am-table am-table-striped am-table-hover table-main">
+          <thead>
+          <tr>
+            <th class="table-id">序号</th>
+            <th class="table-title">货号</th>
+            <th class="table-title">色号</th>
+            <th class="table-title">品牌</th>
+            <th class="table-title">料册</th>
+            <th class="table-title">库存</th>
+            <th class="table-title"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="qp in queriedProducts">
+            <td>{{$index + 1}}</td>
+            <td>{{qp.productNumber}}</td>
+            <td>{{qp.color}}</td>
+            <td>{{qp.brand.name}}</td>
+            <td>{{qp.book}}</td>
+            <td>{{qp.stock/100}}</td>
+            <td><a href="" ng-click="setProductStatus(qp, $index)"><span class="am-text-primary">缺货登记</span></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <legend style="margin-top: 20px"></legend>
+
+    <div class="am-g" style="margin-top: 40px">
+      <div class="am-u-sm-10">
+        <table class="am-table am-table-striped am-table-hover table-main">
+          <thead>
+          <tr>
+            <th class="table-id">序号</th>
+            <th class="table-title">货号</th>
+            <th class="table-type">色号</th>
+            <th class="table-author">料册</th>
+            <th class="table-date ">预计到货</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="sp in stockProducts">
+            <td>{{$index + 1}}</td>
+            <td>{{sp.productNumber}}</td>
+            <td>{{sp.color}}</td>
+            <td>{{sp.book}}</td>
+            <td>{{sp.deliveryDateFormatStr}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+</div>

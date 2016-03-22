@@ -1,0 +1,60 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+  .more-button {
+    margin-top: 10px;
+  }
+  td {
+    text-align: center;
+  }
+  .table-title {
+    text-align: center;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-6">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="tailor.shopManage.orderRecord({STATUS: 'DOING'})">店内管理</a></li>
+        <li class="am-active">月结管理</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding" style="margin-top: 40px">
+    <div class="am-g" style="margin-top: 10px">
+      <div class="am-u-sm-10">
+        <table class="am-table am-table-striped am-table-hover table-main">
+          <thead>
+          <tr>
+            <th class="table-title">序号</th>
+            <th class="table-title">供应商</th>
+            <th class="table-title">区域 </th>
+            <th class="table-title">总金额</th>
+            <th class="table-title">操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="bill in bills">
+            <td>{{$index + 1}}</td>
+            <td>{{bill.shopName}}</td>
+            <td>{{bill.shopAtProvince + bill.shopAtCity}}</td>
+            <td>{{bill.amount/100}}</td>
+            <td>
+              <div class="am-btn-group am-btn-group-xs" ng-if="STATUS == 'DELIVERED'">
+                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="sendPayment(bill)"><span class="am-text-primary">发送付款凭证</span></button>
+              </div>
+              <p class="am-text-primary" ng-if="STATUS == 'PAYED'">已付款,待确认</p>
+              <p class="am-text-primary" ng-if="STATUS == 'SQUAREDUP'">结算成功</p>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 400px;
+    height: auto;
+    /*margin-top:-150px;*/
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">请输入新增价格体系的名称。</span></legend>
+  <form class="am-form am-form-horizontal">
+    <div class="am-form-group">
+      <label for="doc-ipt-3" class="am-u-sm-6 am-form-label">价格体系名称:</label>
+      <div class="am-u-sm-6">
+        <input type="text" id="doc-ipt-3" placeholder="" ng-model="modalData.name" />
+      </div>
+    </div>
+  </form>
+
+  <legend></legend>
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(modalData)">确认</button>
+  </div>
+</div>

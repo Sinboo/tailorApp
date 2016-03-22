@@ -1,0 +1,40 @@
+<style>
+  .more-button {
+    margin-top: 10px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-4">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="tailor.provider.fabric()">我的供应商</a></li>
+        <!--<li><a href="#">面料供应商</a></li>-->
+        <li class="am-active">面料供应商</li>
+        <!--<li class="am-active">意厉维(北京)</li>-->
+      </ol>
+    </div>
+    <div class="am-u-sm-3 more-button">
+      <a class="am-btn am-btn-primary am-radius" ui-sref="tailor.providers.fabrics()" >寻找更多供应商<span class="am-icon-angle-double-right"></span></a>
+    </div>
+
+  </div>
+
+
+  <div class="am-g">
+    <div class="am-u-sm-12">
+      <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-4 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+        <li ng-repeat="fabric in fabrics" style="padding: 20px">
+          <div class="am-gallery-item">
+            <a ui-sref="tailor.repertory.quickQuery({fabricId: fabric.number, shortName: fabric.shortName})" class="">
+              <img ng-src="{{fabric.portrait }}" style="width: 100%;height: 100%"/>
+              <h3 class="am-gallery-title " style="text-align: center">{{fabric.shortName}}</h3>
+              <!--<div class="am-gallery-desc">2375-09-26</div>-->
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

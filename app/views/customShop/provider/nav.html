@@ -1,0 +1,34 @@
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">
+    <ul class="am-list admin-sidebar-list">
+      <li class="admin-parent">
+        <a ui-sref="tailor.provider.fabric()" class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav1'}"><span ng-class="getClass('fabric')"> 面料供应商</span> <span ng-if="fabrics.length>0" class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav1">
+          <li ng-repeat="fabric in fabrics"><a ui-sref="tailor.repertory.quickQuery({fabricId: fabric.number, shortName: fabric.shortName})" class="am-text-sm"><span class=""></span>{{fabric.shortName}}</a></li>
+        </ul>
+      </li>
+      <li><a class="am-text-md"  ><span class=""></span> <span ng-class="getClass('leader')"> 辅料供应商</span></a></li>
+      <li class="admin-parent">
+        <a class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}"><span class=""></span> 生产供应商 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav2">
+          <li ><a href="#" class="am-text-sm"><span class="am-icon-dist"></span>开发中，敬请期待</a></li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a ui-sref="tailor.provider.myApplicaiton({status: ''})" class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}"><span ng-class="getClass('myApplication')">我的合作申请</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav3">
+          <li><a ui-sref="tailor.provider.myApplicaiton({status: 0})" class="am-text-sm"><span ng-class="getClass('myApplication/0')">未通过</span></a></li>
+          <li><a ui-sref="tailor.provider.myApplicaiton({status: 1})" class="am-text-sm"><span ng-class="getClass('myApplication/1')">已通过</span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+
+  <div ui-view></div>
+
+  <!-- content end -->
+</div>

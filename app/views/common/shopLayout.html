@@ -1,0 +1,67 @@
+  <style>
+    .footer p {
+      color: #7f8c8d;
+      margin: 0;
+      padding: 15px 0;
+      text-align: center;
+      background: #2d3e50;
+    }
+    .tailor-padding {
+      padding-left: 30px;
+    }
+    .qcode {
+      position: fixed;
+      left: 0px;
+      bottom: 80px;
+    }
+    .qcode img {
+      width: 135px;
+      height: auto;
+    }
+  </style>
+<header class="am-topbar am-topbar-fixed-top">
+  <div class="am-container" style="margin-left: 95px">
+    <h1 class="am-topbar-brand" >
+      <a href="" ng-click="login()"><img src="images/logo-new-layout.png" style="height: 80%"/></a>
+    </h1>
+
+    <div class="am-collapse am-topbar-collapse" id="collapse-head" >
+      <ul class="am-nav am-nav-pills am-topbar-nav">
+        <li class="tailor-padding" ng-class="getLayoutClass('shopManage')"><a ui-sref="tailor.shopManage.orderRecord({STATUS: 'DOING'})">店内管理</a></li>
+        <li class="tailor-padding" ng-class="getLayoutClass('otherManage')"><a ui-sref="tailor.otherManage.addPosition()">其他业务管理</a></li>
+        <li class="tailor-padding" ng-class="getLayoutClass('provider')" ><a ui-sref="tailor.provider.fabric()"><span  class="">我的供应商</span></a></li>
+        <li class="tailor-padding" ng-class="getLayoutClass('all')"><a href="" ng-click="allProviderClicked()">全部供应商</a></li>
+      </ul>
+
+      <div class="am-topbar-right">
+        <div style="padding-top: 15px">
+          欢迎你，<span class="am-text-secondary">{{shortName}}</span>
+          <a href="" style="margin-left: 30px" ng-if="shortName !== undefined" ng-click="logout()">
+            <span class="am-icon-power-off am-text-warning" ></span><span class="am-text-warning">退出</span>
+          </a>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</header>
+
+<div ui-view id="content"></div>
+
+  <div class="qcode">
+    <img src="images/qcode_customShop.jpg" />
+  </div>
+
+<footer class="footer">
+  <p>
+    <a href="" ng-click="aboutUs()">关于我们</a>
+    <a href="" ng-click="howToJoin()" style="margin-left: 40px">申请用户</a>
+    <a href="" ng-click="law()" style="margin-left: 40px">法律声明</a>
+    <br/>
+    京ICP备14033165号-2 / Powered by © 2016~2116 youcai6.com
+
+  </p>
+</footer>
+
+

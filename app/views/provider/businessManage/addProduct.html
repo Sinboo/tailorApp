@@ -1,0 +1,120 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+
+</style>
+<div class="admin-content">
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-12">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="provider.businessManage.repertoryAndPrice()">业务管理</a></li>
+        <li class="am-active">添加产品</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding">
+
+    <legend></legend>
+    <div class="am-u-sm-5 am-fl" >
+      <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
+          <label for="doc-ipt-3" class="am-u-sm-4 am-form-label am-text-sm">面料品牌:</label>
+          <div class="am-u-sm-8" id="selectBrand">
+            <ui-select ng-model="number" ng-change="setBrand(number)" style="font-size: smaller"  ng-disabled="false" title="选择品牌">
+              <ui-select-match placeholder="搜索品牌">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices repeat="brand.number as brand in brands | filter: $select.search">
+                <div ng-bind-html="brand.name | highlight: $select.search"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="am-u-sm-3">
+            <span class="am-text-sm">(必填)</span>
+          </div>
+        </div>
+        <legend></legend>
+
+        <div class="am-form-group">
+          <label for="doc-ipt-3" class="am-u-sm-4 am-form-label am-text-sm">面料类型:</label>
+          <div class="am-u-sm-8" id="selectType">
+            <ui-select ng-model="fabricTypeShortName" ng-change="setFabricTypeShortName(fabricTypeShortName)" style="font-size: smaller"  ng-disabled="false" title="选择面料类型">
+              <ui-select-match placeholder="搜索面料类型">{{$select.selected.fullName}}</ui-select-match>
+              <ui-select-choices repeat="fabric.shortName as fabric in fabricTypeList | filter: $select.search">
+                <div ng-bind-html="fabric.fullName | highlight: $select.search"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="am-u-sm-3">
+            <span class="am-text-sm">(必填)</span>
+          </div>
+        </div>
+        <legend></legend>
+
+        <div class="am-form-group">
+          <label for="doc-ipt-3" class="am-u-sm-4 am-form-label am-text-sm">料册:</label>
+          <div class="am-u-sm-8">
+            <input type="text" id="doc-ipt-3" placeholder="此项没有可不填" ng-model="product.book" style="font-size: smaller"/>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="am-u-sm-7">
+      <span class="am-text-secondary am-text-sm">提示：目前只能从现有品牌库里挑选，如果找不到您正在销售的品牌，请联系我们。如果是您们自己销售的无品牌产品，请填写“其他”。</span>
+    </div>
+
+    <legend></legend>
+    <div class="am-u-sm-12">
+      <form class="am-form am-form-horizontal">
+        <div class="am-form-group ">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+              <th class="table-title">序号</th>
+              <th class="table-title">面料货号</th>
+              <th class="table-title">色号</th>
+              <th class="table-title">成分</th>
+              <th class="table-title">纱支</th>
+              <th class="table-title">库存</th>
+              <th class="table-title">零剪价格</th>
+              <th class="table-title">批发价格</th>
+              <th class="table-title">批发起点米数</th>
+              <th class="table-title"><a href="" ng-click="addInputRow()"><span class="am-icon-plus"></span></a></th>
+              <th class="table-title"></th>
+              <th class="table-title"></th>
+            </tr>
+            </thead>
+            <tbody id="itemTable">
+            <tr ng-if="!(data.length > 0)">
+              <td colspan="12"><span class="am-text-secondary">* 点击"添加一条"或右上角的" + "添加条目 </span></td>
+            </tr>
+            <tr ng-repeat="d in data">
+              <td>{{$index + 1}}</td>
+              <td>{{d.productNumber}}</td>
+              <td>{{d.color}}</td>
+              <td>{{d.composition}}</td>
+              <td>{{d.yarnCount}}</td>
+              <td>{{d.stock}}</td>
+              <td>{{d.retailPrice}}</td>
+              <td>{{d.wholesalePrice}}</td>
+              <td>{{d.wholesaleLowerLimit/100}}</td>
+              <td><a href="" ng-click="editInputRow(d, $index)"><span class="am-text-warning am-icon-edit"></span></a></td>
+              <td><a href="" ng-click="copyInputRow(d)"><span class="am-text-warning am-icon-copy"></span></a></td>
+              <td><a href="" ng-click="deleteInputRow($index)"><span class="am-text-warning am-icon-trash-o"></span></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="am-form-group">
+          <div class="am-u-sm-10 am-u-sm-offset-3">
+            <button type="submit" class="am-btn am-btn-secondary" ng-click="addInputRow()">添加一条</button>
+            <button type="submit" class="am-btn am-btn-primary" style="margin-left: 60px" ng-click="submit()">确认提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

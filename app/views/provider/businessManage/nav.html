@@ -1,0 +1,20 @@
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">
+    <ul class="am-list admin-sidebar-list">
+      <li><a class="am-text-md" ui-sref="provider.businessManage.addProduct()" ><span class=""></span> <span ng-class="getClass('addProduct')"> 添加产品</span></a></li>
+      <li><a class="am-text-md" ui-sref="provider.businessManage.repertoryAndPrice()" ><span class=""></span> <span ng-class="getClass('repertoryAndPrice')"> 库存及价格</span></a></li>
+      <li><a class="am-text-md" ui-sref="provider.businessManage.stockManage()" ><span class=""></span> <span ng-class="getClass('stockManage')"> 缺货管理</span></a></li>
+      <li><a class="am-text-md" ui-sref="provider.businessManage.outStockManage()" ><span class=""></span> <span ng-class="getClass('outStockManage')"> 断货管理</span></a></li>
+      <li><a class="am-text-md" ui-sref="provider.businessManage.modifyRepertory()" ><span class=""></span> <span ng-class="getClass('modifyRepertory')"> 修改库存</span></a></li>
+
+    </ul>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+
+  <div ui-view></div>
+
+  <!-- content end -->
+</div>

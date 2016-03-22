@@ -1,0 +1,46 @@
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-4">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="tailor.provider.fabric()">定制供应商</a></li>
+        <!--<li><a href="#">面料供应商</a></li>-->
+        <li class="am-active">我的申请</li>
+        <!--<li class="am-active">意厉维(北京)</li>-->
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g">
+    <div class="am-u-sm-12">
+      <table class="am-table am-table-striped am-table-hover table-main">
+        <thead>
+        <tr>
+          <th class="table-id">序号</th>
+          <th class="table-title">类型</th>
+          <th class="table-type">单位名称</th>
+          <th class="table-author am-hide-sm-only">联系人</th>
+          <th class="table-date am-hide-sm-only">电话</th>
+          <th class="table-set">联系地址</th>
+          <th class="table-set">状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="apply in applies">
+          <td>{{$index + 1}}</td>
+          <td>{{apply ? '面料供应商':'面料供应商'}}</td>
+          <td>{{apply.supplier.fullName}}</td>
+          <td>{{apply.supplier.contact}}</td>
+          <td>{{apply.supplier.phone}}</td>
+          <td>{{apply.supplier.province}}{{apply.supplier.city}}{{apply.supplier.address}}</td>
+          <td ng-class="{false: 'am-text-primary', true: 'am-text-danger'}[apply.status=='REFUSED']">{{APPLY_STATUS[apply.status]}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+</div>

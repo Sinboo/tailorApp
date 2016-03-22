@@ -1,0 +1,236 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+  .more-button {
+    margin-top: 10px;
+  }
+  .subOrder td {
+    font-size: smaller;
+    font-style: italic;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-6">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="provider.customShop.myCustomShops()">定制合作商</a></li>
+        <li class="am-active">我的定制合作商</li>
+      </ol>
+    </div>
+    <div class="am-u-sm-6  more-button">
+      <article class="am-article am-u-sm-7">
+        <div class="am-article-bd">
+          <a ui-sref="provider.customShop.cooperationApplication()" ><p style="padding-left: 25px" class="am-article-lead am-text-warning">你有{{newApplyCount}}条新的合作申请。
+            <span class="am-icon-exclamation-triangle am-text-lg"></span>
+          </p></a>
+        </div>
+      </article>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding" style="margin-top: 40px">
+
+    <div class="am-g">
+      <div class="am-u-sm-4">
+        <div class="am-input-group">
+          <input type="text" class="am-form-field" placeholder="输入品牌名快速查找" ng-model="shopKeywords">
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-primary" type="button" ng-click="quickQuery(shopKeywords)">快速查询</button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g" ng-if="quickQueryShow">
+      <div class="am-u-sm-6">
+        <table class="am-table am-table-striped am-table-hover">
+          <thead>
+          <tr>
+            <th style="width: 100px;"></th>
+            <th style="width: 100px;"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>品牌名:</td>
+            <td>{{d.shortName}}</td>
+          </tr>
+          <tr>
+            <td>公司名称:</td>
+            <td>{{d.fullName}}</td>
+          </tr>
+          <tr>
+            <td>类型:</td>
+            <td>{{d.shopType}}</td>
+          </tr>
+          <tr>
+            <td>区域:</td>
+            <td>{{d.province}}</td>
+          </tr>
+          <tr>
+            <td>地址:</td>
+            <td>{{d.address}}</td>
+          </tr>
+          <tr>
+            <td>定制服装类型:</td>
+            <td>{{d.clothType}}</td>
+          </tr>
+          <tr>
+            <td>联系人:</td>
+            <td>{{d.contact}}</td>
+          </tr>
+          <tr>
+            <td>联系电话:</td>
+            <td>{{d.phone}}</td>
+          </tr>
+          <tr>
+            <td>联系邮箱:</td>
+            <td>{{d.email}}</td>
+          </tr>
+          <tr>
+            <td>微信号:</td>
+            <td>{{d.weChatNum}}</td>
+          </tr>
+          <tr>
+            <td>QQ:</td>
+            <td>{{d.qq}}</td>
+          </tr>
+          <tr>
+            <td>网站:</td>
+            <td>{{d.website}}</td>
+          </tr>
+          <tr>
+            <td>定位客户群:</td>
+            <td>{{d.clientBase}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <button class="am-btn am-btn-primary" type="button" ng-click="quickQueryConfirm()">确认</button>
+      </div>
+    </div>
+
+    <div class="am-g" style="margin-top: 40px">
+      <div class="am-u-sm-4 am-u-sm-offset-6">
+        <div class="am-input-group">
+          <span class="am-input-group-label" style="background: transparent; border: none;" >
+            限定区域：
+          </span>
+          <ui-select ng-model="divisionNumber" ng-change="changeFn('divisionNumber', divisionNumber)"  ng-disabled="false" style="width:208px" title="选择省份">
+            <ui-select-match placeholder="搜索省/直辖市">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="division.number as division in divisions | filter: $select.search">
+              <div ng-bind-html="division.name | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g" style="margin-top: 10px">
+      <div class="am-u-sm-10">
+        <table class="am-table am-table-striped am-table-hover table-main">
+          <thead>
+          <tr>
+            <th class="table-id">序号</th>
+            <th class="table-title">品牌名称</th>
+            <th class="table-type">区域</th>
+            <th class="table-author">类型</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat-start="shop in shops" ng-click="shop.expanded = !shop.expanded">
+            <!--<td ng-if="!order.dropDown"></td>-->
+            <td>{{(bigCurrentPage-1)*20 + $index + 1}}</td>
+            <td>{{shop.shortName}}</td>
+            <td>{{shop.province}}</td>
+            <td>{{SHOP_TYPE[shop.shopType]}}</td>
+            <td ng-if="shop.expanded && shop.dropDown"><span class="am-icon-chevron-up am-text-primary"></span></td>
+            <td ng-if="!shop.expanded && shop.dropDown"><span class="am-icon-chevron-down am-text-primary"></span></td>
+            <td ng-if="!shop.dropDown"></td>
+          </tr>
+          <tr ng-show="shop.expanded && shop.dropDown && shop.dropDown.length == 1" ng-repeat-start="d in shop.dropDown" >
+            <td colspan="10">
+              <table class="am-table am-table-striped am-table-hover">
+                <thead>
+                <tr>
+                  <th style="width: 100px;"></th>
+                  <th style="width: 100px;"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>品牌名:</td>
+                  <td>{{d.shortName}}</td>
+                </tr>
+                <tr>
+                  <td>公司名称:</td>
+                  <td>{{d.fullName}}</td>
+                </tr>
+                <tr>
+                  <td>类型:</td>
+                  <td>{{SHOP_TYPE[d.shopType]}}</td>
+                </tr>
+                <tr>
+                  <td>区域:</td>
+                  <td>{{d.province}}</td>
+                </tr>
+                <tr>
+                  <td>地址:</td>
+                  <td>{{d.address}}</td>
+                </tr>
+                <tr>
+                  <td>定制服装类型:</td>
+                  <td>{{d.clothType}}</td>
+                </tr>
+                <tr>
+                  <td>联系人:</td>
+                  <td>{{d.contact}}</td>
+                </tr>
+                <tr>
+                  <td>联系电话:</td>
+                  <td>{{d.phone}}</td>
+                </tr>
+                <tr>
+                  <td>联系邮箱:</td>
+                  <td>{{d.email}}</td>
+                </tr>
+                <tr>
+                  <td>微信号:</td>
+                  <td>{{d.weChatNum}}</td>
+                </tr>
+                <tr>
+                  <td>QQ:</td>
+                  <td>{{d.qq}}</td>
+                </tr>
+                <tr>
+                  <td>网站:</td>
+                  <td>{{d.website}}</td>
+                </tr>
+                <tr>
+                  <td>定位客户群:</td>
+                  <td>{{d.clientBase}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr ng-repeat-end ng-hide="true"></tr>
+          <tr ng-repeat-end ng-hide="true"></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-10">
+        <span class="am-text-secondary am-text-sm" style="margin-left: 5px">*共 {{total}} 条记录</span>
+        <div class="am-fr">
+          <pagination previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页" total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" items-per-page="perPages" ng-change="changeFn('page')"></pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

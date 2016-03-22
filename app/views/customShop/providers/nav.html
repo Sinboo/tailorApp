@@ -1,0 +1,45 @@
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">
+    <ul class="am-list admin-sidebar-list">
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav1'}"><span ng-class="getClass('fabric')">面料</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav1">
+          <li ng-repeat="business in businesses" >
+            <a href=""  class="am-text-sm" ng-click="choose(business, $index)">
+              <span ng-class="{true: 'am-text-primary', false: ''}[business.active]"> {{business.name}} </span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}"><span class=""></span> 辅料 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav2">
+          <li><a  class="am-text-sm">领带丝巾</a></li>
+          <li><a  class="am-text-sm">扣子</a></li>
+          <li><a  class="am-text-sm">衬布</a></li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav4'}"><span class=""></span> 生产商 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav4">
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}"><span class=""></span> 区域 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav3">
+          <li><a  class="am-text-sm">北京</a></li>
+          <li><a  class="am-text-sm">上海</a></li>
+          <li><a  class="am-text-sm">香港</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+
+  <div ui-view></div>
+
+  <!-- content end -->
+</div>

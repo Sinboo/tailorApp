@@ -1,0 +1,80 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+  .more-button {
+    margin-top: 10px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-6">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="provider.customShop.myCustomShops()">定制合作商</a></li>
+        <li class="am-active">合作申请</li>
+      </ol>
+    </div>
+    <div class="am-u-sm-6  more-button">
+      <article class="am-article am-u-sm-10">
+        <div class="am-article-bd">
+          <p class="am-article-lead am-text-secondary">你有{{newApplyCount}}条新的合作申请, 赶快处理吧。
+            <span class="am-icon-smile-o am-text-lg"></span>
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding">
+    <div class="am-u-sm-12">
+      <div data-am-widget="list_news" class="am-list-news am-list-news-default" >
+        <!--列表标题-->
+        <div class="am-list-news-hd am-cf">
+          <!--带更多链接-->
+          <a href="" class="">
+            <h2>待处理的合作申请 :</h2>
+          </a>
+        </div>
+        <article class="am-article">
+          <div class="am-article-bd">
+            <p class="am-article-lead am-text-secondary">* 下面是潜在合作商户发给你的合作申请，你可以进行“通过”或者“拒绝”操作。
+
+              注意：如果通过合作申请，对方将可以查看你的面料库存及价格信息，并可直接购买你的产品。
+            </p>
+          </div>
+        </article>
+
+        <div class="am-list-news-bd am-u-sm-12">
+          <ul class="am-list">
+            <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" ng-repeat="apply in applies">
+              <div class="am-u-sm-3 am-list-thumb">
+                <a ui-sref="provider.customShop.cooperationApplicationDetail({apply: apply})" class="">
+                  <img ng-src="{{apply.shop.portrait}}" class="am-img-thumbnail am-radius" style="width: 150px" />
+                </a>
+              </div>
+
+              <div class=" am-u-sm-9 am-list-main">
+                <div class="am-list-item-text am-text-lg"> {{apply.shop.province}}的&nbsp;<a ui-sref="provider.customShop.cooperationApplicationDetail({apply: apply})"><span class="am-text-primary" >{{apply.shop.shortName}}</span></a>&nbsp;{{SHOP_TYPE[apply.shop.shopType]}}&nbsp;请求与你建立业务合作 </div>
+                <div class="am-u-sm-6 am-u-sm-offset-6 am-vertical-align" style="height: 150px">
+                  <button type="submit" class="am-btn am-btn-secondary" ui-sref="provider.customShop.cooperationApplicationDetail({apply: apply})">查看</button>
+                  <button style="margin-left: 3px" type="submit" class="am-btn am-btn-primary" ng-click="accept(apply.number)" >确认</button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+</div>
+

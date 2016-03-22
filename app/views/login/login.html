@@ -1,0 +1,110 @@
+  <style>
+    .get {
+      background-image: url(images/BG_img.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      color: #fff;
+      text-align: center;
+      padding: 100px 0;
+    }
+
+
+    .get-title {
+      font-size: 200%;
+      padding: 20px;
+      display: inline-block;
+    }
+    .tailor-loginBG {
+      margin:30px;
+      background: inherit;
+      border: 1px solid grey;
+      /* for IE */
+      filter:alpha(opacity=80);
+      /* CSS3 standard */
+      opacity:0.8;
+    }
+
+    .footer p {
+      color: #7f8c8d;
+      margin: 0;
+      padding: 15px 0;
+      text-align: center;
+      background: #2d3e50;
+    }
+    .footer a {
+      margin: 10px;
+      padding: 30px 0;
+      text-align: center;
+      background: #2d3e50;
+    }
+  </style>
+
+<div class="get" ng-keyup="keyPress($event)" tabindex="1">
+  <div class="am-g">
+    <div class="am-u-lg-12">
+
+      <h1 class="get-title" style="margin-left: -15px"><img src="images/logo-new-firstPage.png" style="width: 100%"/></h1>
+
+
+      <div class="am-u-sm-12 am-u-sm-centered">
+        <div class="am-u-lg-4 am-u-md-6 am-u-sm-centered tailor-loginBG">
+          <br/>
+          <hr>
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-1">
+                <div class="am-u-sm-centered">
+                  <input type="text" class="form-control" id="_loginNumber" placeholder="账号" ng-model="loginData.number" ng-change="inputting(loginData.number)" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-1">
+                <div class="am-u-sm-centered">
+                  <input type="password" class="form-control" id="_loginPasswd" placeholder="密码" ng-model="loginData.passwd" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="am-u-sm-12">
+                <div class="am-u-sm-7 am-sm-offset-1">
+                  <label for="remember-me">
+                    <input id="remember-me" type="checkbox" ng-model="remember" ng-true-value="true" ng-false-value="undefined" ng-change="setRemember(remember)"/>
+                    记住密码
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="button" class="am-btn am-btn-primary am-radius" ng-click="login(loginData)">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+              <button type="button" style="margin-left: 30px;" class="am-btn am-btn-secondary am-radius" ng-click="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+            </div>
+
+          </form>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="am-g">
+  <div class="am-u-sm-12">
+      <img src="images/first_page.png" style="width: 100%" />
+  </div>
+</div>
+
+<footer class="footer">
+  <p>
+    <a href="" ng-click="aboutUs()">关于我们</a>
+    <a href="" ng-click="howToJoin()" style="margin-left: 40px">申请用户</a>
+    <a href="" ng-click="law()" style="margin-left: 40px">法律声明</a>
+    <br/>
+    京ICP备14033165号-2 / Powered by © 2016~2116 youcai6.com
+
+  </p>
+</footer>
+

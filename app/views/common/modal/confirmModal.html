@@ -1,0 +1,26 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 400px;
+    height: auto;
+    /*margin-top:-150px;*/
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">请确认以下信息:</span></legend>
+  <!--<p style="text-align: center">您确定要删除此条记录？</p>-->
+  <p style="text-align: center">{{ngDialogData.message}}</p>
+  <legend></legend>
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm()">确认</button>
+  </div>
+</div>

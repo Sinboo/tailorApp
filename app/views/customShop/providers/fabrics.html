@@ -1,0 +1,59 @@
+<style>
+  .more-button {
+    margin-top: 10px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-4">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="tailor.providers.fabrics()">全部供应商</a></li>
+        <!--<li><a href="#">面料供应商</a></li>-->
+        <li class="am-active">面料供应商</li>
+        <!--<li class="am-active">意厉维(北京)</li>-->
+      </ol>
+    </div>
+    <div class="am-u-sm-6 more-button">
+      <article class="am-article">
+        <div class="am-article-bd">
+          <p class="am-article-lead am-text-secondary">这里汇集了服务于定制行业的各类优质供应商，赶紧与他们建立起业务联系吧，这会让你的定制产品质量更加优质、交期更加快速。
+            <span class="am-icon-sort-down am-text-lg"></span>
+          </p>
+        </div>
+      </article>
+    </div>
+
+  </div>
+
+
+  <div class="am-g">
+    <div class="am-u-sm-12">
+      <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-4 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+        <li ng-repeat="fabric in fabrics" style="padding: 20px">
+          <div class="am-gallery-item" >
+            <a ui-sref="tailor.providers.fabricDetail({id: fabric.number})" >
+              <img ng-src="{{fabric.portrait }}" style="width: 100%;height: 100%"/>
+              <h3 class="am-gallery-title " style="text-align: center">{{fabric.shortName}}</h3>
+              <!--<div class="am-gallery-desc">2375-09-26</div>-->
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="am-g" style="margin-top: 40px">
+    <legend></legend>
+    <div class="am-u-sm-12">
+      <span class="am-text-secondary am-text-sm" style="margin-left: 5px">*共 {{total}} 条记录</span>
+      <div class="am-fr">
+        <pagination previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页" total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" items-per-page="perPages" ng-change="changeFn('page')"></pagination>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

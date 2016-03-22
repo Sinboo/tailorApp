@@ -1,0 +1,68 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 400px;
+    height: auto;
+    margin-top:-150px;
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">缺货登记。</span></legend>
+
+  <table class="am-table am-table-striped am-table-hover">
+    <thead>
+    <tr>
+      <th style="width: 100px;"></th>
+      <th style="width: 100px;"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>货号:</td>
+      <td>{{ngDialogData.product.productNumber}}</td>
+    </tr>
+    <tr>
+      <td>色号:</td>
+      <td>{{ngDialogData.product.color}}</td>
+    </tr>
+    <tr>
+      <td>品牌:</td>
+      <td>{{ngDialogData.product.brand.name}}</td>
+    </tr>
+    <tr>
+      <td>料册:</td>
+      <td>{{ngDialogData.product.book}}</td>
+    </tr>
+    <tr>
+      <td>库存:</td>
+      <td>{{ngDialogData.product.stock/100}}</td>
+    </tr>
+    <!--<tr>-->
+      <!--<td>预计到货时间:</td>-->
+      <!--<td>-->
+        <!--<input type="text" ui-date="ngDialogData.comingDateOptions" class="am-form-field" ng-model="comingDate"  date-format />-->
+      <!--</td>-->
+    <!--</tr>-->
+    <tr>
+      <td>预计到货时间:</td>
+      <td>
+        <input type="text" ng-model="modalComingDate" class="am-form-field setProductComintDate" />
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <legend></legend>
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(modalComingDate)">确认</button>
+  </div>
+</div>

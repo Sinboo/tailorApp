@@ -1,0 +1,90 @@
+<style>
+  .fabric-detail-padding {
+    padding: 10px;
+  }
+  .more-button {
+    margin-top: 10px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-6">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="provider.businessManage.repertoryAndPrice">业务管理</a></li>
+        <li class="am-active">库存及价格</li>
+      </ol>
+    </div>
+    <div class="am-u-sm-6  more-button">
+      <article class="am-article am-u-sm-10">
+        <div class="am-article-bd">
+          <p class="am-article-lead am-text-secondary">这是目前正在销售的商品及库存情况。
+            <span class="am-icon-sort-down am-text-lg"></span>
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding">
+    <div class="am-u-sm-12">
+      <a class="am-btn am-btn-primary am-radius am-fr" ng-click="addPriceSystem()" >增加价格体系<span class="am-icon-plus"></span></a>
+      <table class="am-table am-table-striped am-table-hover table-main">
+        <thead>
+        <tr>
+          <th class="table-id">序号</th>
+          <th class="table-title">品牌</th>
+          <th class="table-type">料册</th>
+          <th class="table-author">面料货号</th>
+          <th class="table-date ">面料色号</th>
+          <th class="table-title">库存({{FABRIC_UNIT[fabricUnit]}})</th>
+          <th class="table-title">零剪价格<br/>({{CURRENCY[currency]}})</th>
+          <th class="table-title">批发价格<br/>({{CURRENCY[currency]}})</th>
+          <th ng-if="priceSystems.length > 0" ng-repeat="ps in priceSystems" class="am-text-primary">
+            <a href="" ng-click="editPriceSystem($index, ps.number)">
+            {{ps.name}}
+            </a>
+          </th>
+          <th class="table-title" ng-if="priceSystemInputFlag">{{priceSystemName}}</th>
+          <th class="table-title">状态</th>
+          <th class="table-title"></th>
+          <th class="table-title"></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="stock in stocks">
+          <td>{{(bigCurrentPage-1)*20 + $index + 1}}</td>
+          <td>{{stock.brand.name}}</td>
+          <td>{{stock.book ? stock.book : "—"}}</td>
+          <td>{{stock.productNumber}}</td>
+          <td>{{stock.color}}</td>
+          <td>{{stock.stock}}</td>
+          <td>{{stock.retailPrice}}</td>
+          <td>{{stock.wholesalePrice}}</td>
+          <td ng-if="priceSystems.length > 0" ng-repeat="ps in priceSystems">
+            <span ng-if="psEditIndex !== $index">{{ps.priceSetup[stock.number] ? ps.priceSetup[stock.number] : "—"}}</span>
+            <input ng-if="psEditIndex == $index" style="width: 50px" placeholder="{{ps.priceSetup[stock.number] ? ps.priceSetup[stock.number] : '—'}}" ng-model="stock.psPrice" />
+          </td>
+          <td ng-if="priceSystemInputFlag" ><input ng-model="stock.psPrice" style="width: 50px"/></td>
+          <td ng-class="{true: 'am-text-primary', false: 'am-text-danger'}[stock.salesStatus=='NORMAL']">{{SALES_STATUS[stock.salesStatus]}}</td>
+          <td><a href="" ng-click="editInputRow(stock)"><span class="am-text-warning am-icon-edit"></span></a></td>
+          <td><a href="" ng-click="deleteInputRow(stock.number)"><span class="am-text-warning am-icon-trash-o"></span></a></td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="am-btn am-btn-warning am-radius am-fr" ng-if="priceSystemInputFlag || priceSystemEditFlag" ng-click="confirmPriceSystem()" >确定价格体系<span class="am-icon-plus"></span></a>
+    </div>
+  </div>
+
+  <div class="am-g">
+    <div class="am-u-sm-11">
+      <span class="am-text-secondary am-text-sm" style="margin-left: 40px">*共 {{total}} 条记录</span>
+      <div class="am-fr">
+        <pagination previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页" total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" items-per-page="perPages" ng-change="changeFn('page')"></pagination>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,61 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 650px;
+    height: auto;
+    margin-top:-150px;
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">还差最后一步，请设置该店与你的结算方式。</span></legend>
+  <div class="am-u-sm-12" style="margin-bottom: 40px">
+    <div class="am-u-sm-12">
+      <div class="am-input-group">
+        <span class="am-input-group-label" style="background: transparent; border: none;">
+          选择结算价格：
+        </span>
+        <div class="am-form-group" style="padding-top: 12px">
+          <label class="am-checkbox-inline" ng-repeat="ps in priceSystems">
+            <input type="checkbox" checklist-model="formData.pricingPackageNumber" checklist-value="ps.number" ng-click="choosePrice(ps)"> {{ps.name}}
+          </label>
+        </div>
+      </div>
+
+      <div class="am-input-group">
+        <span class="am-input-group-label" style="background: transparent; border: none;">
+          选择结算方式：
+        </span>
+        <div class="am-form-group" style="padding-top: 12px">
+          <label class="am-checkbox-inline" ng-repeat="business in businesses">
+            <input type="checkbox" checklist-model="formData.settlementType" checklist-value="business.shortName" ng-click="choose(business)"> {{business.fullName}}
+          </label>
+        </div>
+      </div>
+
+      <div class="am-input-group">
+        <span class="am-input-group-label" style="background: transparent; border: none;">
+          订单运费：
+        </span>
+        <div class="am-form-group" style="padding-top: 12px">
+          <label class="am-checkbox-inline" ng-repeat="ExpressProcess in ExpressProcesses">
+            <input type="checkbox" checklist-model="formData.hasExpressProcess" checklist-value="ExpressProcess.shortName" ng-click="chooseExpressProcess(ExpressProcess)"> {{ExpressProcess.fullName}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click=closeThisDialog()>取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(formData)">确认</button>
+  </div>
+
+
+</div>

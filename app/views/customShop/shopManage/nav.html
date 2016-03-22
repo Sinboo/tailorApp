@@ -1,0 +1,65 @@
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">
+    <ul class="am-list admin-sidebar-list">
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav1'}" href="" ui-sref="tailor.shopManage.orderRecord({STATUS: 'DOING'})" ><span ng-class="getClass('orderRecord')">订单管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav1">
+          <li><a ui-sref="tailor.shopManage.orderRecord({STATUS: 'DOING'})"  class="am-text-sm"><span ng-class="getClass('orderRecord/DOING')">未完成</span></a></li>
+          <li><a ui-sref="tailor.shopManage.orderRecord({STATUS: 'FINISH'})"  class="am-text-sm"><span ng-class="getClass('orderRecord/FINISH')">已完成</span></a></li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav4'}" ui-sref="tailor.shopManage.fabricManage({clothingType: 'D'})"> <span ng-class="getClass('fabricManage')">面料管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav4">
+          <li ><a href="" class="am-text-sm" ui-sref="tailor.shopManage.fabricManage({clothingType: 'D'})"><span ng-class="getClass('fabricManage/D')">衬衫未采购</span></a></li>
+          <li ><a href="" class="am-text-sm" ui-sref="tailor.shopManage.fabricManage({clothingType: 'A'})"><span ng-class="getClass('fabricManage/A')">西服等未采购</span></a></li>
+          <li ><a href="" class="am-text-sm" ui-sref="tailor.shopManage.fabricManage({clothingType: 'OTHER'})"><span ng-class="getClass('fabricManage/OTHER')">其他未采购</span></a></li>
+          <li ><a href="" class="am-text-sm" ui-sref="tailor.shopManage.boughtFabric()"><span ng-class="getClass('boughtFabric')">已采购</span></a></li>
+          <li class="admin-parent">
+            <a class="am-cf am-text-sm" data-am-collapse="{target: '#collapse-nav6'}" ui-sref="tailor.shopManage.orderManage({STATUS: 'PAYED'})" > <span ng-class="getClass('orderManage')">订单管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav6">
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.orderManage({STATUS: 'PLACED'})" ><span ng-class="getClass('orderManage/PLACED')" >待确认运费</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.orderManage({STATUS: 'EXPRESSFEE_CONFIRMED'})" ><span ng-class="getClass('orderManage/EXPRESSFEE_CONFIRMED')" >确认运费待付款</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.orderManage({STATUS: 'PAYED'})" ><span ng-class="getClass('orderManage/PAYED')" >已付款待发货</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.orderManage({STATUS: 'DELIVERED'})" ><span ng-class="getClass('orderManage/DELIVERED')" >待确认收货</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.orderManage({STATUS: 'SUCCESS'})" ><span ng-class="getClass('orderManage/SUCCESS')" >已确认收货</span></a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}" ui-sref="tailor.shopManage.productionRecord({STATUS: 'INIT'})"><span ng-class="getClass('productionRecord')">生产管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav2">
+          <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'INIT'})" class="am-text-sm"><span ng-class="getClass('productionRecord/INIT')">未下单</span></a></li>
+          <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'PLACED'})" class="am-text-sm"><span ng-class="getClass('productionRecord/PLACED')">生产中</span></a></li>
+          <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'DELIVERED'})" class="am-text-sm"><span ng-class="getClass('productionRecord/DELIVERED')">已完成</span></a></li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="tailor.shopManage.storageManage({STATUS: 'INIT'})"><span ng-class="getClass('storageManage')">出入库管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav3">
+          <li><a ui-sref="tailor.shopManage.storageManage({STATUS: 'INIT'})"  class="am-text-sm"><span ng-class="getClass('storageManage/INIT')">未入库</span></a></li>
+          <li><a ui-sref="tailor.shopManage.storageManage({STATUS: 'IN', notified: false})"  class="am-text-sm"><span ng-class="unNotiHighLight">已入库未通知</span></a></li>
+          <li><a ui-sref="tailor.shopManage.storageManage({STATUS: 'IN', notified: true})"  class="am-text-sm"><span ng-class="notiHighLight">已入库已通知</span></a></li>
+          <li><a ui-sref="tailor.shopManage.storageManage({STATUS: 'OUT'})"  class="am-text-sm"><span ng-class="getClass('storageManage/OUT')">已出库</span></a></li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a ui-sref="tailor.shopManage.monthlyStatement({billType: 'DELIVERED'})" class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav5'}"><span ng-class="getClass('monthlyStatement')">月结管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav5">
+          <li><a ui-sref="tailor.shopManage.monthlyStatement({billType: 'DELIVERED'})" class="am-text-sm"><span ng-class="getClass('monthlyStatement/DELIVERED')">未付款</span></a></li>
+          <li><a ui-sref="tailor.shopManage.monthlyStatement({billType: 'PAYED'})" class="am-text-sm"><span ng-class="getClass('monthlyStatement/PAYED')">已付款</span></a></li>
+          <li><a ui-sref="tailor.shopManage.monthlyStatement({billType: 'SQUAREDUP'})" class="am-text-sm"><span ng-class="getClass('monthlyStatement/SQUAREDUP')">已成功结算</span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+
+  <div ui-view></div>
+
+  <!-- content end -->
+</div>

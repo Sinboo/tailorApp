@@ -1,0 +1,63 @@
+<style>
+  .subOrder td {
+    font-size: smaller;
+    font-style: italic;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-12">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="tailor.otherManage.positionManage()">其他业务管理</a></li>
+        <li class="am-active">{{addressType ? ADDRESSTYPE[addressType] : PRODUCE_STATUS[type]}}地址</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g">
+    <div class="am-u-sm-12">
+      <table class="am-table am-table-striped am-table-hover table-main">
+        <thead>
+        <tr>
+          <th class="table-id">序号</th>
+          <th class="table-title">类型</th>
+          <th class="table-type">单位名称</th>
+          <th class="table-author">联系人</th>
+          <th class="table-date">电话</th>
+          <th class="table-date">区域具体地址</th>
+          <th class="table-date">邮编</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="position in positions">
+          <td>{{(bigCurrentPage-1)*20 + $index + 1}}</td>
+          <td>{{PRODUCE_STATUS[type]}}</td>
+          <td>{{position.fullName}}</td>
+          <td>{{position.contact}}</td>
+          <td>{{position.phone}}</td>
+          <td>{{position.fullAddress}}</td>
+          <td>{{position.zip}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+  <div class="am-g" style="margin-top: 40px">
+    <legend></legend>
+    <div class="am-u-sm-12">
+      <span class="am-text-secondary am-text-sm" style="margin-left: 5px">*共 {{total}} 条记录</span>
+      <div class="am-fr">
+        <pagination previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页" total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" items-per-page="perPages" ng-change="changeFn('page')"></pagination>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+

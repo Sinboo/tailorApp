@@ -1,0 +1,118 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+  .more-button {
+    margin-top: 10px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-6">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="provider.customShop.myCustomShops()">定制合作商</a></li>
+        <li><a ui-sref="provider.customShop.cooperationApplication()">合作申请</a></li>
+        <li class="am-active">合作申请详情</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding">
+    <div class="am-u-sm-12">
+
+      <div data-am-widget="intro"
+           class="am-intro am-cf am-intro-default"
+        >
+        <div class="am-intro-hd more-button">
+          <p class="am-intro-title ">{{apply.fullName}}</p>
+        </div>
+
+        <div class="am-g am-intro-bd">
+          <div
+            class="am-intro-left am-u-sm-5"><img ng-src="{{apply.portrait}}" class="" /></div>
+          <div class="am-intro-right am-u-sm-7">
+            <table class="am-table am-table-striped am-table-hover">
+              <thead>
+              <tr>
+                <th style="width: 100px;"></th>
+                <th style="width: 100px;"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>品牌名:</td>
+                <td>{{apply.shortName}}</td>
+              </tr>
+              <tr>
+                <td>公司名称:</td>
+                <td>{{apply.fullName}}</td>
+              </tr>
+              <tr>
+                <td>类型:</td>
+                <td>{{SHOP_TYPE[apply.shopType]}}</td>
+              </tr>
+              <tr>
+                <td>区域:</td>
+                <td>{{apply.province}}</td>
+              </tr>
+              <tr>
+                <td>地址:</td>
+                <td>{{apply.address}}</td>
+              </tr>
+              <tr>
+                <td>定制服装类型:</td>
+                <td>{{}}</td>
+              </tr>
+              <tr>
+                <td>联系人:</td>
+                <td>{{apply.contact}}</td>
+              </tr>
+              <tr>
+                <td>联系电话:</td>
+                <td>{{apply.phone}}</td>
+              </tr>
+              <tr>
+                <td>联系邮箱:</td>
+                <td>{{apply.email}}</td>
+              </tr>
+              <tr>
+                <td>微信号:</td>
+                <td>{{}}</td>
+              </tr>
+              <tr>
+                <td>QQ:</td>
+                <td>{{apply.qq}}</td>
+              </tr>
+              <tr>
+                <td>网站:</td>
+                <td>{{apply.website}}</td>
+              </tr>
+              <tr>
+                <td>定位客户群:</td>
+                <td>{{apply.clientBase}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="am-intro-more-bottom">
+          <a class="am-btn am-btn-danger "
+             href="" ng-click="refuse(applyNumber)">拒绝</a>
+          <a class="am-btn am-btn-primary " style="margin-left: 20px"
+             href="" ng-click="accept(applyNumber)">通过</a>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+</div>
+

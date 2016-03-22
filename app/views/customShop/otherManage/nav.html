@@ -1,0 +1,27 @@
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">
+    <ul class="am-list admin-sidebar-list">
+      <li><a class="am-text-md" ui-sref="tailor.otherManage.changePassword()" > <span ng-class="getClass('changePassword')">修改密码</span></a></li>
+
+      <li class="admin-parent">
+        <a class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav4'}" ui-sref="tailor.otherManage.addPosition()"><span ng-class="getClass('addPosition')"></span> 地址管理 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav4">
+          <li ><a ui-sref="tailor.otherManage.addPosition()" class="am-text-sm"><span class=""></span><span ng-class="getClass('addPosition')">新增地址</span></a></li>
+          <li ><a href="" ng-click="go('fabric')" class="am-text-sm"><span ng-class="getClass('positionManage/fabric')">面料供应商地址</span></a></li>
+          <li ><a href="" ng-click="go('accessory')" class="am-text-sm"><span ng-class="getClass('positionManage/accessory')">辅料供应商地址</span></a></li>
+          <li ><a href="" ng-click="go('factory')" ui-sref="tailor.otherManage.positionManage({type: 'factory', addressType: undefined})" class="am-text-sm"><span ng-class="getClass('positionManage/factory')">工厂地址</span></a></li>
+          <li ><a href="" ng-click="choose(1)" class="am-text-sm"><span ng-class="{true: 'am-text-primary', false: ''}[addressType == 1]">我的地址</span></a></li>
+          <li ><a href="" ng-click="choose(2)" class="am-text-sm"><span ng-class="{true: 'am-text-primary', false: ''}[addressType == 2]">其他地址</span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+
+  <div ui-view></div>
+
+  <!-- content end -->
+</div>

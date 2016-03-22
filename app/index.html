@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>优裁—专业的定制业务管理工具</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="alternate icon" type="image/png" href="images/logo-url.png">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" />
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+    <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="assets/css/amazeui.css"/>
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="styles/lib/base/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="styles/lib/base/all.css"/>
+    <link rel="stylesheet" href="styles/app.css"/>
+
+    <!-- endbuild -->
+
+  </head>
+  <body ng-app="tailorApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+
+
+    <div ui-view id="wrapper" ></div>
+    <toaster-container
+      toaster-options="{'time-out': 2000,
+                'position-class': 'toast-top-right','close-button':true}"></toaster-container>
+
+    <!--<toaster-container></toaster-container>-->
+
+    <!-- build:js(.) scripts/vendor.js -->
+
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/angular-ui-date/src/date.js"></script>
+    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+    <script src="bower_components/ui-select/dist/select.js"></script>
+    <script src="bower_components/ng-rap/index.js"></script>
+    <script src="bower_components/angular-counter/counter.js"></script>
+    <script src="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
+    <script src="bower_components/checklist-model/checklist-model.js"></script>
+    <script src="bower_components/js-base64/base64.js"></script>
+    <script src="bower_components/js-md5/js/md5.js"></script>
+    <script src="bower_components/upyun/dist/upyun.min.js"></script>
+    <script src="bower_components/angular-uuid-service/angular-uuid-service.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <!-- endbower -->
+    <script src="scripts/lib/stringFormat.js" ></script>
+
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- customer added -->
+    <script src="scripts/lib/jquery-ui.custom.js"></script>
+    <script src="scripts/lib/datepicker-zh-CN.js"></script>
+    <script src="scripts/lib/layer.js" ></script>
+    <script src="scripts/lib/laydate.js" ></script>
+    <script src="assets/js/amazeui.js"></script>
+    <!-- end customer added -->
+
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/common/shopLayout.js"></script>
+    <script src="scripts/controllers/common/providerLayout.js"></script>
+
+    <script src="scripts/controllers/loginRegister/loginRegister.js"></script>
+    <script src="scripts/controllers/loginRegister/modal/registerCustomShopModal.js"></script>
+    <script src="scripts/controllers/loginRegister/modal/registerProviderModal.js"></script>
+
+
+    <script src="scripts/controllers/customShop/providers/fabricDetail.js"></script>
+    <script src="scripts/controllers/customShop/providers/fabrics.js"></script>
+    <script src="scripts/controllers/customShop/providers/nav.js"></script>
+
+    <script src="scripts/controllers/customShop/provider/fabric.js"></script>
+    <script src="scripts/controllers/customShop/provider/myApplication.js"></script>
+    <script src="scripts/controllers/customShop/provider/nav.js"></script>
+
+    <script src="scripts/controllers/customShop/repertory/nav.js"></script>
+    <script src="scripts/controllers/customShop/repertory/quickQuery.js"></script>
+    <script src="scripts/controllers/customShop/repertory/outOfStock.js"></script>
+    <script src="scripts/controllers/customShop/repertory/canceled.js"></script>
+
+    <script src="scripts/controllers/customShop/shopManage/nav.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/productionRecord.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/fabricManage.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/buyFabric.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/boughtFabric.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/orderRecord.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/addOrderRecord.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/monthlyStatement.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/orderManage.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/storageManage.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/modal/addSubOrderModal.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/modal/addSubOrderModalNoPlatform.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/modal/updateOrderStatus.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/modal/updateOrderDeliver.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/modal/sendPaymentModal.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/modal/receiveClothModal.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/modal/informClientModal.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/modal/takeProductModal.js"></script>
+    <script src="scripts/controllers/customShop/shopManage/modal/returnFactoryModal.js"></script>
+
+    <script src="scripts/controllers/customShop/otherManage/addPosition.js"></script>
+    <script src="scripts/controllers/customShop/otherManage/changePassword.js"></script>
+    <script src="scripts/controllers/customShop/otherManage/nav.js"></script>
+    <script src="scripts/controllers/customShop/otherManage/positionManage.js"></script>
+
+    <script src="scripts/controllers/provider/customShop/nav.js"></script>
+    <script src="scripts/controllers/provider/customShop/myCustomShops.js"></script>
+    <script src="scripts/controllers/provider/customShop/cooperationApplication.js"></script>
+    <script src="scripts/controllers/provider/customShop/cooperationApplicationDetail.js"></script>
+    <script src="scripts/controllers/provider/customShop/monthlyStatement.js"></script>
+    <script src="scripts/controllers/provider/customShop/modal/settlementTypeModal.js"></script>
+
+    <script src="scripts/controllers/provider/orderManage/nav.js"></script>
+    <script src="scripts/controllers/provider/orderManage/myOrderManage.js"></script>
+    <script src="scripts/controllers/provider/orderManage/orderDetail.js"></script>
+    <script src="scripts/controllers/provider/orderManage/modal/sendInfoModal.js"></script>
+
+    <script src="scripts/controllers/provider/businessManage/nav.js"></script>
+    <script src="scripts/controllers/provider/businessManage/addProduct.js"></script>
+    <script src="scripts/controllers/provider/businessManage/stockManage.js"></script>
+    <script src="scripts/controllers/provider/businessManage/outStockManage.js"></script>
+    <script src="scripts/controllers/provider/businessManage/modifyRepertory.js"></script>
+    <script src="scripts/controllers/provider/businessManage/repertoryAndPrice.js"></script>
+    <script src="scripts/controllers/provider/businessManage/modal/setProductStatus.js"></script>
+    <script src="scripts/controllers/provider/businessManage/modal/addInputRowModal.js"></script>
+    <script src="scripts/controllers/provider/businessManage/modal/addPriceSystemModal.js"></script>
+
+    <script src="scripts/controllers/provider/moreManage/changePassword.js"></script>
+    <script src="scripts/controllers/provider/moreManage/fixExchangeRate.js"></script>
+    <script src="scripts/controllers/provider/moreManage/changContact.js"></script>
+    <script src="scripts/controllers/provider/moreManage/nav.js"></script>
+
+    <script src="scripts/services/login_Register/register.js"></script>
+    <script src="scripts/services/login_Register/login.js"></script>
+    <script src="scripts/services/baseService/base.js"></script>
+    <script src="scripts/services/provider/provider.js"></script>
+    <script src="scripts/services/customShop/apply.js"></script>
+    <script src="scripts/services/customShop/customShop.js"></script>
+
+
+    <script src="scripts/services/common.js"></script>
+    <script src="scripts/services/http.js"></script>
+    <script src="scripts/services/config.js"></script>
+    <script src="scripts/services/publicFunc.js"></script>
+
+    <script src="scripts/directives/ngEnter.js"></script>
+    <script src="scripts/directives/customOnchange.js"></script>
+
+    <!-- endbuild -->
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257728722'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/stat.php%3Fid%3D1257728722%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+
+
+  </body>
+</html>
