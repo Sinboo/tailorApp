@@ -90,7 +90,7 @@ module.exports = function (grunt) {
         proxies: [
           {
             context: '/api',
-            host: '112.126.70.25',
+            host: 'icf.99weiyi.com',
             changeOrigin: true,
             port: 80
           }
