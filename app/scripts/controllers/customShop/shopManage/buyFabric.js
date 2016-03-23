@@ -55,7 +55,8 @@ angular.module('tailorApp')
 
     customShopService.factoryPartners().then(function (data) {
       $scope.factoryPartners = data.data;
-      $scope.factoryPartner = _.groupBy($scope.factoryPartners, 'number')[$stateParams.factoryNum][0]
+      $scope.factoryPartner = _.groupBy($scope.factoryPartners, 'number')[$stateParams.factoryNum][0];
+      console.log($scope.factoryPartner)
     })
 
     //upload image

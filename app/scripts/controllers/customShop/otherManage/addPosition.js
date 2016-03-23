@@ -71,7 +71,7 @@ angular.module('tailorApp')
       if(!$scope.formData.shortName) {layer.tips('请输入单位简称', '#_shortName'); scrollTo('#_shortName'); return false;}
       if(!$scope.formData.providerType) {layer.tips('请输入单位简称', '#_providerType'); scrollTo('#_providerType'); return false;}
       if(!$scope.formData.contact) {layer.tips('请输入联系人', '#_contact'); scrollTo('#_contact'); return false;}
-      if(!commonService.regMobile($scope.formData.phone)) {layer.tips('请填写正确的手机号', '#_phone'); scrollTo('#_phone'); return false;}
+      if(!(commonService.regMobile($scope.formData.phone) || commonService.regTel($scope.formData.phone))) {layer.tips('输入的联系电话格式有误，请参照格式：010-5983163或13400693163', '#_phone'); scrollTo('#_phone'); return false;}
       return true;
     };
 

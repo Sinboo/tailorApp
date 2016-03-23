@@ -61,7 +61,7 @@
               <td>{{order.color}}</td>
               <td>{{order.colorDesc}}</td>
               <td>{{order.figure}}</td>
-              <td>{{FABRIC_UNIT[orderToBuy[0].unit] == 'METER' ? order.quantity : order.quantity4yard}}</td>
+              <td>{{order.unit == 'METER' ? order.quantity : order.quantity4yard}}</td>
               <td>{{order.createDate}}</td>
               <td>{{order.deliveryDate}}</td>
               <td>{{order.orderItem.remark}}</td>

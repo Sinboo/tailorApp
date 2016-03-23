@@ -45,6 +45,9 @@ angular.module('gitdao')
         this.regMobile = function(mobile) {
           return RegExp(/^0?(17[6-7]|13[0-9]|15[0-9]|18[02356789]|14[57])[0-9]{8}$/).test(mobile)
         };
+        this.regTel = function(tel) {
+          return RegExp(/^(([0\+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/).test(tel)
+        };
         this.truncateDecimals = function (num, digits) {
           var numS = num.toString(),
             decPos = numS.indexOf('.'),

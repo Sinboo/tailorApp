@@ -28,8 +28,7 @@ angular.module('tailorApp')
         fabric.factoryList = Object.keys(fabric.orderList);
         $scope.fabricList.push(fabric);
       })
-      console.log($scope.fabricList)
-
+      console.log($scope.fabricList);
     })
 
   })

@@ -83,7 +83,7 @@
               <td>{{order.color}}</td>
               <td>{{order.colorDesc}}</td>
               <td>{{order.figure}}</td>
-              <td>{{FABRIC_UNIT[orderToBuy[0].unit] == 'METER' ? order.quantity : order.quantity4yard}}</td>
+              <td>{{order.unit == 'METER' ? order.quantity : order.quantity4yard}}</td>
               <td>{{order.unitPrice}}</td>
               <td>{{order.totalPrice}}</td>
             </tr>
@@ -119,7 +119,7 @@
                 <td class="am-text-sm am-text-primary">{{factoryPartner.fullName}}</td>
               </tr>
               <td>区域和具体地址:</td>
-              <td class="am-text-sm am-text-primary">{{factoryPartner.address}}</td>
+              <td class="am-text-sm am-text-primary">{{factoryPartner.fullAddress}}</td>
               </tr>
               <tr>
                 <td>邮箱:</td>
