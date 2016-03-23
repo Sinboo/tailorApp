@@ -48,6 +48,7 @@
               <th class="table-title">定制商</th>
               <th class="table-title">面料品牌</th>
               <th class="table-title">面料号</th>
+              <th class="table-title">色号</th>
               <th class="table-title">颜色</th>
               <th class="table-title">花纹</th>
               <th class="table-title">数量({{FABRIC_UNIT[orders[0].unit]}})</th>
@@ -64,6 +65,7 @@
               <td>{{order.orderItem.shopName}}</td>
               <td>{{order.brand.name}}</td>
               <td>{{order.productNumber}}</td>
+              <td>{{order.color}}</td>
               <td>{{order.colorDesc}}</td>
               <td>{{order.figure}}</td>
               <td>{{order.unit == 'METER' ? order.quantity : order.quantity4yard}}</td>

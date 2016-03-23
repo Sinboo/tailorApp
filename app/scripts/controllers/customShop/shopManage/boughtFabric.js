@@ -10,10 +10,10 @@ angular.module('tailorApp')
     var param = {};
     param.page = 1;
     param.pageSize = PAGE_SIZE;
-    param = JSON.parse(JSON.stringify(param));
+    var queryParams = JSON.parse(JSON.stringify(param));
 
-    customShopService.purchaseOrder(param).then(function (data) {
-      initData(param, data.data)
+    customShopService.purchaseOrder(queryParams).then(function (data) {
+      initData(queryParams, data.data)
     })
 
     var initData = function (param, data) {
@@ -33,9 +33,9 @@ angular.module('tailorApp')
         param[key] = value == "" ? undefined : value;
       }
       //console.log(param);
-      param = JSON.parse(JSON.stringify(param))
-      customShopService.purchaseOrder(param).then(function(data){
-        initData(param, data.data)
+      var queryParam = JSON.parse(JSON.stringify(param))
+      customShopService.purchaseOrder(queryParam).then(function(data){
+        initData(queryParam, data.data)
       });
     };
 
