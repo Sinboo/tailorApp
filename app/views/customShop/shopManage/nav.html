@@ -29,9 +29,9 @@
         </ul>
       </li>
       <li class="admin-parent">
-        <a class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}" ui-sref="tailor.shopManage.productionRecord({STATUS: 'INIT'})"><span ng-class="getClass('productionRecord')">生产管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <a class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY'})"><span ng-class="getClass('productionRecord')">生产管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
         <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav2">
-          <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'INIT'})" class="am-text-sm"><span ng-class="getClass('productionRecord/INIT')">未下单</span></a></li>
+          <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY'})" class="am-text-sm"><span ng-class="getClass('productionRecord/READY')">未下单</span></a></li>
           <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'PLACED'})" class="am-text-sm"><span ng-class="getClass('productionRecord/PLACED')">生产中</span></a></li>
           <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'DELIVERED'})" class="am-text-sm"><span ng-class="getClass('productionRecord/DELIVERED')">已完成</span></a></li>
         </ul>

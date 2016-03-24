@@ -49,7 +49,7 @@
             <td ng-if="STATUS=='DELIVERED'">{{order.express.company == null ? "—" : order.express.company}}</td>
             <td ng-if="STATUS=='DELIVERED'"><a href="" ng-click="queryExpress(order.express)">{{order.express.number == null ? "—" : order.express.number}}</a></td>
             <td>{{order.placeRemark}}</td>
-            <td ng-if="STATUS=='INIT'">
+            <td ng-if="STATUS=='READY'">
               <div class="am-btn-group am-btn-group-xs">
                 <button class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="updateOrder(order.number)" ><span class="am-text-primary">若工厂已下单,<br/> 更新下单状态</span></button>
               </div>

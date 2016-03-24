@@ -11,7 +11,7 @@ angular.module('tailorApp')
 
     $scope.validate = function () {
       if (!$scope.modalData.company) {layer.msg('请选择快递公司', {offset: 0, shift: 6}); return false;}
-      if (!$scope.modalData.number) {layer.msg('请填写快递单号', {offset: 0, shift: 6}); return false;}
+      if (!($scope.modalData.company == '客户自取' || $scope.modalData.company == '合包') && !$scope.modalData.number) {layer.msg('请填写快递单号', {offset: 0, shift: 6}); return false;}
       return true;
     }
 

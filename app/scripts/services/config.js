@@ -185,7 +185,7 @@ void function () {
           OUT: '  已出库'
         },
         PRODUCE_STATUS: {
-          INIT: '未下单',
+          READY: '未下单',
           PLACED: '生产中',
           DELIVERED: '已完成'
         },

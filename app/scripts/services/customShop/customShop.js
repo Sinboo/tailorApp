@@ -44,6 +44,10 @@ angular.module('tailorApp')
         url: 'order/fabric',
         method: 'POST'
       },
+      order_fabricPrivate: {
+        url: 'order/fabric/private',
+        method: 'POST'
+      },
       get_bills: {
         url: 'bill/{STATUS}',
         method: 'GET'
@@ -150,6 +154,9 @@ angular.module('tailorApp')
     };
     this.orderFabric = function (postData) {
       return httpService.http(postData, customShopUrl.order_fabric, {})
+    };
+    this.orderFabricPrivate = function (postData) {
+      return httpService.http(postData, customShopUrl.order_fabricPrivate, {})
     };
     this.getBills = function (queryParams) {
       return httpService.http({}, customShopUrl.get_bills, queryParams)

@@ -64,6 +64,12 @@ angular.module('tailorApp')
       $scope.item.factoryNumber = factory.number;
     }
 
+    $scope.keyPress = function (e) {
+      if(e.keyCode == 13) {
+        $scope.getFabricsByProductNumber($scope.item.purchaseOrder.productNumber);
+      }
+    };
+
     $scope.getFabricsByProductNumber = function(productNumber) {
       var queryParams = {};
       queryParams.productNumber = productNumber == "" ? undefined : productNumber;
@@ -84,18 +90,20 @@ angular.module('tailorApp')
 
     $scope.setQueriedProduct = function (product) {
       //if (product.color) {
-        $scope.item.purchaseOrder.color = product.color;
-        $scope.item.purchaseOrder.composition = product.composition;
-        $scope.item.purchaseOrder.yarnCount = product.yarnCount;
-        $scope.item.purchaseOrder.colorDesc = product.colorDesc;
-        $scope.item.purchaseOrder.figure = product.figure;
+      $scope.item.purchaseOrder.color = product.color;
+      $scope.item.purchaseOrder.breadth = product.breadth;
+      $scope.item.purchaseOrder.composition = product.composition;
+      $scope.item.purchaseOrder.yarnCount = product.yarnCount;
+      $scope.item.purchaseOrder.colorDesc = product.colorDesc;
+      $scope.item.purchaseOrder.figure = product.figure;
 
-        $scope.disable_composition = product.composition !== null;
-        $scope.disable_yarnCount = product.yarnCount !== null;
-        $scope.disable_colorDesc = product.colorDesc !== null;
-        $scope.disable_figure = product.figure !== null;
+      $scope.disable_breadth = product.breadth !== null;
+      $scope.disable_composition = product.composition !== null;
+      $scope.disable_yarnCount = product.yarnCount !== null;
+      $scope.disable_colorDesc = product.colorDesc !== null;
+      $scope.disable_figure = product.figure !== null;
 
-        $scope.stock = product.stock;
+      $scope.stock = product.stock;
       //}
     }
 

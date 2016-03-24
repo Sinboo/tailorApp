@@ -66,8 +66,8 @@
               <th width="40" class="table-title">颜色</th>
               <th width="40" class="table-title">花纹</th>
               <th width="40" class="table-title">数量<br/>({{FABRIC_UNIT[orderToBuy[0].unit]}})</th>
-              <th width="40" class="table-title">单价<br/>({{CURRENCY[payment.currency]}})</th>
-              <th width="40" class="table-title">金额<br/>({{CURRENCY[payment.currency]}})</th>
+              <th width="40" class="table-title" ng-if="payment.hasSettleProcess">单价<br/>({{CURRENCY[payment.currency]}})</th>
+              <th width="40" class="table-title" ng-if="payment.hasSettleProcess">金额<br/>({{CURRENCY[payment.currency]}})</th>
             </tr>
             </thead>
             <tbody>
@@ -84,8 +84,8 @@
               <td>{{order.colorDesc}}</td>
               <td>{{order.figure}}</td>
               <td>{{order.unit == 'METER' ? order.quantity : order.quantity4yard}}</td>
-              <td>{{order.unitPrice}}</td>
-              <td>{{order.totalPrice}}</td>
+              <td ng-if="payment.hasSettleProcess">{{order.unitPrice}}</td>
+              <td ng-if="payment.hasSettleProcess">{{order.totalPrice}}</td>
             </tr>
             </tbody>
           </table>
@@ -140,7 +140,7 @@
       </form>
     </div>
 
-    <div class="am-u-sm-4 am-fr">
+    <div class="am-u-sm-4 am-fr" ng-if="payment.hasSettleProcess">
       <div class="am-u-sm-11 am-fr">
         <table class="am-table">
           <thead>
@@ -172,7 +172,7 @@
   </div>
   <legend></legend>
 
-  <div class="am-g" ng-if="payment.settlementType!=='CASH'">
+  <div class="am-g" ng-if="payment.settlementType!=='CASH' && payment.hasSettleProcess">
     <div class="am-u-sm-8 ">
       <div class="am-u-sm-11 am-fl">
         <table class="am-table am-table-striped am-table-hover">
@@ -196,7 +196,7 @@
     </div>
   </div>
 
-  <div class="am-g" ng-if="payment.settlementType=='CASH' && (payment.hasExpressFeeProcess == false || (payment.hasExpressFeeProcess && expressFeeStatus == 'true'))">
+  <div class="am-g" ng-if="payment.hasSettleProcess && payment.settlementType=='CASH' && (payment.hasExpressFeeProcess == false || (payment.hasExpressFeeProcess && expressFeeStatus == 'true'))">
     <div class="am-u-sm-8 ">
       <div class="am-u-sm-12 am-fl">
         <table class="am-table am-table-striped am-table-hover">
@@ -235,8 +235,7 @@
     </div>
   </div>
 
-  <div class="am-g" style="margin-top: 40px" ng-if="(payment.settlementType=='CASH' && payment.hasExpressFeeProcess == false) || (payment.settlementType=='CASH' && expressFeeStatus == 'true') ">
-      <!--<button type="button" class="am-btn am-btn-primary am-fr" style="margin-bottom: 40px">上传付款凭证</button>-->
+  <div class="am-g" style="margin-top: 40px" ng-if="payment.hasSettleProcess && (payment.settlementType=='CASH' && payment.hasExpressFeeProcess == false) || (payment.settlementType=='CASH' && expressFeeStatus == 'true') ">
       <div class="am-u-sm-6">
           <form class="am-form-horizontal" name="uploadForm" role="form" style="float: right">
             <input type="file" name="file" custom-on-change="chooseImage" /> <br/>
