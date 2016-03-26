@@ -51,6 +51,7 @@
               <th class="table-title">色号</th>
               <th class="table-title">颜色</th>
               <th class="table-title">花纹</th>
+              <th class="table-title" ng-if="orders[0].unit == 'YARD'">数量(米)</th>
               <th class="table-title">数量({{FABRIC_UNIT[orders[0].unit]}})</th>
               <th class="table-title">单价</th>
               <th></th>
@@ -68,6 +69,7 @@
               <td>{{order.color}}</td>
               <td>{{order.colorDesc}}</td>
               <td>{{order.figure}}</td>
+              <td ng-if="order.unit == 'YARD'">{{order.quantity ? order.quantity : truncateDecimals(order.quantity4yard / 1.094, 2)}}</td>
               <td>{{order.unit == 'METER' ? order.quantity : order.quantity4yard}}</td>
               <td>{{order.unitPrice}}</td>
             </tr>

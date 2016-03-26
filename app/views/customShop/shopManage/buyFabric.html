@@ -65,6 +65,7 @@
               <th width="40" class="table-title">面料色号</th>
               <th width="40" class="table-title">颜色</th>
               <th width="40" class="table-title">花纹</th>
+              <th width="40" class="table-title" ng-if="orderToBuy[0].unit == 'YARD'">数量<br/>(米)</th>
               <th width="40" class="table-title">数量<br/>({{FABRIC_UNIT[orderToBuy[0].unit]}})</th>
               <th width="40" class="table-title" ng-if="payment.hasSettleProcess">单价<br/>({{CURRENCY[payment.currency]}})</th>
               <th width="40" class="table-title" ng-if="payment.hasSettleProcess">金额<br/>({{CURRENCY[payment.currency]}})</th>
@@ -83,9 +84,10 @@
               <td>{{order.color}}</td>
               <td>{{order.colorDesc}}</td>
               <td>{{order.figure}}</td>
+              <td ng-if="order.unit == 'YARD'">{{truncateDecimals(order.quantity4yard * 0.9144, 2)}}</td>
               <td>{{order.unit == 'METER' ? order.quantity : order.quantity4yard}}</td>
               <td ng-if="payment.hasSettleProcess">{{order.unitPrice}}</td>
-              <td ng-if="payment.hasSettleProcess">{{order.totalPrice}}</td>
+              <td ng-if="payment.hasSettleProcess">{{truncateDecimals(order.totalPrice, 2)}}</td>
             </tr>
             </tbody>
           </table>
@@ -151,7 +153,7 @@
           </thead>
           <tbody>
           <td class="am-text-sm">面料款:</td>
-          <td class="am-text-sm">{{CURRENCY[payment.currency]}}&nbsp;&nbsp;{{fabricFeeState ? fabricFeeState : totalPrice}}</td>
+          <td class="am-text-sm">{{CURRENCY[payment.currency]}}&nbsp;&nbsp;{{fabricFeeState ? fabricFeeState : truncateDecimals(totalPrice, 2)}}</td>
           </tr>
           <tr ng-if="payment.hasExpressFeeProcess">
             <td class="am-text-sm" >运费:</td>

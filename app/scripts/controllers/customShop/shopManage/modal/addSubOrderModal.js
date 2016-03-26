@@ -113,6 +113,7 @@ angular.module('tailorApp')
 
     $scope.validate = function () {
       if($scope.outOfStock) {layer.msg('数量超库存了!', {offset: 0, shift: 6}); return false;}
+      if(!$scope.item.purchaseOrder.supplierNumber) {layer.msg('请设置面料供应商!', {offset: 0, shift: 6}); return false;}
       return true;
     }
 

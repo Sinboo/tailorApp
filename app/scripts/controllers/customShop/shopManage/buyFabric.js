@@ -48,9 +48,6 @@ angular.module('tailorApp')
     $scope.orderItems = orderItems;
     $scope.totalPrice = totalPrice;
     $scope.totalPrice4CNY = $scope.totalPrice * $scope.payment.exchangeRate;
-    console.log($scope.orderToBuy);
-    console.log($scope.totalPrice4CNY);
-    console.log(($scope.totalPrice4CNY*100));
 
 
     customShopService.factoryPartners().then(function (data) {
