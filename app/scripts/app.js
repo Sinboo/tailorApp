@@ -350,11 +350,14 @@ angular
         controller: 'LoginRegisterCtrl'
       });
   })
-  .run(function ($rootScope, localStorageService, loginService, $state) {
+  .run(function ($rootScope, localStorageService, loginService, $location, $state) {
+
+
     $rootScope.$on('$stateChangeSuccess',
       function (event, toState, toParams, fromState, fromParams) {
         //$activityIndicator.stopAnimating();
         layer.close($rootScope.ii);
+
 
       });
 

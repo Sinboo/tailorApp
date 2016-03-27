@@ -4,10 +4,20 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('FabricsCtrl', function ($scope, providerService, $stateParams, PAGE_SIZE) {
+  .controller('FabricsCtrl', function ($scope, $rootScope, dataSetterGetter, $location, providerService, $stateParams, PAGE_SIZE) {
+    $rootScope.$watch(function () {return $location.path()}, function (newLocation, oldLocation) {
+      //console.log('new:' + newLocation);
+      //console.log('old:' + oldLocation);
+      if (newLocation.indexOf('fabricDetail') && oldLocation.indexOf('fabrics')) {
+        dataSetterGetter.set('page', param.page);
+      }
+      if (newLocation.indexOf('fabrics') && oldLocation.indexOf('fabricDetail')) {
+        param.page = dataSetterGetter.get('page') ? dataSetterGetter.get('page') : 0;
+      }
+    });
 
     var param = {};
-    param.page = 0;
+    param.page = dataSetterGetter.get('page') ? dataSetterGetter.get('page') : 0;
     param.business = $stateParams.business == "" ? undefined : $stateParams.business;
     param.pageSize = PAGE_SIZE;
 

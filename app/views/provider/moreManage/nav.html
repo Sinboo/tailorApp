@@ -3,7 +3,7 @@
   <div class="admin-sidebar">
     <ul class="am-list admin-sidebar-list">
       <li><a class="am-text-md" ui-sref="provider.moreManage.fixPWD()" ><span class=""></span> <span ng-class="getClass('fixPWD')"> 修改密码</span></a></li>
-      <li><a class="am-text-md" ui-sref="provider.moreManage.fixExchangeRate()" ><span class=""></span> <span ng-class="getClass('fixExchangeRate')"> 变更汇率</span></a></li>
+      <li ng-if="providerCurrency !== 'CNY'"><a class="am-text-md" ui-sref="provider.moreManage.fixExchangeRate()" ><span class=""></span> <span ng-class="getClass('fixExchangeRate')"> 变更汇率</span></a></li>
       <li><a class="am-text-md" ui-sref="provider.moreManage.changeContact()" ><span class=""></span> <span ng-class="getClass('changeContact')"> 变更联系人</span></a></li>
 
     </ul>
