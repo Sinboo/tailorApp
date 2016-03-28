@@ -54,8 +54,8 @@
             <td>{{order.number}}</td>
             <td>{{order.shopName}}</td>
             <td>{{order.subject}}</td>
-            <td>{{order.createTime | date: 'yyyy-MM-dd'}}</td>
-            <td ng-if="STATUS !== 'PAYED' && STATUS !== 'PLACED' && STATUS !== 'EXPRESSFEE_CONFIRMED' ">{{order.express.createTime | date: 'yyyy-MM-dd'}}</td>
+            <td>{{order.createTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+            <td ng-if="STATUS !== 'PAYED' && STATUS !== 'PLACED' && STATUS !== 'EXPRESSFEE_CONFIRMED' ">{{order.express.createTime | date: 'yyyy-MM-dd HH:mm'}}</td>
             <td ng-if="STATUS !== 'PAYED' && STATUS !== 'PLACED' && STATUS !== 'EXPRESSFEE_CONFIRMED' ">{{order.express.company}}</td>
             <td ng-if="STATUS !== 'PAYED' && STATUS !== 'PLACED' && STATUS !== 'EXPRESSFEE_CONFIRMED' "><a href="" ng-click="queryExpress(order.express)">{{order.express.number}}</a></td>
             <td><a href="" ui-sref="provider.orderManage.orderDetail({order: order})"><span class="am-text-primary">详情</span></a></td>

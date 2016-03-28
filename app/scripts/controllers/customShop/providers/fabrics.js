@@ -21,7 +21,7 @@ angular.module('tailorApp')
     param.business = $stateParams.business == "" ? undefined : $stateParams.business;
     param.pageSize = PAGE_SIZE;
 
-    var queryParams = JSON.parse(JSON.stringify(param))
+    var queryParams = JSON.parse(JSON.stringify(param));
     providerService.getAllFabrics(queryParams).then(function(data){
       initData(queryParams, data.data)
     });

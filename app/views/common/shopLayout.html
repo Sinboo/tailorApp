@@ -35,8 +35,8 @@
 
       <div class="am-topbar-right">
         <div style="padding-top: 15px">
-          欢迎你，<span class="am-text-secondary">{{shortName}}</span>
-          <a href="" style="margin-left: 30px" ng-if="shortName !== undefined" ng-click="logout()">
+          欢迎你，<span class="am-text-secondary" style="display:inline-block;width:120px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;vertical-align: middle" >{{shortName}}</span>
+          <a href=""  ng-if="shortName !== undefined" ng-click="logout()">
             <span class="am-icon-power-off am-text-warning" ></span><span class="am-text-warning">退出</span>
           </a>
         </div>

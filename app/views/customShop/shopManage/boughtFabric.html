@@ -27,8 +27,8 @@
           <th width="40" class="table-title">颜色</th>
           <th width="40" class="table-title">花纹</th>
           <th width="40" class="table-title">数量(米)</th>
-          <th width="200" class="table-title">购买日</th>
-          <th width="200" class="table-title">发货日</th>
+          <th width="200" class="table-title">下单时间</th>
+          <th width="200" class="table-title">发货时间</th>
           <th width="80" class="table-title">递往</th>
           <th width="80" class="table-title">快递公司</th>
           <th width="80" class="table-title">快递号</th>
@@ -48,8 +48,8 @@
           <td>{{order.colorDesc}}</td>
           <td>{{order.figure}}</td>
           <td>{{order.quantity}}</td>
-          <td>{{covertDate(order.createTime)}}</td>
-          <td>{{covertDate(order.express.createTime)}}</td>
+          <td>{{order.createTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+          <td>{{order.express.createTime | date: 'yyyy-MM-dd HH:mm'}}</td>
           <td>{{order.factoryName}}</td>
           <td>{{order.express.company}}</td>
           <td>{{order.express.number}}</td>

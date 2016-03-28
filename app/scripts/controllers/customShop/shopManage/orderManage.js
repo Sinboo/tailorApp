@@ -5,7 +5,6 @@
 
 angular.module('tailorApp')
   .controller('OrderManageCtrl', function ($scope, $stateParams, toaster, $state, customShopService, PAGE_SIZE, commonService, ORDER_MANAGE, customShop_OrderType) {
-    $scope.covertDate = commonService.convertDate;
     $scope.customShop_OrderType = customShop_OrderType;
     $scope.ORDER_MANAGE = ORDER_MANAGE;
     $scope.STATUS = $stateParams.STATUS;

@@ -4,9 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('BoughtFabricCtrl', function ($scope, PAGE_SIZE, customShopService, commonService) {
-    $scope.covertDate = commonService.convertDate;
-
+  .controller('BoughtFabricCtrl', function ($scope, PAGE_SIZE, customShopService) {
     var param = {};
     param.page = 1;
     param.pageSize = PAGE_SIZE;

@@ -84,7 +84,7 @@
               <td>{{order.color}}</td>
               <td>{{order.colorDesc}}</td>
               <td>{{order.figure}}</td>
-              <td ng-if="order.unit == 'YARD'">{{truncateDecimals(order.quantity4yard * 0.9144, 2)}}</td>
+              <td ng-if="order.unit == 'YARD'">{{order.quantity ? order.quantity : truncateDecimals(order.quantity4yard / 1.094, 2)}}</td>
               <td>{{order.unit == 'METER' ? order.quantity : order.quantity4yard}}</td>
               <td ng-if="payment.hasSettleProcess">{{order.unitPrice}}</td>
               <td ng-if="payment.hasSettleProcess">{{truncateDecimals(order.totalPrice, 2)}}</td>
