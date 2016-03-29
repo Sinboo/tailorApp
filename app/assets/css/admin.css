@@ -78,6 +78,7 @@ ul {
   height: 100%;
   background: #fff;
   min-height: 500px;
+  padding-top: 30px;
 }
 
 .admin-content-list {
@@ -179,6 +180,7 @@ ul {
     display: block;
     position: static;
     background: none;
+    padding-top: 15px;
   }
 
   .admin-offcanvas-bar {
