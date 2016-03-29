@@ -11,6 +11,7 @@
 angular.module('gitdao', []);
 angular
   .module('tailorApp', [
+    'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
@@ -33,9 +34,11 @@ angular
     'ngTouch',
     'gitdao'
   ])
+  .config(function($animateProvider) {
+    $animateProvider.classNameFilter(/^(?:(?!ng-animate-disabled).)*$/);
+  })
   .config(['$routeProvider', '$compileProvider', function($routeProvider, $compileProvider) {
-  //configure routeProvider as usual
-  $compileProvider.debugInfoEnabled(false);
+    $compileProvider.debugInfoEnabled(false);
   }])
   .config(function (localStorageServiceProvider) {
     localStorageServiceProvider

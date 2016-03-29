@@ -14,7 +14,7 @@
   }
 </style>
 <div class="am-g">
-  <legend><span class="am-text-primary am-text-sm">缺货登记。</span></legend>
+  <legend><span class="am-text-primary am-text-sm">{{ngDialogData.setStock ? '已到货,修改库存' : '缺货登记'}}</span></legend>
 
   <table class="am-table am-table-striped am-table-hover">
     <thead>
@@ -40,20 +40,18 @@
       <td>料册:</td>
       <td>{{ngDialogData.product.book}}</td>
     </tr>
-    <tr>
+    <tr ng-if="!ngDialogData.setStock">
       <td>库存:</td>
       <td>{{ngDialogData.product.stock}}</td>
     </tr>
-    <!--<tr>-->
-      <!--<td>预计到货时间:</td>-->
-      <!--<td>-->
-        <!--<input type="text" ui-date="ngDialogData.comingDateOptions" class="am-form-field" ng-model="comingDate"  date-format />-->
-      <!--</td>-->
-    <!--</tr>-->
-    <tr>
+    <tr ng-if="ngDialogData.setStock">
+      <td>库存:</td>
+      <td><input class="am-form-field" type="text" placeholder="{{ngDialogData.product.stock}}{{FABRIC_UNIT[ngDialogData.product.unit]}}" ng-model="modalData.stock" /></td>
+    </tr>
+    <tr ng-if="!ngDialogData.setStock">
       <td>预计到货时间:</td>
       <td>
-        <input type="text" ng-model="modalComingDate" class="am-form-field setProductComintDate" />
+        <input type="text" ng-model="modalData.comingDate" class="am-form-field setProductComintDate" />
       </td>
     </tr>
     </tbody>
@@ -63,6 +61,6 @@
 
   <div class="ngdialog-buttons">
     <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">取消</button>
-    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(modalComingDate)">确认</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(modalData)">确认</button>
   </div>
 </div>

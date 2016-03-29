@@ -4,7 +4,9 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('SetProductStatusModalCtrl', function ($scope, $timeout) {
+  .controller('SetProductStatusModalCtrl', function ($scope, FABRIC_UNIT) {
+    $scope.FABRIC_UNIT = FABRIC_UNIT;
+    $scope.modalData = {};
 
     $(document).on("click", ".setProductComintDate", function(){
       laydate({
@@ -18,6 +20,12 @@ angular.module('tailorApp')
         }
       });
     })
+
+    $scope.validate = function () {
+      if($scope.ngDialogData.setStock && !$scope.modalData.stock) {layer.msg('请填写库存量.', {offset: 0, shift: 6}); return false;}
+      if(!$scope.ngDialogData.setStock && !$scope.modalData.comingDate) {layer.msg('请填写预计到货时间.', {offset: 0, shift: 6}); return false;}
+      return true;
+    }
 
 
   });
