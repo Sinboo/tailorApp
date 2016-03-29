@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('OrderManageCtrl', function ($scope, $stateParams, toaster, $state, customShopService, PAGE_SIZE, commonService, ORDER_MANAGE, customShop_OrderType) {
+  .controller('OrderManageCtrl', function ($scope, $stateParams, ngDialog, toaster, $state, customShopService, PAGE_SIZE, commonService, ORDER_MANAGE, customShop_OrderType) {
     $scope.customShop_OrderType = customShop_OrderType;
     $scope.ORDER_MANAGE = ORDER_MANAGE;
     $scope.STATUS = $stateParams.STATUS;
@@ -42,19 +42,32 @@ angular.module('tailorApp')
       });
     };
 
-    $scope.confirmReceived = function (NUBMBER) {
-      customShopService.receiveOrder(NUBMBER).then(function (data) {
-        if (data && data.success == true) {
-          toaster.pop('success', '添加确认成功!');
-          var queryParams = JSON.parse(JSON.stringify(param));
-          customShopService.fabricOrders(queryParams).then(function(data){
-            initData(queryParams, data.data)
-          });
+    $scope.confirmReceived = function (order) {
+      ngDialog.openConfirm({
+        template: 'views/customShop/shopManage/modal/confirmReceivedModal.html',
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        controller: 'ConfirmReceivedModalCtrl',
+        data: order
+      }).then(
+        function(value) {
+          customShopService.receiveOrder(order.number).then(function (data) {
+            if (data && data.success == true) {
+              toaster.pop('success', '添加确认成功!');
+              var queryParams = JSON.parse(JSON.stringify(param));
+              customShopService.fabricOrders(queryParams).then(function(data){
+                initData(queryParams, data.data)
+              });
+            }
+            else if (data && data.success == false) {
+              toaster.pop('warning', data.error.message);
+            }
+          })
+        },
+        function (value) {
+
         }
-        else if (data && data.success == false) {
-          toaster.pop('warning', data.error.message);
-        }
-      })
+      );
+
     };
 
     $scope.confirmExpressFee = function (order) {

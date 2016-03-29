@@ -83,7 +83,7 @@
             <td ng-if="STATUS !== 'PLACED' && STATUS !== 'EXPRESSFEE_CONFIRMED'">{{ORDER_MANAGE[order.status]}}</td>
             <td ng-if="STATUS == 'DELIVERED'">
               <div class="am-btn-group am-btn-group-xs">
-                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ng-click="confirmReceived(order.number)" ><span class="am-text-primary">确认并退出</span></button>
+                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ng-click="confirmReceived(order)" ><span class="am-text-primary">确认并退出</span></button>
               </div>
             </td>
           </tr>
