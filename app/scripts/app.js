@@ -11,7 +11,6 @@
 angular.module('gitdao', []);
 angular
   .module('tailorApp', [
-    'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
@@ -34,6 +33,10 @@ angular
     'ngTouch',
     'gitdao'
   ])
+  .config(['$routeProvider', '$compileProvider', function($routeProvider, $compileProvider) {
+  //configure routeProvider as usual
+  $compileProvider.debugInfoEnabled(false);
+  }])
   .config(function (localStorageServiceProvider) {
     localStorageServiceProvider
       .setPrefix('tailorApp');

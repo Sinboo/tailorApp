@@ -78,6 +78,7 @@
             <th class="table-type">色号</th>
             <th class="table-author">料册</th>
             <th class="table-date ">预计到货</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -87,6 +88,7 @@
             <td>{{sp.color}}</td>
             <td>{{sp.book}}</td>
             <td>{{sp.deliveryDateFormatStr}}</td>
+            <td><a href="" ng-click="setProductStatus(qp, $index)"><span class="am-text-primary">已到货,修改库存</span></a></td>
           </tr>
           </tbody>
         </table>

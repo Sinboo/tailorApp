@@ -216,20 +216,8 @@
           <tr>
             <td colspan="15"><span class="am-text-secondary am-text-sm">*提醒：线下完成支付后，请尽快上传付款凭证以加快发货。</span></td>
           </tr>
-          <!--<tr>-->
-            <!--<td>收款账号:</td>-->
-            <!--<td>112345322212121212</td>-->
-          <!--</tr>-->
-          <td>开户银行:</td>
-          <td class="am-text-sm am-text-primary">{{payment.payment[0].split(" ")[0]}}</td>
-          </tr>
-          <tr>
-            <td>开户账号:</td>
-            <td class="am-text-sm am-text-primary">{{payment.payment[0].replace(payment.payment[0].split(" ")[0], "")}}</td>
-          </tr>
-          <tr>
-            <td>公司名称:</td>
-            <td class="am-text-sm am-text-primary">{{supplierName}}</td>
+          <tr ng-repeat="payment in payment.payment">
+            <td colspan="15"><span class="am-text-warning am-text-md">{{payment}}</span></td>
           </tr>
           </tbody>
         </table>
