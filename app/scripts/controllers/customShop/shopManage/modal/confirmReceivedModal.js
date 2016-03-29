@@ -4,7 +4,8 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('ConfirmReceivedModalCtrl', function ($scope, FABRIC_UNIT) {
+  .controller('ConfirmReceivedModalCtrl', function ($scope, FABRIC_UNIT, tailoringTypes) {
     $scope.FABRIC_UNIT = FABRIC_UNIT;
+    $scope.tailoringTypes = tailoringTypes;
 
   });
