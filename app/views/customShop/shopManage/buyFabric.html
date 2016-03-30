@@ -84,7 +84,7 @@
               <td>{{order.color}}</td>
               <td>{{order.colorDesc}}</td>
               <td>{{order.figure}}</td>
-              <td ng-if="order.unit == 'YARD'">{{order.quantity ? order.quantity : truncateDecimals(order.quantity4yard / 1.094, 2)}}</td>
+              <td ng-if="order.unit == 'YARD'">{{order.quantity ? order.quantity : truncateDecimals(order.quantity4yard * 0.9144, 2)}}</td>
               <td>{{order.unit == 'METER' ? order.quantity : order.quantity4yard}}</td>
               <td ng-if="payment.hasSettleProcess">{{order.unitPrice}}</td>
               <td ng-if="payment.hasSettleProcess">{{truncateDecimals(order.totalPrice, 2)}}</td>
@@ -153,7 +153,7 @@
           </thead>
           <tbody>
           <td class="am-text-sm">面料款:</td>
-          <td class="am-text-sm">{{CURRENCY[payment.currency]}}&nbsp;&nbsp;{{fabricFeeState ? fabricFeeState : truncateDecimals(totalPrice, 2)}}</td>
+          <td class="am-text-sm">{{CURRENCY[payment.currency]}}&nbsp;&nbsp;{{fabricFeeState ? fabricFeeState : truncateDecimals(totalPrice.toFixed(4), 2)}}</td>
           </tr>
           <tr ng-if="payment.hasExpressFeeProcess">
             <td class="am-text-sm" >运费:</td>
@@ -161,11 +161,11 @@
           </tr>
           <tr>
             <td class="am-text-sm">合计{{CURRENCY[payment.currency]}}:</td>
-            <td class="am-text-sm">{{totalPriceState ? totalPriceState : truncateDecimals(totalPrice, 2)}}</td>
+            <td class="am-text-sm">{{totalPriceState ? totalPriceState : truncateDecimals(totalPrice.toFixed(4), 2)}}</td>
           </tr>
           <tr>
             <td class="am-text-sm">合计人民币:</td>
-            <td class="am-text-sm">{{totalPrice4CNYState ? totalPrice4CNYState : truncateDecimals(totalPrice4CNY, 2)}}</td>
+            <td class="am-text-sm">{{totalPrice4CNYState ? totalPrice4CNYState : truncateDecimals(totalPrice4CNY.toFixed(4), 2)}}</td>
           </tr>
           </tbody>
         </table>
@@ -216,7 +216,7 @@
           <tr>
             <td colspan="15"><span class="am-text-secondary am-text-sm">*提醒：线下完成支付后，请尽快上传付款凭证以加快发货。</span></td>
           </tr>
-          <tr ng-repeat="payment in payment.payment">
+          <tr ng-repeat="payment in payment.payment track by $index">
             <td colspan="15"><span class="am-text-warning am-text-md">{{payment}}</span></td>
           </tr>
           </tbody>

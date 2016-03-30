@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('BuyFabricCtrl', function ($rootScope, $scope, $state, $stateParams, ngDialog, toaster, customShopService, commonService, upyun, rfc4122, localStorageService, tailoringTypes, CURRENCY, FABRIC_UNIT, payment, SETTLEMENT_TYPE) {
+  .controller('BuyFabricCtrl', function ($rootScope, $scope, zero, one, $state, $filter, $stateParams, ngDialog, big, toaster, customShopService, commonService, upyun, rfc4122, localStorageService, tailoringTypes, CURRENCY, FABRIC_UNIT, payment, SETTLEMENT_TYPE) {
     $scope.CURRENCY = CURRENCY;
     $scope.SETTLEMENT_TYPE = SETTLEMENT_TYPE;
     $scope.FABRIC_UNIT = FABRIC_UNIT;
@@ -39,15 +39,15 @@ angular.module('tailorApp')
     $scope.orderToBuy = $state.params.orderList;
     console.log($scope.orderToBuy)
     var orderItems = [];
-    var totalPrice = 0;
+    var totalPrice = [];
     angular.forEach($scope.orderToBuy, function (item) {
       $scope.selected[item.number] = true;
-      totalPrice = totalPrice + item.totalPrice;
+      totalPrice.push(item.totalPrice == null ? 0 : item.totalPrice);
       orderItems.push(item.number);
     });
     $scope.orderItems = orderItems;
-    $scope.totalPrice = totalPrice;
-    $scope.totalPrice4CNY = $scope.totalPrice * $scope.payment.exchangeRate;
+    $scope.totalPrice = big.sum(totalPrice);
+    $scope.totalPrice4CNY = $scope.totalPrice.times($scope.payment.exchangeRate == null ? 1 : $scope.payment.exchangeRate);
 
 
     customShopService.factoryPartners().then(function (data) {
@@ -104,22 +104,22 @@ angular.module('tailorApp')
 
     $scope.selectAll = function (checked) {
       if (checked) {
-        var totalPrice = 0;
+        var totalPrice = [];
         var orderItems = [];
         angular.forEach($scope.orderToBuy, function (item) {
           $scope.selected[item.number] = true;
-          totalPrice = totalPrice + item.totalPrice;
+          totalPrice.push(item.totalPrice == null ? 0 : item.totalPrice);
           orderItems.push(item.number);
         })
-        $scope.totalPrice = totalPrice;
-        $scope.totalPrice4CNY = $scope.totalPrice * $scope.payment.exchangeRate;
+        $scope.totalPrice = big.sum(totalPrice);
+        $scope.totalPrice4CNY = $scope.totalPrice.times($scope.payment.exchangeRate == null ? 1 : $scope.payment.exchangeRate);
         $scope.orderItems = orderItems;
       }
       else {
         angular.forEach($scope.orderToBuy, function (item) {
           $scope.selected[item.number] = false;
         })
-        $scope.totalPrice = 0;
+        $scope.totalPrice = zero;
         $scope.orderItems = [];
       }
       console.log($scope.selected)
@@ -127,20 +127,20 @@ angular.module('tailorApp')
 
     $scope.setNotAll = function () {
       $scope.checked = false;
-      var selectTotalPrice = 0;
+      var selectTotalPrice = [];
       var orderItems = [];
       $.each($scope.selected, function (key, value) {
         if (value) {
           angular.forEach($scope.orderToBuy, function (item) {
             if (item.number == key) {
-              selectTotalPrice = selectTotalPrice + item.totalPrice;
+              selectTotalPrice.push(item.totalPrice == null ? 0 : item.totalPrice);
               orderItems.push(item.number);
             }
           })
         }
       })
-      $scope.totalPrice = selectTotalPrice;
-      $scope.totalPrice4CNY = $scope.totalPrice * $scope.payment.exchangeRate;
+      $scope.totalPrice = big.sum(selectTotalPrice);
+      $scope.totalPrice4CNY = $scope.totalPrice.times($scope.payment.exchangeRate == null ? 1 : $scope.payment.exchangeRate);
       $scope.orderItems = orderItems;
     }
 
@@ -179,19 +179,15 @@ angular.module('tailorApp')
       else {
         if ($stateParams.expressFeeStatus !== 'true') {
           if($scope.orderItems.length == 0) {layer.tips('请勾选要支付的订单', '#check_all'); scrollTo('#check_all'); return false;}
-          if(!$scope.factoryPartner) {layer.tips('请选择工厂', '#selectFactory'); scrollTo('#selectFactory'); return false;}
 
           var postData = {};
           postData.factoryNumber = $scope.factoryPartner.number;
           postData.remark = $scope.remark;
           postData.supplierName = $stateParams.supplierName;
           postData.supplierNumber = $stateParams.supplierNumber;
-          //postData.totalPrice = Math.floor($scope.totalPrice *100)/100; // 保留2位小数
-          postData.totalPrice = commonService.truncateDecimals($scope.totalPrice, 2); // 保留2位小数
-          //postData.totalPrice4CNY = Math.floor($scope.totalPrice4CNY *100)/100; // 保留2位小数
-          postData.totalPrice4CNY = commonService.truncateDecimals($scope.totalPrice4CNY, 2); // 保留2位小数
-          //postData.fabricFee = Math.floor($scope.totalPrice *100)/100; // 保留2位小数
-          postData.fabricFee = commonService.truncateDecimals($scope.totalPrice, 2); // 保留2位小数
+          postData.totalPrice = commonService.truncateDecimals($scope.totalPrice.toFixed(4), 2); // 保留2位小数
+          postData.totalPrice4CNY = commonService.truncateDecimals($scope.totalPrice4CNY.toFixed(4), 2); // 保留2位小数
+          postData.fabricFee = commonService.truncateDecimals($scope.totalPrice.toFixed(4), 2); // 保留2位小数
           postData.hasExpressFeeProcess = $scope.payment.hasExpressFeeProcess;
           postData.voucherUrl = $scope.image == undefined ? undefined : $scope.image.url;
           if ($scope.payment && $scope.payment.settlementType) {

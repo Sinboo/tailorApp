@@ -25,6 +25,7 @@ angular
     'Firestitch.angular-counter',
     'upyun',
     'uuid',
+    'Big',
     'ui.date',
     'ui.router',
     'ui.select',

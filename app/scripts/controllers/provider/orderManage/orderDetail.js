@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('OrderDetailCtrl', function ($scope, dataSetterGetter, toaster, $stateParams, $state, commonService, tailoringTypes, SHOP_TYPE, providerService, Lightbox, ngDialog, ORDER_STATUS, CURRENCY, FABRIC_UNIT) {
+  .controller('OrderDetailCtrl', function ($scope, dataSetterGetter, big, toaster, $stateParams, $state, commonService, tailoringTypes, SHOP_TYPE, providerService, Lightbox, ngDialog, ORDER_STATUS, CURRENCY, FABRIC_UNIT) {
     $scope.ORDER_STATUS = ORDER_STATUS;
     $scope.CURRENCY = CURRENCY;
     $scope.FABRIC_UNIT = FABRIC_UNIT;
@@ -20,6 +20,7 @@ angular.module('tailorApp')
 
     $scope.orders = $state.params.order.items;
     $scope.totalPrice = $state.params.order.totalPrice;
+    $scope.totalPrice4CNY = $state.params.order.totalPrice4CNY;
     $scope.shopName = $state.params.order.shopName;
 
     $scope.orderInfo = $state.params.order.items[0].orderItem;
@@ -28,17 +29,21 @@ angular.module('tailorApp')
     $scope.exchangeRate = $state.params.order.exchangeRate;
     $scope.fabricFee = $state.params.order.fabricFee;
     $scope.expressFee = $state.params.order.expressFee;
+    $scope.hasExFeeFlag = $state.params.order.expressFee !== 0;
     $scope.settlementType = $state.params.order.settlementType;
-    $scope.totalPrice = $state.params.order.fabricFee + $state.params.order.expressFee;
-    $scope.totalPrice4CNY = $scope.totalPrice * $scope.exchangeRate;
     $scope.hasExpressFeeProcess = $state.params.order.hasExpressFeeProcess;
 
     $scope.orderId = $state.params.order.number;
 
     $scope.setExpressFee = function (expressFee) {
-      $scope.expressFee = expressFee;
-      $scope.totalPrice = parseInt($scope.fabricFee) + parseInt(expressFee);
-      $scope.totalPrice4CNY = $scope.totalPrice * $scope.exchangeRate;
+      if (isNaN(expressFee) || expressFee == "") {layer.msg('请用数字填写运费', {shift: 6});}
+      var expressFeeNum = isNaN(expressFee) || expressFee == "" ? 0 : Number(expressFee);
+      $scope.expressFee = expressFeeNum;
+      var totalPrice = [];
+      totalPrice.push($scope.fabricFee);
+      totalPrice.push(expressFeeNum);
+      $scope.totalPrice = big.sum(totalPrice).toFixed(4);
+      $scope.totalPrice4CNY = big.sum(totalPrice).times($scope.exchangeRate).toFixed(4);
     };
 
 
@@ -54,6 +59,8 @@ angular.module('tailorApp')
     };
 
     $scope.sendExpressFee = function () {
+      if (isNaN($scope.expressFee) || expressFee == "") {layer.msg('请用数字填写运费', {shift: 6}); return false;}
+
       var params = {};
       params.NUMBER = $state.params.order.number;
       params.expressFee = $scope.expressFee;
@@ -91,5 +98,7 @@ angular.module('tailorApp')
         }
       );
     }
+
+
 
   });

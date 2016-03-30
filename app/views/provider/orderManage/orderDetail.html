@@ -94,7 +94,7 @@
                 </tr>
                 <tr ng-if="hasExpressFeeProcess">
                   <td class="am-text-sm">运费:</td>
-                  <td class="am-text-sm"><input class="form-control" ng-model="expressFee" ng-disabled="STATUS !=='PLACED'" ng-change="setExpressFee(expressFee)" /></td>
+                  <td class="am-text-sm" id="_expressFee"><input class="form-control" ng-model="expressFee" ng-disabled="STATUS !=='PLACED'" ng-change="setExpressFee(expressFee)" /></td>
                 </tr>
                 <tr>
                   <td class="am-text-sm">合计港元:</td>
@@ -142,7 +142,7 @@
                 <td>地址:</td>
                 <td>{{orderInfo.factoryAddress}}</td>
               </tr>
-              <tr ng-if="expressFee !== 0 && settlementType == 'CASH'">
+              <tr ng-if="hasExFeeFlag && settlementType == 'CASH'">
                 <td>付款凭证:</td>
                 <td>见右图,建议先核实款项已到账后再行发货，尤其是以前业务交往少的客户。</td>
               </tr>
