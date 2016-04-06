@@ -1,0 +1,22 @@
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">
+    <ul class="am-list admin-sidebar-list">
+      <li><a class="am-text-md" ui-sref="factory.otherManage.fixPWD()" > <span ng-class="getClass('fixPWD')"> 修改密码</span></a></li>
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="factory.otherManage.addSubAccount()"><span ng-class="getClass('SubAccount')">子账户管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav3">
+          <li><a  class="am-text-sm" ui-sref="factory.otherManage.addSubAccount()"><span ng-class="getClass('addSubAccount')">增加账号</span></a></li>
+          <li><a  class="am-text-sm" ui-sref="factory.otherManage.modifySubAccount()"><span ng-class="getClass('modifySubAccount')">子账号修改</span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+
+  <div ui-view></div>
+
+  <!-- content end -->
+</div>

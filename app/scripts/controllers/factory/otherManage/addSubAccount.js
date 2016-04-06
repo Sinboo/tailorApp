@@ -54,9 +54,10 @@ angular.module('tailorApp')
       var postData = JSON.stringify(params)
       console.log(postData);
       factoryService.addSubAccount(postData).then(function (data) {
-
+        if (data && data.success == true) {
+          $state.go('factory.otherManage.modifySubAccount');
+        }
       })
-
     };
 
 

@@ -132,6 +132,19 @@ angular
         controller: 'ModifySubAccountCtrl'
       })
 
+      .state('factory.fabricReceiveManage', {
+        url: '^/3/fabricReceiveManage',
+        templateUrl: '/views/factory/fabricReceiveManage/nav.html',
+        controller: 'FabricReceiveManageNavCtrl'
+      })
+
+      .state('factory.produceManage', {
+        url: '^/3/produceManage',
+        templateUrl: '/views/factory/produceManage/nav.html',
+        controller: 'ProduceManageNavCtrl'
+      })
+
+
 
       .state('provider', {
         url: '/2',

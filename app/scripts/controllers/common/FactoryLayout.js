@@ -13,6 +13,9 @@ angular.module('tailorApp')
 
     $scope.shortName = localStorageService.cookie.get('user').shortName == undefined ? '测试用户' : localStorageService.cookie.get('user').shortName;
 
+    $scope.privilege = localStorageService.cookie.get('user').privilege;
+    $scope.admin = localStorageService.cookie.get('user').admin;
+
 
     $scope.getLayoutClass = function (path) {
       return $location.path().indexOf(path) !== -1  ? 'am-active' : '';

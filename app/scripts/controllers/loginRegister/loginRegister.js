@@ -76,7 +76,20 @@ angular.module('tailorApp')
               $state.go("provider.orderManage.myOrderManage", {STATUS: 'PAYED'});
             }
             if (localStorageService.cookie.get('user').merchantType == "FACTORY") {
-              $state.go("factory.customShop.cooperationApplication");
+              if (localStorageService.cookie.get('user').admin) {
+                $state.go('factory.customShop.cooperationApplication')
+              }
+              else {
+                if (localStorageService.cookie.get('user').privilege && localStorageService.cookie.get('user').privilege.IN[0] == "ALL") {
+                  $state.go("factory.fabricReceiveManage");
+                }
+                else if (localStorageService.cookie.get('user').privilege && (localStorageService.cookie.get('user').privilege.DELIVER[0] == "ALL" || localStorageService.cookie.get('user').privilege.PRODUCE.length > 0)) {
+                  $state.go("factory.produceManage");
+                }
+                else if ( localStorageService.cookie.get('user').privilege && localStorageService.cookie.get('user').privilege.PARTNER[0] == "ALL") {
+                  $state.go('factory.customShop.cooperationApplication')
+                }
+              }
             }
           }
         });
