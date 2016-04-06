@@ -7,24 +7,6 @@ angular.module('tailorApp')
   .controller('FactoryFixPWDCtrl', function ($scope, loginService, $http, $state, toaster) {
     $scope.account = {};
 
-    //$scope.confirm = function () {
-    //  var param = {};
-    //  param.oldPasswd = $scope.account.oldPasswd;
-    //  param.newPasswd = $scope.account.newPasswd;
-    //  var putParam = $.param(param);
-    //  console.log(putParam);
-    //  var url = '/api/v1/account/{ID}/passwd'.format({ID: $scope.account.ID});
-    //  $http.put(url, param, {
-    //    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-    //    transformRequest: function(data){return $.param(data);}
-    //  }).success(function(data) {
-    //    if (data.success == true) {
-    //      toaster.pop('success', '密码修改成功!');
-    //      $state.go('provider.moreManage.changePassword');
-    //    }
-    //  })
-    //};
-
     $scope.confirm = function () {
       var param = {};
       param.oldPasswd = $scope.account.oldPasswd;
@@ -33,7 +15,7 @@ angular.module('tailorApp')
       loginService.changePassword(param).then(function (data) {
         if (data.success == true) {
           toaster.pop('success', '密码修改成功!');
-          $state.go('provider.businessManage.addProduct');
+          $state.go('factory.otherManage.addSubAccount');
         }
         else {
           toaster.pop('error', data.error.message);
