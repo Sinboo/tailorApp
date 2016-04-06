@@ -80,13 +80,14 @@ angular.module('tailorApp')
                 $state.go('factory.customShop.cooperationApplication')
               }
               else {
-                if (localStorageService.cookie.get('user').privilege && localStorageService.cookie.get('user').privilege.IN[0] == "ALL") {
+                var privilege = localStorageService.cookie.get('user').privilege;
+                if (privilege && privilege.IN && privilege.IN[0] == "ALL") {
                   $state.go("factory.fabricReceiveManage");
                 }
-                else if (localStorageService.cookie.get('user').privilege && (localStorageService.cookie.get('user').privilege.DELIVER[0] == "ALL" || localStorageService.cookie.get('user').privilege.PRODUCE.length > 0)) {
+                else if (privilege && ( (privilege.DELIVER && privilege.DELIVER[0] == "ALL") || (privilege.PRODUCE && privilege.PRODUCE.length > 0))) {
                   $state.go("factory.produceManage");
                 }
-                else if ( localStorageService.cookie.get('user').privilege && localStorageService.cookie.get('user').privilege.PARTNER[0] == "ALL") {
+                else if (privilege && privilege.PARTNER && privilege.PARTNER[0] == "ALL") {
                   $state.go('factory.customShop.cooperationApplication')
                 }
               }
