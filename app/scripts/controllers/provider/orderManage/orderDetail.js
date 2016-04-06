@@ -59,7 +59,7 @@ angular.module('tailorApp')
     };
 
     $scope.sendExpressFee = function () {
-      if (isNaN($scope.expressFee) || expressFee == "") {layer.msg('请用数字填写运费', {shift: 6}); return false;}
+      if (isNaN($scope.expressFee) || $scope.expressFee == "") {layer.msg('请用数字填写运费', {shift: 6}); return false;}
 
       var params = {};
       params.NUMBER = $state.params.order.number;

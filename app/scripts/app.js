@@ -82,6 +82,57 @@ angular
         abstract: true,
         template: '<div ui-view></div>'
       })
+      .state('factory', {
+        url: '/3',
+        templateUrl: '/views/common/factoryLayout.html',
+        controller: 'FactoryLayoutCtrl',
+        resolve: {
+          security:function($q, localStorageService) {
+            if(localStorageService.cookie.get('user').merchantType !== 'FACTORY'){
+              return $q.reject("Not Authorized");
+            }
+          }
+        }
+      })
+      .state('factory.customShop', {
+        url: '^/3/customShop',
+        templateUrl: '/views/factory/customShop/nav.html',
+        controller: 'FactoryCustomShopNavCtrl'
+      })
+      .state('factory.customShop.cooperationApplication', {
+        url: '/cooperationApplication',
+        templateUrl: '/views/factory/customShop/cooperationApplication.html',
+        controller: 'FactoryCooperationApplicationCtrl'
+      })
+      .state('factory.customShop.cooperationApplicationDetail', {
+        url: '/cooperationApplicationDetail',
+        templateUrl: '/views/factory/customShop/cooperationApplicationDetail.html',
+        controller: 'FactoryCooperationApplicationDetailCtrl',
+        params: {apply: null}
+      })
+
+      .state('factory.otherManage', {
+        url: '^/3/otherManage',
+        templateUrl: '/views/factory/otherManage/nav.html',
+        controller: 'FactoryOtherManageNavCtrl'
+      })
+      .state('factory.otherManage.fixPWD', {
+        url: '/fixPWD',
+        templateUrl: '/views/factory/otherManage/changePassword.html',
+        controller: 'FactoryFixPWDCtrl'
+      })
+      .state('factory.otherManage.addSubAccount', {
+        url: '/addSubAccount',
+        templateUrl: '/views/factory/otherManage/addSubAccount.html',
+        controller: 'AddSubAccountCtrl'
+      })
+      .state('factory.otherManage.modifySubAccount', {
+        url: '/modifySubAccount',
+        templateUrl: '/views/factory/otherManage/modifySubAccount.html',
+        controller: 'ModifySubAccountCtrl'
+      })
+
+
       .state('provider', {
         url: '/2',
         templateUrl: '/views/common/providerLayout.html',
@@ -324,6 +375,16 @@ angular
         url: '/fabricDetail/:id',
         templateUrl: '/views/customShop/providers/fabricDetail.html',
         controller: 'FabricDetailCtrl'
+      })
+      .state('tailor.providers.factories', {
+        url: '/factories/:business',
+        templateUrl: '/views/customShop/providers/factories.html',
+        controller: 'FactoriesCtrl'
+      })
+      .state('tailor.providers.factoryDetail', {
+        url: '/factoryDetail/:id',
+        templateUrl: '/views/customShop/providers/factoryDetail.html',
+        controller: 'FactoryDetailCtrl'
       })
 
       .state('tailor.provider', {

@@ -82,9 +82,6 @@
     <script src="bower_components/upyun/dist/upyun.min.js"></script>
     <script src="bower_components/angular-uuid-service/angular-uuid-service.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/big.js/big.js"></script>
-    <script src="bower_components/angular-big/dist/angular-big.js"></script>
-
     <!-- endbower -->
     <script src="scripts/lib/stringFormat.js" ></script>
 
@@ -92,17 +89,21 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <!-- customer added -->
+    <script src="scripts/lib/big.js" ></script>
+    <script src="scripts/lib/angular-big.js" ></script>
     <script src="scripts/lib/jquery-ui.custom.js"></script>
     <script src="scripts/lib/datepicker-zh-CN.js"></script>
     <script src="scripts/lib/layer.js" ></script>
     <script src="scripts/lib/laydate.js" ></script>
     <script src="assets/js/amazeui.js"></script>
+
     <!-- end customer added -->
 
 
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/common/shopLayout.js"></script>
     <script src="scripts/controllers/common/providerLayout.js"></script>
+    <script src="scripts/controllers/common/factoryLayout.js"></script>
 
     <script src="scripts/controllers/loginRegister/loginRegister.js"></script>
     <script src="scripts/controllers/loginRegister/modal/registerCustomShopModal.js"></script>
@@ -110,7 +111,9 @@
 
 
     <script src="scripts/controllers/customShop/providers/fabricDetail.js"></script>
+    <script src="scripts/controllers/customShop/providers/factoryDetail.js"></script>
     <script src="scripts/controllers/customShop/providers/fabrics.js"></script>
+    <script src="scripts/controllers/customShop/providers/factories.js"></script>
     <script src="scripts/controllers/customShop/providers/nav.js"></script>
 
     <script src="scripts/controllers/customShop/provider/fabric.js"></script>
@@ -175,12 +178,24 @@
     <script src="scripts/controllers/provider/moreManage/changContact.js"></script>
     <script src="scripts/controllers/provider/moreManage/nav.js"></script>
 
+    <script src="scripts/controllers/factory/customShop/nav.js"></script>
+    <script src="scripts/controllers/factory/customShop/cooperationApplication.js"></script>
+    <script src="scripts/controllers/factory/customShop/cooperationApplicationDetail.js"></script>
+    <script src="scripts/controllers/factory/customShop/modal/settlementTypeModal.js"></script>
+
+    <script src="scripts/controllers/factory/otherManage/nav.js"></script>
+    <script src="scripts/controllers/factory/otherManage/changePassword.js"></script>
+    <script src="scripts/controllers/factory/otherManage/addSubAccount.js"></script>
+    <script src="scripts/controllers/factory/otherManage/modifySubAccount.js"></script>
+    <script src="scripts/controllers/factory/otherManage/modal/editRow.js"></script>
+
     <script src="scripts/services/login_Register/register.js"></script>
     <script src="scripts/services/login_Register/login.js"></script>
     <script src="scripts/services/baseService/base.js"></script>
     <script src="scripts/services/provider/provider.js"></script>
     <script src="scripts/services/customShop/apply.js"></script>
     <script src="scripts/services/customShop/customShop.js"></script>
+    <script src="scripts/services/factory/factory.js"></script>
 
 
     <script src="scripts/services/common.js"></script>

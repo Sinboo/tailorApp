@@ -11,7 +11,7 @@ angular.module('tailorApp')
     };
     return publicFunc.urlAddPrefix(url, prefix);
   })
-  .service('baseService', function (httpService, baseUrl, $state, cache, $q) {
+  .service('baseService', function (httpService, baseUrl) {
     this.getDivision = function () {
       return httpService.http({}, baseUrl.division, {})
     };

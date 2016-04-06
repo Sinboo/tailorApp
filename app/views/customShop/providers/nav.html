@@ -3,10 +3,10 @@
   <div class="admin-sidebar">
     <ul class="am-list admin-sidebar-list">
       <li class="admin-parent">
-        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav1'}"><span ng-class="getClass('fabric')">面料</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav1'}" ui-sref="tailor.providers.fabrics()"><span ng-class="getClass('fabrics')">面料</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
         <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav1">
-          <li ng-repeat="business in businesses" >
-            <a href=""  class="am-text-sm" ng-click="choose(business, $index)">
+          <li ng-repeat="business in fabricBusiness" >
+            <a href=""  class="am-text-sm" ng-click="fabricChoose(business, $index)">
               <span ng-class="{true: 'am-text-primary', false: ''}[business.active]"> {{business.name}} </span>
             </a>
           </li>
@@ -21,8 +21,13 @@
         </ul>
       </li>
       <li class="admin-parent">
-        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav4'}"><span class=""></span> 生产商 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav4'}" ui-sref="tailor.providers.factories()"><span ng-class="getClass('factories')">生产商</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
         <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav4">
+          <li ng-repeat="business in factoryBusiness" >
+            <a href=""  class="am-text-sm" ng-click="factoryChoose(business, $index)">
+              <span ng-class="{true: 'am-text-primary', false: ''}[business.active]"> {{business.name}} </span>
+            </a>
+          </li>
         </ul>
       </li>
       <li class="admin-parent">

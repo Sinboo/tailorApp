@@ -124,7 +124,7 @@ angular.module('tailorApp')
     };
     return publicFunc.urlAddPrefix(url, prefix);
   })
-  .service('customShopService', function (httpService, customShopUrl, $state, cache, $q) {
+  .service('customShopService', function (httpService, customShopUrl) {
     this.factoryPartners = function () {
       return httpService.http({}, customShopUrl.factory_partner, {})
     };

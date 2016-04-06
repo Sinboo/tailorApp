@@ -1,0 +1,107 @@
+<style>
+  .factory-detail-padding {
+    padding: 40px;
+  }
+</style>
+<div class="admin-content">
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-8">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="tailor.providers.factorys()">全部供应商</a></li>
+        <li><a ui-sref="tailor.providers.factorys()">生产商</a></li>
+        <!--<li class="am-active">面料供应商</li>-->
+        <li class="am-active">{{factory.merchant.shortName}}{{factory.merchant.province ? '('+factory.merchant.province+')' : "" }}</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="am-g factory-detail-padding">
+    <div class="am-g">
+      <div class="am-u-sm-3">
+        <img ng-src="{{factory.merchant.portrait}}" class="am-img-thumbnail am-radius" style="width: 150px"/>
+      </div>
+      <div class="am-u-sm-3 am-vertical-align " style="height: 150px;">
+        <div class="am-vertical-align-middle">
+          <h1 class="am-text-primary" style="width:150px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">{{factory.merchant.shortName}}{{factory.merchant.province ? '('+factory.merchant.province+')' : "" }}</h1>
+        </div>
+      </div>
+      <div class="am-u-sm-4 am-vertical-align " style="height: 150px;">
+        <div class="am-vertical-align-middle">
+          <a class="am-btn am-btn-primary am-radius" href="" ng-click="setPartner(factory.merchant.number)" ng-if="!factory.isPartner && !factory.applyState">申请与TA建立业务联系<span class="am-icon-angle-double-right"></span></a>
+          <a class="am-btn am-btn-warning am-radius" href=""  ng-if="factory.isPartner">合作中</a>
+          <a class="am-btn am-btn-primary am-radius" href="" ng-click="setPartner(factory.merchant.number)" ng-if="!factory.isPartner && factory.applyState == 'REFUSED'">被拒绝合作申请，再次申请<span class="am-icon-angle-double-right"></span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g" style="margin-top: 20px">
+      <div class="am-panel am-panel-default" style="border: transparent">
+        <div class="am-panel-hd" style="border: transparent">
+          <h3 class="am-panel-title am-text-lg"> <span class="am-icon-genderless"/><span style="margin-left: 10px; font-size: 16px" >经营范围</span></h3>
+        </div>
+        <div class="am-panel-bd" style="border: transparent">
+          <ul style="list-style-type: none">
+            <li>{{factory.merchant.businessDetail}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g" style="margin-top: 20px">
+      <div class="am-panel am-panel-default" style="border: transparent">
+        <div class="am-panel-hd" style="border: transparent">
+          <h3 class="am-panel-title am-text-lg"> <span class="am-icon-genderless"/><span style="margin-left: 10px;font-size: 16px">购买须知</span></h3>
+        </div>
+        <div class="am-panel-bd" style="border: transparent">
+          <ul style="list-style-type: none">
+            <li>1、{{factory.merchant.purchaseNotes}}；</li>
+            <!--<li>2、本价格包含发票费用，可开增值税发票。</li>-->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g" style="margin-top: 20px">
+      <div class="am-panel am-panel-default" style="border: transparent">
+        <div class="am-panel-hd" style="border: transparent">
+          <h3 class="am-panel-title am-text-lg"> <span class="am-icon-genderless"/><span style="margin-left: 10px;font-size: 16px">支付方式及账号说明</span></h3>
+        </div>
+        <div class="am-panel-bd" style="border: transparent">
+          <ul style="list-style-type: none">
+            <li style="margin-bottom: 20px" ng-repeat="item in factory.merchant.payment track by $index">
+              {{item}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-10" style="background: #e9ecf1;">
+        <div class="am-u-sm-5 factory-detail-padding">
+          <span class="am-icon-map-marker am-text-lg am-text-primary"/> {{factory.merchant.province}}{{factory.merchant.city}}{{factory.merchant.address}}
+        </div>
+        <div class="am-u-sm-5 factory-detail-padding">
+          <span class="am-icon-envelope-o am-text-lg am-text-primary"/> {{factory.merchant.email || '暂无'}}
+        </div>
+      </div>
+    </div>
+    <div class="am-g">
+      <div class="am-u-sm-10" style="background: #e9ecf1;">
+        <div class="am-u-sm-5 factory-detail-padding">
+          <span class="am-icon-user am-text-lg am-text-primary"/> {{factory.merchant.contact}}
+        </div>
+        <div class="am-u-sm-5 factory-detail-padding">
+          <span class="am-icon-phone am-text-lg am-text-primary"/> {{factory.merchant.phone}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</div>

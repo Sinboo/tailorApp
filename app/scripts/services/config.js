@@ -102,6 +102,11 @@ void function () {
           HALF_MONTH: '半月结',
           MONTH: '月结'
         },
+        FACTORY_SETTLEMENT_TYPE: {
+          CASH: '现款支付',
+          ADVANCE : '预付款',
+          MONTH: '月结'
+        },
         ORIGIN_PLACE: [
           '意大利',
           '英国',
@@ -209,6 +214,12 @@ void function () {
           PAYED: '已付款待发货',
           DELIVERED: '待确认收货',
           SUCCESS: '已确认收货'
+        },
+        PRIVILEGE: {
+          DELIVER: '发货权限',
+          IN: '确认面料到厂',
+          PARTNER: '确认业务合作关系',
+          PRODUCE: '下单分配'
         }
 
 

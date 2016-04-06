@@ -1,0 +1,37 @@
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">
+    <ul class="am-list admin-sidebar-list">
+
+      <li class="admin-parent">
+        <a ui-sref="provider.customShop.myCustomShops()" class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav1'}"><span ng-class="getClass('myCustom')">定制合作商户</span> <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav1">
+          <li ng-repeat="business in businesses" >
+            <a href=""  class="am-text-sm" ng-click="choose(business, $index)">
+              <span ng-class="{true: 'am-text-primary', false: ''}[business.active]"> {{business.name}} </span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li><a class="am-text-md" href="" ><span class=""></span> <span ng-class="getClass('modifyRepertory')"> 群发消息</span></a></li>
+      <li><a class="am-text-md" ui-sref="provider.customShop.cooperationApplication()" ><span class=""></span> <span ng-class="getClass('cooperationApplication')"> 合作申请</span></a></li>
+      <li class="admin-parent">
+        <a ui-sref="provider.customShop.monthlyStatement({billType: 'INIT'})" class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}"><span ng-class="getClass('monthlyStatement')">月结管理</span> <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav2">
+          <li><a class="am-text-sm" ui-sref="provider.customShop.monthlyStatement({billType: 'INIT'})" ><span class=""></span> <span ng-class="getClass('INIT')"> 未寄出账单</span></a></li>
+          <li><a class="am-text-sm" ui-sref="provider.customShop.monthlyStatement({billType: 'DELIVERED'})" ><span class=""></span> <span ng-class="getClass('DELIVERED')"> 待对方付款结算</span></a></li>
+          <li><a class="am-text-sm" ui-sref="provider.customShop.monthlyStatement({billType: 'PAYED'})" ><span class=""></span> <span ng-class="getClass('PAYED')"> 待确认收款结算</span></a></li>
+          <li><a class="am-text-sm" ui-sref="provider.customShop.monthlyStatement({billType: 'SQUAREDUP'})" ><span class=""></span> <span ng-class="getClass('SQUAREDUP')"> 已结算</span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+
+  <div ui-view></div>
+
+  <!-- content end -->
+</div>

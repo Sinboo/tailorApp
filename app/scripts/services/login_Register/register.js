@@ -23,7 +23,7 @@ angular.module('tailorApp')
     };
     return publicFunc.urlAddPrefix(url, prefix);
   })
-  .service('registerService', function (httpService, registerUrl, $state, cache, $q) {
+  .service('registerService', function (httpService, registerUrl) {
     this.factoryApply = function (postData) {
       return httpService.http(postData, registerUrl.factory_apply, {})
     };

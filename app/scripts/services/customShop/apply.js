@@ -11,7 +11,7 @@ angular.module('tailorApp')
     };
     return publicFunc.urlAddPrefix(url, prefix);
   })
-  .service('applyProviderService', function (httpService, applyProviderUrl, $state, cache, $q) {
+  .service('applyProviderService', function (httpService, applyProviderUrl) {
     this.applyProviderPartner = function (postData) {
       return httpService.http(postData, applyProviderUrl.partner, {})
     };

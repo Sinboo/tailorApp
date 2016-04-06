@@ -12,6 +12,14 @@ angular.module('tailorApp')
         url: 'fabric/{id}',
         method: 'GET'
       },
+      factory: {
+        url: 'factory',
+        method: 'GET'
+      },
+      factory_detail: {
+        url: 'factory/{id}',
+        method: 'GET'
+      },
       partner: {
         url: 'partner',
         method: 'GET'
@@ -136,12 +144,18 @@ angular.module('tailorApp')
     };
     return publicFunc.urlAddPrefix(url, prefix);
   })
-  .service('providerService', function (httpService, providerUrl, $state, cache, $q) {
+  .service('providerService', function (httpService, providerUrl) {
     this.getAllFabrics = function (queryParams) {
       return httpService.http({}, providerUrl.fabric, queryParams)
     };
     this.getFabricDetailById = function (id) {
       return httpService.http({}, providerUrl.fabric_detail, {id: id})
+    };
+    this.getAllFactories = function (queryParams) {
+      return httpService.http({}, providerUrl.factory, queryParams)
+    };
+    this.getFactoryDetailById = function (id) {
+      return httpService.http({}, providerUrl.factory_detail, {id: id})
     };
     this.getAllPartners = function (queryParams) {
       return httpService.http({}, providerUrl.partner, queryParams)

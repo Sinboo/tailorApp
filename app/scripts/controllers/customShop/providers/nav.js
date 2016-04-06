@@ -4,35 +4,42 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('ProvidersNavCtrl', function ($scope, $location, $state, FABRIC_TYPE ) {
+  .controller('ProvidersNavCtrl', function ($scope, $location, $state, FABRIC_TYPE, FACTORY_TYPE ) {
 
     $scope.$on('to-providers-nav', function (e, d) {
-      angular.forEach($scope.businesses, function (item) {
+      angular.forEach($scope.fabricBusiness, function (item) {
         item.active = d;
       })
     })
 
-    //$scope.businesses = [{value:'GYJ', name: '国产精纺羊毛'}, {value: 'JYJ', name: '进口精纺羊毛'}, {value: 'GYD', name: '国产羊毛大衣'}];
-    $scope.businesses = [];
+    $scope.fabricBusiness = [];
     $.each(FABRIC_TYPE, function (key, value) {
       var typeItem = {};
       typeItem.value = key;
       typeItem.name = value;
-      $scope.businesses.push(typeItem);
+      $scope.fabricBusiness.push(typeItem);
     });
 
-    $scope.choose = function (business, $index) {
-      angular.forEach($scope.businesses, function (item) {
-        if ($scope.businesses[$index] == item) {
-          item.active = true;
-        }
-        else {
-          item.active = false;
-        }
-      })
-
+    $scope.fabricChoose = function (business, $index) {
+      angular.forEach($scope.fabricBusiness, function (item) {
+        item.active = $scope.fabricBusiness[$index] == item;
+      });
       $state.go('tailor.providers.fabrics', {business: business.value})
+    };
 
+    $scope.factoryBusiness = [];
+    $.each(FACTORY_TYPE, function (key, value) {
+      var typeItem = {};
+      typeItem.value = key;
+      typeItem.name = value;
+      $scope.factoryBusiness.push(typeItem);
+    });
+
+    $scope.factoryChoose = function (business, $index) {
+      angular.forEach($scope.factoryBusiness, function (item) {
+        item.active = $scope.factoryBusiness[$index] == item;
+      });
+      $state.go('tailor.providers.factories', {business: business.value})
     };
 
 

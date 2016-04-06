@@ -75,6 +75,9 @@ angular.module('tailorApp')
             if (localStorageService.cookie.get('user').merchantType == 'FABRIC') {
               $state.go("provider.orderManage.myOrderManage", {STATUS: 'PAYED'});
             }
+            if (localStorageService.cookie.get('user').merchantType == "FACTORY") {
+              $state.go("factory.customShop.cooperationApplication");
+            }
           }
         });
       }

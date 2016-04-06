@@ -15,7 +15,7 @@ angular.module('tailorApp')
     };
     return publicFunc.urlAddPrefix(url, prefix);
   })
-  .service('loginService', function (httpService, loginUrl, localStorageService, $state, cache, $q) {
+  .service('loginService', function (httpService, loginUrl, localStorageService) {
     this.login = function (postData) {
       return httpService.http(postData, loginUrl.login, {})
     };
