@@ -14,7 +14,6 @@ angular.module('tailorApp')
         if (key == 'PRODUCE') {
           $scope.flag = true;
           $scope.account.orderAssignment = $scope.ngDialogData.privilege['PRODUCE'];
-          console.log($scope.account.orderAssignment)
         }
       });
 
@@ -26,14 +25,17 @@ angular.module('tailorApp')
           typeItem.fullName = value;
           $scope.orderAssignments.push(typeItem);
         });
-        $.each($scope.ngDialogData.privilege['PRODUCE'], function (key, value) {
-          var typeItem = {};
-          typeItem.shortName = value;
-          typeItem.fullName = key;
-          $scope.orderAssignments.push(typeItem);
-        });
-        console.log($scope.orderAssignments)
+
+        if($scope.ngDialogData.privilege && $scope.ngDialogData.privilege['PRODUCE'] && $scope.ngDialogData.privilege['PRODUCE'].length > 0) {
+          $.each($scope.ngDialogData.privilege['PRODUCE'], function (key, value) {
+            var typeItem = {};
+            typeItem.shortName = value;
+            typeItem.fullName = $scope.ngDialogData.partners[value];
+            $scope.orderAssignments.push(typeItem);
+          });
+        }
       });
+
     }
     else {
       $scope.account = {};
@@ -49,16 +51,14 @@ angular.module('tailorApp')
 
 
     $scope.choose = function () {
-      console.log($scope.account.permission);
       $scope.flag = $scope.account.permission.indexOf('PRODUCE') !== -1;
     };
 
+
     $scope.validate = function () {
-      //if ($scope.formData.pricingPackageNumber.length === 0) {{layer.msg('请选择结算价格', {offset: 0, shift: 6}); return false;}}
-      if ($scope.formData.settlementType.length === 0) {{layer.msg('请选择结算方式', {offset: 0, shift: 6}); return false;}}
-      //if ($scope.formData.hasExpressProcess.length === 0) {{layer.msg('请选择订单运费', {offset: 0, shift: 6}); return false;}}
+      if(!$scope.account.accountName) {layer.msg('请选择订单运费', {offset: 0, shift: 6}); return false;}
       return true;
     }
 
 
-  })
+  });

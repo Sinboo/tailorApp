@@ -12,6 +12,7 @@ angular.module('tailorApp')
     }
 
     $scope.shortName = localStorageService.cookie.get('user').shortName == undefined ? '测试用户' : localStorageService.cookie.get('user').shortName;
+    $scope.accountName = localStorageService.cookie.get('user').accountName == undefined ? '测试用户' : localStorageService.cookie.get('user').accountName;
 
     $scope.privilege = localStorageService.cookie.get('user').privilege;
     $scope.admin = localStorageService.cookie.get('user').admin;

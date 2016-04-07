@@ -137,6 +137,11 @@ angular
         templateUrl: '/views/factory/fabricReceiveManage/nav.html',
         controller: 'FabricReceiveManageNavCtrl'
       })
+      .state('factory.fabricReceiveManage.fabricReceiveManage', {
+        url: '/fabricReceiveManage/:STATUS',
+        templateUrl: '/views/factory/fabricReceiveManage/fabricReceiveManage.html',
+        controller: 'FabricReceiveManageCtrl'
+      })
 
       .state('factory.produceManage', {
         url: '^/3/produceManage',

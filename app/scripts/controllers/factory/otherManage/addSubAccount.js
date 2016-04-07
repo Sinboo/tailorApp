@@ -55,7 +55,11 @@ angular.module('tailorApp')
       console.log(postData);
       factoryService.addSubAccount(postData).then(function (data) {
         if (data && data.success == true) {
+          toaster.pop('success', '添加子账户成功！');
           $state.go('factory.otherManage.modifySubAccount');
+        }
+        else if (data && data.success == false) {
+          toaster.pop('error', data.error.message);
         }
       })
     };

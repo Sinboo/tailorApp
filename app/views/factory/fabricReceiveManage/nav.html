@@ -3,15 +3,10 @@
   <div class="admin-sidebar">
     <ul class="am-list admin-sidebar-list">
       <li class="admin-parent">
-        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}"
-            ui-sref="factory.fabricReceiveManage.toBeReceived()"><span ng-class="getClass('fabricReceiveManage')">面料到货管理</span>
-          <span
-                class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="factory.fabricReceiveManage.fabricReceiveManage({STATUS: 'DELIVERED'})"><span ng-class="getClass('fabricReceiveManage')">面料到货管理</span><span class="am-icon-angle-down am-fr am-margin-right"></span></a>
         <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav3">
-          <li><a  class="am-text-sm" ui-sref="factory.fabricReceiveManage.toBeReceived()"><span
-                  ng-class="getClass('toBeReceived')">待收货</span></a></li>
-          <li><a  class="am-text-sm" ui-sref="factory.fabricReceiveManage.received()"><span
-                  ng-class="getClass('received')">已收货</span></a></li>
+          <li><a  class="am-text-sm" ui-sref="factory.fabricReceiveManage.fabricReceiveManage({STATUS: 'DELIVERED'})"><span ng-class="getClass('DELIVERED')">待收货</span></a></li>
+          <li><a  class="am-text-sm" ui-sref="factory.fabricReceiveManage.fabricReceiveManage({STATUS: 'SUCCESS'})"><span ng-class="getClass('SUCCESS')">已收货</span></a></li>
         </ul>
       </li>
     </ul>

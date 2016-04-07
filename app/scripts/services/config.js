@@ -220,6 +220,10 @@ void function () {
           IN: '确认面料到厂',
           PARTNER: '确认业务合作关系',
           PRODUCE: '下单分配'
+        },
+        FABRIC_RECEIVE_STATUS: {
+          DELIVERED: '待收货',
+          SUCCESS: '已收货'
         }
 
 

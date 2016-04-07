@@ -28,9 +28,21 @@ angular.module('tailorApp')
         url: 'account',
         method: 'GET'
       },
+      modify_accounts: {
+        url: 'account/{ID}',
+        method: 'PUT'
+      },
       delete_account: {
         url: 'account/{ID}',
         method: 'DELETE'
+      },
+      fabrics: {
+        url: 'factory/fabric/{STATUS}',
+        method: 'GET'
+      },
+      receive_fabric: {
+        url: 'factory/fabric/{ID}/receive',
+        method: 'PUT'
       }
 
     };
@@ -55,8 +67,17 @@ angular.module('tailorApp')
     this.subAccounts = function () {
       return httpService.http({}, factoryUrl.get_accounts, {})
     };
+    this.modifySubAccount = function (params, ID) {
+      return httpService.http(params, factoryUrl.modify_accounts, {ID: ID})
+    };
     this.deleteSubAccount = function (ID) {
       return httpService.http({}, factoryUrl.delete_account, {ID: ID})
+    };
+    this.fabrics = function (queryParams) {
+      return httpService.http({}, factoryUrl.fabrics, queryParams)
+    };
+    this.receiveFabric = function (ID) {
+      return httpService.http({}, factoryUrl.receive_fabric, {ID: ID})
     }
 
 
