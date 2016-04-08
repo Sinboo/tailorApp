@@ -82,9 +82,8 @@ angular.module('tailorApp')
           if (item.salesStatus == 'NORMAL') {
             productList.push(item);
           }
-        })
+        });
         $scope.queriedProducts = productList;
-        console.log($scope.queriedProducts)
       })
     };
 
@@ -104,6 +103,7 @@ angular.module('tailorApp')
       $scope.disable_figure = product.figure !== null;
 
       $scope.stock = product.stock;
+      $scope.salesStatus = product.salesStatus;
       //}
     }
 
@@ -113,9 +113,11 @@ angular.module('tailorApp')
 
     $scope.validate = function () {
       if($scope.outOfStock) {layer.msg('数量超库存了!', {offset: 0, shift: 6}); return false;}
+      if($scope.salesStatus == 'OOS') {layer.msg('所选产品缺货!', {offset: 0, shift: 6}); return false;}
       if(!$scope.item.purchaseOrder.supplierNumber) {layer.msg('请设置面料供应商!', {offset: 0, shift: 6}); return false;}
+      if(!$scope.item.factoryNumber) {layer.msg('请设置工厂!', {offset: 0, shift: 6}); return false;}
       return true;
-    }
+    };
 
     $(document).on("click", ".setItemComingDate", function(){
       laydate({

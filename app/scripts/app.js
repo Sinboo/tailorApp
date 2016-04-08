@@ -131,6 +131,21 @@ angular
         templateUrl: '/views/factory/otherManage/modifySubAccount.html',
         controller: 'ModifySubAccountCtrl'
       })
+      .state('factory.otherManage.addSpecification', {
+        url: '/addSpecification',
+        templateUrl: '/views/factory/otherManage/addSpecification.html',
+        controller: 'AddSpecificationCtrl'
+      })
+      .state('factory.otherManage.fillSizes', {
+        url: '/fillSizes',
+        templateUrl: '/views/factory/otherManage/fillSizes.html',
+        controller: 'FillSizesCtrl'
+      })
+      .state('factory.otherManage.viewSpecification', {
+        url: '/viewSpecification',
+        templateUrl: '/views/factory/otherManage/viewSpecification.html',
+        controller: 'ViewSpecificationCtrl'
+      })
 
       .state('factory.fabricReceiveManage', {
         url: '^/3/fabricReceiveManage',

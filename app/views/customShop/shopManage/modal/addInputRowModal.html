@@ -99,6 +99,7 @@
       <div class="am-u-sm-8">
         <input type="text"  placeholder="剩余{{stock}}米" ng-model="item.purchaseOrder.quantity" ng-change="checkOutOfStock(item.purchaseOrder.quantity)" />
         <p class="am-text-danger am-fr" ng-if="outOfStock">*数量超过库存量!</p>
+        <p class="am-text-danger am-fr" ng-if="salesStatus == 'OOS'">*该产品缺货!</p>
       </div>
     </div>
 

@@ -5,9 +5,16 @@
       <li><a class="am-text-md" ui-sref="factory.otherManage.fixPWD()" > <span ng-class="getClass('fixPWD')"> 修改密码</span></a></li>
       <li class="admin-parent">
         <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="factory.otherManage.addSubAccount()"><span ng-class="getClass('SubAccount')">子账户管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
-        <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav3">
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav3">
           <li><a  class="am-text-sm" ui-sref="factory.otherManage.addSubAccount()"><span ng-class="getClass('addSubAccount')">增加账号</span></a></li>
           <li><a  class="am-text-sm" ui-sref="factory.otherManage.modifySubAccount()"><span ng-class="getClass('modifySubAccount')">子账号修改</span></a></li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="factory.otherManage.addSpecification()"><span ng-class="getClass('Specification')">规格单管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in">
+          <li><a  class="am-text-sm" ui-sref="factory.otherManage.addSpecification()"><span ng-class="getClass('addSpecification')">创建规格单</span></a></li>
+          <li><a  class="am-text-sm" ui-sref="factory.otherManage.viewSpecification()"><span ng-class="getClass('viewSpecification')">查看规格单</span></a></li>
         </ul>
       </li>
     </ul>

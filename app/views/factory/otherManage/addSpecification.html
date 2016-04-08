@@ -1,0 +1,109 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-12">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="factory.otherManage.fixPWD()">其他管理</a></li>
+        <li class="">规格单管理</li>
+        <li class="am-active">创建规格单</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding">
+    <legend><span class="am-text-secondary am-text-sm">提示：你可以输入自己工厂的尺寸规格单，合作定制商户可以对照规格单方便地在线下单.</span></legend>
+    <div class="am-g">
+      <div class="am-u-sm-6" >
+        <form class="am-form am-form-horizontal">
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">类别:</label>
+            <div class="am-u-sm-8">
+              <select class="form-control " style="font-size: smaller" ng-model="item.gender" id="_gender">
+                <option ng-selected="gender === item.gender"
+                        ng-repeat="gender in genders"
+                        value="{{gender.shortName}}">
+                  {{gender.fullName}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">类型:</label>
+            <div class="am-u-sm-8">
+              <select class="form-control " style="font-size: smaller" ng-model="item.clothing" ng-change="setFlag(item.clothing)" id="_clothing">
+                <option ng-selected="clothing === item.clothing"
+                        ng-repeat="clothing in clothings"
+                        value="{{clothing.shortName}}">
+                  {{clothing.fullName}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-pwd-3" class="am-u-sm-4 am-form-label am-text-sm">规格单名称:</label>
+            <div class="am-u-sm-8">
+              <input type="text" id="doc-ipt-pwd-3" placeholder="" ng-model="item.name"/>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">需要尺寸部位:</label>
+            <div class="am-u-sm-8" ng-if="!item.flag">
+              <div class="am-form-group" style="width: 500px" >
+                <label class="am-checkbox-inline" ng-repeat="part in not_trousers_parts">
+                  <input type="checkbox" checklist-model="item.part" checklist-value="part.shortName" ng-click="choose()"> {{part.fullName}}
+                </label>
+              </div>
+            </div>
+            <div class="am-u-sm-8" ng-if="item.flag">
+              <div class="am-form-group" style="width: 500px" >
+                <label class="am-checkbox-inline" ng-repeat="part in trousers_parts">
+                  <input type="checkbox" checklist-model="item.part" checklist-value="part.shortName" ng-click="choose()"> {{part.fullName}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-pwd-3" class="am-u-sm-4 am-form-label am-text-sm">号型设定:</label>
+            <div class="am-u-sm-8">
+              <div class="am-btn-group am-btn-group-xs" style="margin-bottom: 10px" id="_setSize">
+                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="addSize()" ><span class="am-text-primary">新增一个号型</span></button>
+              </div>
+              <div class="am-g" ng-repeat="size in item.sizes">
+                <div class="am-u-sm-6">
+                  <span class="am-text-sm am-text-primary am-icon-angle-right"></span><span style="margin-left: 10px">{{size}}</span>
+                </div>
+                <div class="am-u-sm-6">
+                  <a href="" ng-click="deleteSize($index)"><span class="am-text-warning am-icon-trash-o"></span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label  class="am-u-sm-4 am-form-label am-text-sm">公差及其他备注:</label>
+            <div class="am-u-sm-8">
+              <textarea type="text" class="am-form-field"  placeholder="" ng-model="item.remark"></textarea>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label  class="am-u-sm-4 am-form-label am-text-sm"></label>
+            <div class="am-u-sm-8">
+              <button type="submit" class="am-btn am-btn-primary" ng-click="validate() && confirm(item)">创建此规格单,继续填写尺寸</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

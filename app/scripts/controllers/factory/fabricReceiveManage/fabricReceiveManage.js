@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('FabricReceiveManageCtrl', function ($scope, dataSetterGetter, $stateParams, factoryService, commonService, PAGE_SIZE, FABRIC_RECEIVE_STATUS) {
+  .controller('FabricReceiveManageCtrl', function ($scope, dataSetterGetter, $stateParams, factoryService, ngDialog, toaster, commonService, PAGE_SIZE, FABRIC_RECEIVE_STATUS) {
     $scope.FABRIC_RECEIVE_STATUS = FABRIC_RECEIVE_STATUS;
     $scope.STATUS = $stateParams.STATUS == "" ? undefined : $stateParams.STATUS;
 
@@ -42,14 +42,16 @@ angular.module('tailorApp')
     
     $scope.receiveFabric = function (order) {
       ngDialog.openConfirm({
-        template: 'views/common/modal/confirmModal.html',
+        template: 'views/customShop/shopManage/modal/confirmReceivedModal.html',
         className: 'ngdialog-theme-default dialogcaseeditor',
-        data: {message: '请确认快递物品与清单描述是否一致?'}
+        controller: 'ConfirmReceivedModalCtrl',
+        data: order
       }).then(
         function(value) {
           factoryService.receiveFabric(order.number).then(function (data) {
             if (data && data.success == true) {
               toaster.pop('success', '确认收货成功！');
+              var queryParams = JSON.parse(JSON.stringify(param));
               factoryService.fabrics(queryParams).then(function(data){
                 initData(queryParams, data.data)
               });

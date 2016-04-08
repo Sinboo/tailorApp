@@ -22,7 +22,7 @@
     <div class="am-u-sm-6  more-button">
       <article class="am-article am-u-sm-10">
         <div class="am-article-bd">
-          <p class="am-article-lead am-text-secondary" >你有{{total}}个新订单需要处理, 赶快处理吧。
+          <p class="am-article-lead am-text-secondary" ng-if="STATUS !== 'SUCCESS'">你有{{total}}个新订单需要处理, 赶快处理吧。
             <span class="am-icon-smile-o am-text-lg"></span>
           </p>
         </div>
@@ -58,7 +58,7 @@
             <td >{{order.express.createTime | date: 'yyyy-MM-dd HH:mm'}}</td>
             <td >{{order.express.company}}</td>
             <td ><a href="" ng-click="queryExpress(order.express)">{{order.express.number}}</a></td>
-            <td><a href="" ng-click="receiveFabric(order)"><span class="am-text-primary">确认收货</span></a></td>
+            <td ng-if="STATUS !== 'SUCCESS'"><a href="" ng-click="receiveFabric(order)"><span class="am-text-primary">确认收货</span></a></td>
           </tr>
           </tbody>
         </table>

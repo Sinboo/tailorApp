@@ -224,8 +224,22 @@ void function () {
         FABRIC_RECEIVE_STATUS: {
           DELIVERED: '待收货',
           SUCCESS: '已收货'
+        },
+        SPECIFICATION_GENDER: {
+          1: '男装',
+          0: '女装'
+        },
+        not_trousers_parts: {
+          neck: '领围', frontLength: '前长', backLength: '后长', length: '衣长', shoulder: '肩宽',
+          sleeve: '袖长', chest: '胸围', middleChest: '中腰', sleeveHead: '袖头长', lowerHem: '下摆',
+          bicep: '袖肥', cuff: '袖口', frontWidth: '前宽', backWidth: '后宽',
+          shoulderOfLongSleeve: '长袖肩宽', shoulderOfShortSleeve: '短袖肩宽',
+          yokeOfLongSleeve: '长袖过肩', yokeOfShortSleeve: '短袖过肩'
+        },
+        trousers_parts: {
+          waist: '腰围', ass: '臀围', crotch: '通裆', rise: '立裆', crosspiece: '横档',
+          midCrotch: '中档', leg: '裤长', trouserEnds: '脚口', frontRise: '前浪', backRise: '后浪'
         }
-
 
 
 
