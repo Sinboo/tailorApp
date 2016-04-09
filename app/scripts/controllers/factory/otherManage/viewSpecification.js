@@ -4,36 +4,35 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('ViewSpecificationCtrl', function ($scope, loginService, $http, $state, toaster) {
-    $scope.account = {};
+  .controller('ViewSpecificationCtrl', function ($scope, factoryService, $http, $state, toaster, not_trousers_parts, trousers_parts, SPECIFICATION_GENDER, CUSTOMCLOTHING_TYPE) {
+    $scope.not_trousers_parts = not_trousers_parts;
+    $scope.trousers_parts = trousers_parts;
+    $scope.SPECIFICATION_GENDER = SPECIFICATION_GENDER;
+    $scope.CUSTOMCLOTHING_TYPE = CUSTOMCLOTHING_TYPE;
 
-    $scope.confirm = function () {
-      var param = {};
-      param.oldPasswd = $scope.account.oldPasswd;
-      param.newPasswd = $scope.account.newPasswd;
-      param.ID = $scope.account.ID;
-      loginService.changePassword(param).then(function (data) {
-        if (data.success == true) {
-          toaster.pop('success', '密码修改成功!');
-          $state.go('factory.otherManage.addSubAccount');
-        }
-        else {
-          toaster.pop('error', data.error.message);
-        }
-      })
-    };
+    factoryService.getSpecifications().then(function (data) {
+      if (data && data.success == true) {
+        $scope.specifications = data.data;
+      }
+      else if (data && data.success == false) {
+        toaster.pop('error', data.error.message)
+      }
+    });
 
+    $scope.chooseSpecification = function (specification) {
+      console.log(specification)
+      $scope.flag = true;
+      $scope.specification = specification;
+      $scope.specificationFlag = specification.clothing == 'JEANS';
+      var oneSpecification = specification.standard[Object.keys(specification.standard)[0]];
+      $scope.parts = Object.keys(oneSpecification);
+      console.log(oneSpecification)
+      console.log($scope.parts)
 
-    $scope.validate = function () {
-      if(!$scope.account.ID) {layer.tips('请输入账号ID', '#doc-ipt-3'); scrollTo('#doc-ipt-3'); return false;}
-      if(!$scope.account.oldPasswd) {layer.tips('请输入旧密码', '#doc-ipt-pwd-2'); scrollTo('#doc-ipt-pwd-2'); return false;}
-      if(!$scope.account.newPasswd) {layer.tips('请输入新密码', '#doc-ipt-pwd-3'); scrollTo('#doc-ipt-pwd-3'); return false;}
-      if(!$scope.account.reNewPasswd) {layer.tips('请再次输入新密码', '#doc-ipt-pwd-4'); scrollTo('#doc-ipt-pwd-4'); return false;}
-      if($scope.account.reNewPasswd !== $scope.account.newPasswd) {layer.tips('两次输入的新密码不同!', '#doc-ipt-pwd-4'); scrollTo('#doc-ipt-pwd-4'); return false;}
-      return true;
     }
 
-    var scrollTo = function (id) {$('html,body').animate({scrollTop:$(id).offset().top - 100}, 200);};
+
+
 
 
   })

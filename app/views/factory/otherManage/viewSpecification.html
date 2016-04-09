@@ -16,47 +16,65 @@
 
 
   <div class="am-g fabric-detail-padding">
-    <legend><span class="am-text-secondary am-text-sm">提示：你可以自己修改登录密码，其他资料的修改需要与客服联系。</span></legend>
+    <legend><span class="am-text-secondary am-text-sm">你目前一共有{{total}}个规格单。</span></legend>
     <div class="am-u-sm-6" >
       <form class="am-form am-form-horizontal">
         <div class="am-form-group">
-          <label for="doc-ipt-3" class="am-u-sm-4 am-form-label am-text-sm">账号ID:</label>
+          <label  class="am-u-sm-4 am-form-label am-text-sm">全部规格单:</label>
           <div class="am-u-sm-8">
-            <input type="text" id="doc-ipt-3" placeholder="账号ID" ng-model="account.ID"/>
+            <div class="am-g" style="width: 500px">
+              <span ng-repeat="specification in specifications" style="margin-left: 20px">
+                <a href="" ng-click="chooseSpecification(specification)">
+                  <span class="am-text-xs am-text-primary am-icon-circle-thin"></span><span style="margin-left: 10px">{{specification.name}}</span>
+                </a>
+              </span>
+            </div>
           </div>
         </div>
-
-        <div class="am-form-group">
-          <label for="doc-ipt-pwd-3" class="am-u-sm-4 am-form-label am-text-sm">旧密码:</label>
-          <div class="am-u-sm-8">
-            <input type="password" id="doc-ipt-pwd-2" placeholder="" ng-model="account.oldPasswd"/>
+        <div ng-if="flag">
+          <div class="am-form-group" >
+            <label for="doc-ipt-pwd-3" class="am-u-sm-4 am-form-label am-text-sm">规格单名称:</label>
+            <div class="am-u-sm-8">
+              <input type="text" ng-disabled="true" id="doc-ipt-pwd-2" placeholder="" ng-model="specification.name"/>
+            </div>
           </div>
-        </div>
 
-        <div class="am-form-group">
-          <label for="doc-ipt-pwd-3" class="am-u-sm-4 am-form-label am-text-sm">新密码:</label>
-          <div class="am-u-sm-8">
-            <input type="password" id="doc-ipt-pwd-3" placeholder="" ng-model="account.newPasswd"/>
+          <div class="am-form-group">
+            <label for="doc-ipt-pwd-3" class="am-u-sm-4 am-form-label am-text-sm">类别:</label>
+            <div class="am-u-sm-8">
+              <input type="text" ng-disabled="true" id="doc-ipt-pwd-3" placeholder="" ng-model="SPECIFICATION_GENDER[specification.gender]"/>
+            </div>
           </div>
-        </div>
 
-        <div class="am-form-group">
-          <label for="doc-ipt-pwd-4" class="am-u-sm-4 am-form-label am-text-sm">确认新密码:</label>
-          <div class="am-u-sm-8">
-            <input type="password" id="doc-ipt-pwd-4" placeholder="" ng-model="account.reNewPasswd"/>
-          </div>
-        </div>
-
-
-        <div class="am-form-group">
-          <div class="am-u-sm-3 am-u-sm-offset-9">
-            <button type="submit" class="am-btn am-btn-primary" ng-click="validate() && confirm()">确认</button>
+          <div class="am-form-group">
+            <label for="doc-ipt-pwd-4" class="am-u-sm-4 am-form-label am-text-sm">类型:</label>
+            <div class="am-u-sm-8">
+              <input type="text" ng-disabled="true" id="doc-ipt-pwd-4" placeholder="" ng-model="CUSTOMCLOTHING_TYPE[specification.clothing]"/>
+            </div>
           </div>
         </div>
       </form>
     </div>
-
-
+    <div class="am-g fabric-detail-padding" ng-if="flag">
+      <table class="am-table am-table-striped am-table-hover table-main">
+        <thead>
+        <tr>
+          <th class="table-title">号型</th>
+          <th class="table-title" ng-repeat="part in  parts">
+            {{specificationFlag ? trousers_parts[part] : not_trousers_parts[part]}}
+          </th>
+        </tr>
+        </thead>
+        <tbody id="_setSize">
+        <tr ng-repeat="(key, value) in specification.standard">
+          <td>{{key}}</td>
+          <td ng-repeat="key in parts">
+            {{value[key]}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
 

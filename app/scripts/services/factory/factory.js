@@ -43,6 +43,14 @@ angular.module('tailorApp')
       receive_fabric: {
         url: 'factory/fabric/{ID}/receive',
         method: 'PUT'
+      },
+      add_specification: {
+        url: 'factory/specification',
+        method: 'POST'
+      },
+      get_specifications: {
+        url: 'factory/specification',
+        method: 'GET'
       }
 
     };
@@ -78,7 +86,14 @@ angular.module('tailorApp')
     };
     this.receiveFabric = function (ID) {
       return httpService.http({}, factoryUrl.receive_fabric, {ID: ID})
+    };
+    this.addSpecification = function (postData) {
+      return httpService.http(postData, factoryUrl.add_specification, {})
+    };
+    this.getSpecifications = function () {
+      return httpService.http({}, factoryUrl.get_specifications, {})
     }
+
 
 
 

@@ -67,17 +67,41 @@ angular.module('tailorApp')
 
 
     $scope.confirm = function () {
-      
-    }
-
-
-
+      console.log($scope.item);
+      console.log($scope.sizes);
+      var postData = {};
+      postData.clothing = $scope.item.clothing;
+      postData.gender = $scope.item.gender;
+      postData.name = $scope.item.name;
+      postData.remark = $scope.item.remark;
+      postData.standard = {};
+      angular.forEach($scope.item.part, function (item) {
+        postData[item] = true;
+      });
+      angular.forEach($scope.sizes, function (item) {
+        postData.standard[item.name] = {};
+        $.each(item, function (key, value) {
+          if (key !== 'name') {
+            postData.standard[item.name][key] = value;
+          }
+        })
+      });
+      var post = JSON.parse(JSON.stringify(postData));
+      console.log(post);
+      factoryService.addSpecification(post).then(function (data) {
+        if (data && data.success == true) {
+          toaster.pop('success', '添加规格单成功!');
+          $state.go('factory.otherManage.viewSpecification');
+        }
+        else if (data && data.success == false) {
+          toaster.pop('error', data.error.message);
+        }
+      })
+    };
 
 
     $scope.validate = function () {
-      if(!$scope.item.gender) {layer.tips('请选择类别', '#_gender'); scrollTo('#_gender'); return false;}
-      if(!$scope.item.clothing) {layer.tips('请选择类型', '#_clothing'); scrollTo('#_clothing'); return false;}
-      if($scope.sizes.length == 0) {layer.tips('请新增至少一个号型', '#_setSize'); scrollTo('#_setSize'); return false;}
+      if($scope.sizes.length == 0) {layer.tips('请填写至少一个号型详情', '#_setSize'); scrollTo('#_setSize'); return false;}
       return true;
     };
     var scrollTo = function (id) {$('html,body').animate({scrollTop:$(id).offset().top - 100}, 200);};
