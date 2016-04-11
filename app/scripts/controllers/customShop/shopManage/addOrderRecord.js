@@ -4,8 +4,28 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('AddOrderRecordCtrl', function ($scope, ngDialog, $state, CLOTHING_TYPE, commonService, customShopService, providerService, toaster) {
-    $scope.order = {};
+  .controller('AddOrderRecordCtrl', function ($scope, ngDialog, $state, $stateParams, CLOTHING_TYPE, commonService, customShopService, providerService, toaster, tailoringTypes) {
+    if ($stateParams.ID) {
+      $scope.editFlag = true;
+      customShopService.orderDetail($stateParams.ID).then(function (data) {
+        $scope.order = data.data;
+        $scope.data = data.data.items;
+
+        $scope.order.birthday = commonService.convertDate($scope.order.birthday).split('-')[0];
+        $scope.order.purharseDate = commonService.convertDate($scope.order.purharseDate);
+        angular.forEach($scope.data, function (item) {
+          item.deliveryDate = commonService.convertDate(item.deliveryDate);
+          item.editFlag = true;
+          item.tailoringType = item.clothingTypes=='OTHER' ? item.otherClothes : tailoringTypes[item.clothingTypes.toString()]
+        });
+      });
+    }
+    else {
+      $scope.order = {};
+      $scope.data = [];
+      $scope.order.birthday = '无';
+    }
+
     $scope.item = {};
     $scope.item.quantity = 1;
     $scope.item.purchaseOrder = {};
@@ -17,7 +37,6 @@ angular.module('tailorApp')
       $scope.ages.push(beginYear + i);
     }
     $scope.ages.push('无');
-    $scope.order.birthday = '无';
 
 
     customShopService.fabricPartners().then(function (data) {
@@ -29,11 +48,7 @@ angular.module('tailorApp')
     });
     customShopService.privateFabrics().then(function (data) {
       $scope.privateFabrics = data.data;
-    })
-
-
-    $scope.data = [];
-
+    });
 
     $scope.deleteInputRow = function (index) {
       ngDialog.openConfirm({
@@ -52,7 +67,6 @@ angular.module('tailorApp')
     $scope.editInputRow = function (d, index) {
       var editItem = {};
       angular.copy(d, editItem);
-      //editItem.purchaseOrder.quantity = editItem.purchaseOrder.quantity / 100;
       ngDialog.openConfirm({
         template: 'views/customShop/shopManage/modal/addInputRowModal.html',
         className: 'ngdialog-theme-default dialogcaseeditor',
@@ -60,7 +74,6 @@ angular.module('tailorApp')
         data: {fabrics: $scope.fabrics, factories: $scope.factories, editItem: editItem }
       }).then(
         function(value) {
-          //value.purchaseOrder.quantity = value.purchaseOrder.quantity * 100; // m to cm
           $scope.data[index] = value;
         },
         function(value) {
@@ -151,21 +164,41 @@ angular.module('tailorApp')
       postData.birthday = postData.birthday == '无' ? undefined : postData.birthday + '-01-01';
       var postString = JSON.stringify(postData);
       $scope.disable = true;
-      customShopService.addOrder(postString).then(function (data) {
-        console.log(data);
-        if (data && data.success == true) {
-          toaster.pop('success', '添加订单成功!');
-          $state.go('tailor.shopManage.orderRecord', {STATUS: 'DOING'});
-        }
-        else if (data && data.success == false) {
-          toaster.pop('error', data.error.message );
-          $scope.disable = false;
-        }
-        else {
-          toaster.pop('error', '添加订单失败!');
-          $scope.disable = false;
-        }
-      })
+      if ( $scope.editFlag ) {
+        customShopService.editOrder(postString, $scope.order.number).then(function (data) {
+          console.log(data);
+          if (data && data.success == true) {
+            toaster.pop('success', '修改订单成功!');
+            $state.go('tailor.shopManage.orderRecord', {STATUS: 'DOING'});
+          }
+          else if (data && data.success == false) {
+            toaster.pop('error', data.error.message );
+            $scope.disable = false;
+          }
+          else {
+            toaster.pop('error', '修改订单失败!');
+            $scope.disable = false;
+          }
+        })
+      }
+      else {
+        customShopService.addOrder(postString).then(function (data) {
+          console.log(data);
+          if (data && data.success == true) {
+            toaster.pop('success', '添加订单成功!');
+            $state.go('tailor.shopManage.orderRecord', {STATUS: 'DOING'});
+          }
+          else if (data && data.success == false) {
+            toaster.pop('error', data.error.message );
+            $scope.disable = false;
+          }
+          else {
+            toaster.pop('error', '添加订单失败!');
+            $scope.disable = false;
+          }
+        })
+      }
+
     };
 
     var valid = function() {

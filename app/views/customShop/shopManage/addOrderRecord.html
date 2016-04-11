@@ -6,8 +6,8 @@
   <div class="am-g am-u-sm-12">
     <div class="am-u-sm-6">
       <ol class="am-breadcrumb">
-        <li><a ui-sref="tailor.shopManage.orderRecord()">店内管理</a></li>
-        <li class="am-active">录入新订单</li>
+        <li><a ui-sref="tailor.shopManage.orderRecord({STATUS: 'DOING'})">店内管理</a></li>
+        <li class="am-active">{{editFlag ? '修改订单' : '录入新订单'}}</li>
       </ol>
     </div>
 

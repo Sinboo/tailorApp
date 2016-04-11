@@ -92,6 +92,7 @@ angular.module('tailorApp')
     $scope.validate = function () {
       if(!$scope.item.gender) {layer.tips('请选择类别', '#_gender'); scrollTo('#_gender'); return false;}
       if(!$scope.item.clothing) {layer.tips('请选择类型', '#_clothing'); scrollTo('#_clothing'); return false;}
+      if(!$scope.item.name) {layer.tips('请输入规格单名称', '#_specificationName'); scrollTo('#_specificationName'); return false;}
       if($scope.item.sizes.length == 0) {layer.tips('请新增至少一个号型', '#_setSize'); scrollTo('#_setSize'); return false;}
       return true;
     };

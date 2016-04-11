@@ -16,8 +16,16 @@ angular.module('tailorApp')
         url: 'order/tailoring',
         method: 'POST'
       },
+      edit_order: {
+        url: 'order/tailoring/{ID}',
+        method: 'PUT'
+      },
       get_orders: {
         url: 'order/tailoring/{STATUS}',
+        method: 'GET'
+      },
+      order_detail: {
+        url: 'order/tailoring/id/{ID}',
         method: 'GET'
       },
       fabric_query: {
@@ -134,8 +142,14 @@ angular.module('tailorApp')
     this.addOrder = function (postData) {
       return httpService.http(postData, customShopUrl.add_order, {})
     };
+    this.editOrder = function (postData, ID) {
+      return httpService.http(postData, customShopUrl.edit_order, {ID: ID})
+    };
     this.getOrders = function (queryParams) {
       return httpService.http({}, customShopUrl.get_orders, queryParams)
+    };
+    this.orderDetail = function (ID) {
+      return httpService.http({}, customShopUrl.order_detail, {ID: ID})
     };
     this.queryFabric = function (queryParams) {
       return httpService.http({}, customShopUrl.fabric_query, queryParams)

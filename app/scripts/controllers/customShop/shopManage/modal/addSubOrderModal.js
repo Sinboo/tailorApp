@@ -7,6 +7,20 @@ angular.module('tailorApp')
   .controller('AddSubOrderModalCtrl', function ($scope, customShopService, providerService, BREADTH, YARN_COUNT, CRAFT, COMPOSITION, FABRIC_COLOR, FLOWER_PATTERN) {
     if ($scope.ngDialogData.editItem) {
       $scope.item = $scope.ngDialogData.editItem;
+      console.log($scope.item)
+      $scope.fabric = _.findWhere($scope.ngDialogData.fabrics, {number: $scope.ngDialogData.editItem.purchaseOrder.supplierNumber});
+      $scope.brands = $scope.fabric.brands;
+      if ($scope.ngDialogData.editItem.editFlag) {
+        $scope.brand = _.findWhere($scope.fabric.brands, {number: $scope.ngDialogData.editItem.purchaseOrder.brand.number});
+        $scope.factory = {};
+        $scope.factory.shortName = $scope.item.factoryName;
+        $scope.factory.number = $scope.item.factoryNumber;
+        $scope.item.urgent = $scope.item.urgent.toString();
+        $scope.item.halfFinished = $scope.item.halfFinished.toString();
+      }
+      else {
+        $scope.brand = _.findWhere($scope.fabric.brands, {number: $scope.ngDialogData.editItem.purchaseOrder.brand});
+      }
     }
     else {
       $scope.item = {};
@@ -45,10 +59,7 @@ angular.module('tailorApp')
       '夹克F'
     ];
 
-    if ($scope.ngDialogData.editItem) {
-      $scope.fabric = _.findWhere($scope.ngDialogData.fabrics, {number: $scope.ngDialogData.editItem.purchaseOrder.supplierNumber});
-      $scope.brand = _.findWhere($scope.fabric.brands, {number: $scope.ngDialogData.editItem.purchaseOrder.brand});
-    }
+
 
     $scope.setFabric = function (fabric) {
       $scope.item.purchaseOrder.supplierName = fabric.shortName;

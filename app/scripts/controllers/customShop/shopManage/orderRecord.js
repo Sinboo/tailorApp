@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('OrderRecordCtrl', function ($scope, $stateParams, customShopService, PAGE_SIZE, tailoringTypes) {
+  .controller('OrderRecordCtrl', function ($scope, $state, $stateParams, customShopService, ngDialog, PAGE_SIZE, tailoringTypes) {
     $scope.tailoringTypes = tailoringTypes;
     $scope.Math = Math;
 
@@ -39,5 +39,21 @@ angular.module('tailorApp')
       });
     };
 
+    $scope.editOrder = function (order) {
+      ngDialog.openConfirm({
+        template: 'views/common/modal/confirmModal.html',
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        data: {message: '修改此订单？'}
+      }).then(
+        function () {
+          //dataSetterGetter.set('editOrderInitData', order)
+          $state.go('tailor.shopManage.addOrderRecord', {ID: order.number})
+        },
+        function () {
 
-  })
+        }
+      )
+    }
+
+
+  });

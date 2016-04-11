@@ -326,7 +326,7 @@ angular
         controller: 'OrderRecordCtrl'
       })
       .state('tailor.shopManage.addOrderRecord', {
-        url: '/addOrderRecord',
+        url: '/addOrderRecord/:ID',
         templateUrl: '/views/customShop/shopManage/addOrderRecord.html',
         controller: 'AddOrderRecordCtrl'
       })
