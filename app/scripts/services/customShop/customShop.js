@@ -20,6 +20,10 @@ angular.module('tailorApp')
         url: 'order/tailoring/{ID}',
         method: 'PUT'
       },
+      delete_order: {
+        url: 'order/tailoring/{ID}',
+        method: 'DELETE'
+      },
       get_orders: {
         url: 'order/tailoring/{STATUS}',
         method: 'GET'
@@ -144,6 +148,9 @@ angular.module('tailorApp')
     };
     this.editOrder = function (postData, ID) {
       return httpService.http(postData, customShopUrl.edit_order, {ID: ID})
+    };
+    this.deleteOrder = function (ID) {
+      return httpService.http({}, customShopUrl.delete_order, {ID: ID})
     };
     this.getOrders = function (queryParams) {
       return httpService.http({}, customShopUrl.get_orders, queryParams)

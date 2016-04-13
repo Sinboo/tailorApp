@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('OrderRecordCtrl', function ($scope, $state, $stateParams, customShopService, ngDialog, PAGE_SIZE, tailoringTypes) {
+  .controller('OrderRecordCtrl', function ($scope, $state, $stateParams, customShopService, ngDialog, toaster, PAGE_SIZE, tailoringTypes) {
     $scope.tailoringTypes = tailoringTypes;
     $scope.Math = Math;
 
@@ -48,6 +48,32 @@ angular.module('tailorApp')
         function () {
           //dataSetterGetter.set('editOrderInitData', order)
           $state.go('tailor.shopManage.addOrderRecord', {ID: order.number})
+        },
+        function () {
+
+        }
+      )
+    }
+
+    $scope.deleteOrder = function (ID) {
+      ngDialog.openConfirm({
+        template: 'views/common/modal/confirmModal.html',
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        data: {message: '删除此订单？'}
+      }).then(
+        function () {
+          customShopService.deleteOrder(ID).then(function (data) {
+            if (data && data.success == true) {
+              var queryParams = JSON.parse(JSON.stringify(param));
+              customShopService.getOrders(queryParams).then(function (data) {
+                initData(queryParams, data.data)
+              });
+              toaster.pop('success', '删除订单成功!');
+            }
+            else if (data && data.success == false) {
+              toaster.pop('error', data.error.message);
+            }
+          })
         },
         function () {
 

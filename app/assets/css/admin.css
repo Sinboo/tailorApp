@@ -274,6 +274,11 @@ ul {
   padding: .5rem;
 }
 
+.table-main-tailor {
+  font-size: 11px;
+  padding: 0.2rem;
+}
+
 .table-main button {
   background: #fff;
 }

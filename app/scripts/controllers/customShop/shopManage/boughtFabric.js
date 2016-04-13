@@ -4,7 +4,8 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('BoughtFabricCtrl', function ($scope, PAGE_SIZE, customShopService) {
+  .controller('BoughtFabricCtrl', function ($scope, PAGE_SIZE, customShopService, tailoringTypes) {
+    $scope.tailoringTypes = tailoringTypes;
     var param = {};
     param.page = 1;
     param.pageSize = PAGE_SIZE;
@@ -12,7 +13,7 @@ angular.module('tailorApp')
 
     customShopService.purchaseOrder(queryParams).then(function (data) {
       initData(queryParams, data.data)
-    })
+    });
 
     var initData = function (param, data) {
       $scope.orders = data.content;
