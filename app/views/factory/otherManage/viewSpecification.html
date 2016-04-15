@@ -9,14 +9,15 @@
     <div class="am-u-sm-12">
       <ol class="am-breadcrumb">
         <li><a ui-sref="factory.otherManage.addSubAccount()">其他管理</a></li>
-        <li class="am-active">修改密码</li>
+        <li class="">规格单管理</li>
+        <li class="am-active">查看规格单</li>
       </ol>
     </div>
   </div>
 
 
   <div class="am-g fabric-detail-padding">
-    <legend><span class="am-text-secondary am-text-sm">你目前一共有{{total}}个规格单。</span></legend>
+    <legend><span class="am-text-secondary am-text-sm">你目前一共有{{specifications.length}}个规格单。</span></legend>
     <div class="am-u-sm-6" >
       <form class="am-form am-form-horizontal">
         <div class="am-form-group">

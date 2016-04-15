@@ -1,0 +1,168 @@
+<style>
+
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-6">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="tailor.shopManage.orderRecord({STATUS: 'DOING'})">店内管理</a></li>
+        <li class="am-active">{{editFlag ? '修改订单' : '录入新订单'}}</li>
+      </ol>
+    </div>
+
+  </div>
+
+
+  <div class="am-g">
+    <legend></legend>
+    <div class="am-u-sm-7 am-fl" >
+      <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
+          <label for="doc-ipt-33" class="am-u-sm-4 am-form-label am-text-sm">客户单号:</label>
+          <div class="am-u-sm-8">
+            <input type="text" id="doc-ipt-33" placeholder="可不填" ng-model="order.shopOrderNumber"/>
+          </div>
+        </div>
+        <legend></legend>
+
+
+        <div class="am-form-group">
+          <label for="doc-ipt-31" class="am-u-sm-4 am-form-label am-text-sm">姓名:</label>
+          <div class="am-u-sm-8">
+            <input type="text" id="doc-ipt-31" placeholder="必填" ng-model="order.customerName"/>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">出生年份:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.birthday" >
+              <option ng-selected="age === order.birthday"
+                      ng-repeat="age in ages"
+                      value="{{age}}">
+                {{age}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">购买日:</label>
+          <div class="am-u-sm-8">
+            <input ng-model="order.purharseDate" class="am-form-field setOrderPurchaseDate" />
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label for="doc-ipt-3" class="am-u-sm-4 am-form-label am-text-sm">总价:</label>
+          <div class="am-u-sm-8">
+            <input type="text" id="doc-ipt-3" placeholder="" ng-model="order.price"/>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label for="doc-ipt-4" class="am-u-sm-4 am-form-label am-text-sm">预付:</label>
+          <div class="am-u-sm-8">
+            <input type="text" id="doc-ipt-4" placeholder="" ng-model="order.advance"/>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label for="doc-ipt-6" class="am-u-sm-4 am-form-label am-text-sm">量体师:</label>
+          <div class="am-u-sm-8">
+            <input type="text" id="doc-ipt-6" placeholder="" ng-model="order.measurer"/>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label  class="am-u-sm-4 am-form-label am-text-sm">订单备注:</label>
+          <div class="am-u-sm-8">
+            <textarea type="text" class="am-form-field"  placeholder="输入备注..." ng-model="order.remark"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="am-u-sm-5">
+      <span class="am-text-secondary am-text-sm">提示：可不填，是客户在你店里的记录单号。</span>
+    </div>
+
+  <div class="am-g">
+    <div class="am-u-sm-12">
+      <legend><span class="am-text-sm am-text-primary" style="margin-left: 80px" >填写产品信息或者拆分子订单:</span></legend>
+
+      <div class="am-u-sm-8 am-u-sm-offset-4">
+        <article class="am-article">
+          <div class="am-article-bd">
+            <p class="am-article-lead am-text-secondary">* 子订单拆分原则为：面料一样，款式一样的套装（上下装）或者单件，不需要拆分。
+              上衣和裤子面料不一样，需要拆分。
+              面料一样，款式不一样的单件，需要拆分。
+              如果存在面料不一样的衣服，需要拆分。
+              同样类型的衣服，款式不一样，需要拆分。
+              拆分后，自动生成未采购面料需求。
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="am-g">
+    <div class="am-u-sm-12 am-fl" >
+    <form class="am-form am-form-horizontal">
+      <div class="am-form-group ">
+        <table class="am-table am-table-striped am-table-hover table-main">
+          <thead>
+          <tr>
+            <th class="table-title">客户编号</th>
+            <th class="table-title">姓名</th>
+            <th class="table-title">消费产品</th>
+            <th class="table-title">年龄</th>
+            <th class="table-title">购买日</th>
+            <th class="table-title">交货日</th>
+            <th class="table-title">是否加急</th>
+            <th class="table-title">量体师</th>
+            <th class="table-title">子订单备注</th>
+            <th class="table-title"><a href="" ng-click="addInputRow()"><span class="am-icon-plus"></span></a></th>
+            <th class="table-title"></th>
+            <th class="table-title"></th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-if="!(data.length > 0)">
+            <td colspan="18" id="addItem"><span class="am-text-secondary">* 点击"添加子订单"或右上角的" + "添加条目 </span></td>
+          </tr>
+          <tr ng-repeat="d in data track by $index">
+            <td>{{order.shopOrderNumber}}</td>
+            <td>{{order.customerName}}</td>
+            <td>{{d.tailoringType}}</td>
+            <td>{{order.birthday}}</td>
+            <td>{{order.purharseDate}}</td>
+            <td>{{d.deliveryDate}}</td>
+            <td>{{d.urgent==true?'是':'否'}}</td>
+            <td>{{order.measurer}}</td>
+            <td>{{d.remarks}}</td>
+
+            <td><a href="" ng-click="editInputRow(d, $index)"><span class="am-text-warning am-icon-edit"></span></a></td>
+            <td><a href="" ng-click="copyInputRow(d)"><span class="am-text-warning am-icon-copy"></span></a></td>
+            <td><a href="" ng-click="deleteInputRow($index)"><span class="am-text-warning am-icon-trash-o"></span></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="am-form-group">
+        <div class="am-u-sm-8 am-u-sm-offset-3">
+          <button type="submit" class="am-btn am-btn-secondary"  ng-click="addInputRow()">添加子订单</button>
+          <button type="submit" class="am-btn am-btn-primary" style="margin-left: 100px" ng-disabled="disable" ng-click="submitOrder()">确认提交整个订单</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+
+
+
+</div>
+

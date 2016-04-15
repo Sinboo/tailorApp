@@ -81,5 +81,21 @@ angular.module('tailorApp')
       )
     }
 
+    $scope.addOrderChoose = function () {
+      ngDialog.openConfirm({
+        template: "views/customShop/shopManage/modal/newOrderChooseModal.html",
+        className: 'ngdialog-theme-default dialogcaseeditor'
+      }).then(
+        function (value) {
+          
+        },
+        function (value) {
+          if (value == 'no_size') {
+            $state.go('tailor.shopManage.addOrderRecord');
+          }
+        }
+      )
+    }
+
 
   });

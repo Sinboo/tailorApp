@@ -6,6 +6,7 @@
 angular.module('tailorApp')
   .controller('AddInputRowModalCtrl', function ($scope, upyun, localStorageService, providerService, FABRIC_UNIT, CURRENCY, FABRIC_COLOR, CRAFT, GRAM_WEIGHT, FLOWER_PATTERN, ORIGIN_PLACE, BREADTH, YARN_COUNT, COMPOSITION) {
     if ($scope.ngDialogData && $scope.ngDialogData.editItem) {
+      $scope.editFlag = true;
       $scope.modalData = $scope.ngDialogData.editItem;
       $scope.modalData.image = {ready: true, url: $scope.ngDialogData.editItem.imageUrl};
       $scope.priceSystems = $scope.ngDialogData.editItem.priceSystems;
@@ -82,6 +83,7 @@ angular.module('tailorApp')
 
     $scope.deleteImage = function () {
       $scope.modalData.image.url = "";
+      $scope.modalData.imageUrl = undefined;
       $scope.modalData.image.ready = false;
       if ($scope.uploadText === '上传完成') {
         $scope.uploadText = '重新上传'
@@ -89,7 +91,6 @@ angular.module('tailorApp')
     }
 
     $scope.validate = function () {
-      var flag;
       if(!$scope.modalData.productNumber) {layer.msg('请填写面料货号.', {offset: 0, shift: 6}); return false;}
       //if(!$scope.modalData.color) {layer.msg('请填写面料色号.', {offset: 0, shift: 6}); return false;}
       if(!$scope.modalData.composition) {layer.msg('请填写面料成分.', {offset: 0, shift: 6}); return false;}
@@ -102,12 +103,14 @@ angular.module('tailorApp')
       if(isNaN($scope.modalData.wholesalePrice)) {layer.msg('批发价格必须为数字.', {offset: 0, shift: 6}); return false;}
       if(!$scope.modalData.wholesaleLowerLimit) {layer.msg('请填写批发起点米数.', {offset: 0, shift: 6}); return false;}
       if(isNaN($scope.modalData.wholesaleLowerLimit)) {layer.msg('批发起点米数必须为数字.', {offset: 0, shift: 6}); return false;}
-      for (var i = 0; i < $scope.priceSystems.length; i++) {
-        if (!$scope.priceSystems[i].psPrice) {
-          continue;
-        }
-        else if (isNaN($scope.priceSystems[i].psPrice)) {
-          layer.msg('价格体系必须为数字.', {offset: 0, shift: 6}); return false;
+      if (!$scope.editFlag) {
+        for (var i = 0; i < $scope.priceSystems.length; i++) {
+          if (!$scope.priceSystems[i].psPrice) {
+            continue;
+          }
+          else if (isNaN($scope.priceSystems[i].psPrice)) {
+            layer.msg('价格体系必须为数字.', {offset: 0, shift: 6}); return false;
+          }
         }
       }
       //if(!($scope.modalData.image && $scope.modalData.image.url)  || $scope.modalData.image.url == "") {layer.msg('请上传图片.', {offset: 0, shift: 6}); return false;}
@@ -121,4 +124,4 @@ angular.module('tailorApp')
 
 
 
-  })
+  });

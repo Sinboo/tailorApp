@@ -158,6 +158,7 @@ angular.module('tailorApp')
         data: {editItem: editItem}
       }).then(
         function(value) {
+          console.log(value)
           if (value.color) {
             if (_.where($scope.stocks, {productNumber: value.productNumber, color: value.color}).length > 1) {
               toaster.pop('error', '面料货号和色号不能同时重复！');
@@ -176,6 +177,8 @@ angular.module('tailorApp')
               value.K = V;
             }
           });
+
+          console.log(value)
 
           providerService.editProduct(value).then(function (data) {
             if (data && data.success == true) {
