@@ -4,11 +4,11 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('ViewSpecificationCtrl', function ($scope, factoryService, $http, $state, toaster, not_trousers_parts, trousers_parts, SPECIFICATION_GENDER, CUSTOMCLOTHING_TYPE) {
+  .controller('ViewSpecificationCtrl', function ($scope, factoryService, $http, $state, toaster, not_trousers_parts, trousers_parts, SPECIFICATION_GENDER, specification_clothing_type) {
     $scope.not_trousers_parts = not_trousers_parts;
     $scope.trousers_parts = trousers_parts;
     $scope.SPECIFICATION_GENDER = SPECIFICATION_GENDER;
-    $scope.CUSTOMCLOTHING_TYPE = CUSTOMCLOTHING_TYPE;
+    $scope.specification_clothing_type = specification_clothing_type;
 
     factoryService.getSpecifications().then(function (data) {
       if (data && data.success == true) {

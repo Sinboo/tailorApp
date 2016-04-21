@@ -50,6 +50,7 @@ module.exports = function(config) {
       'bower_components/upyun/dist/upyun.min.js',
       'bower_components/angular-uuid-service/angular-uuid-service.js',
       'bower_components/underscore/underscore.js',
+      'bower_components/angular-plupload/dist/angular-plupload.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

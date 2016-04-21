@@ -1,5 +1,27 @@
 <style>
+  .img-container {
+    position:relative;
+    display: block;
+    width: 210px;
+    height: 140px;
+  }
+  .img-container .button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .4);
+    width: 100%;
+    height: 100%;
+    line-height: 140px;
+    font-size: 20px;
+    color: orange;
+    display: none;
+    text-align: center;
+  }
 
+  .img-container:hover .button-container {
+    display: block;
+  }​
 </style>
 <div class="admin-content">
 
@@ -15,7 +37,7 @@
 
 
   <div class="am-g">
-    <legend></legend>
+    <legend class="am-text-primary am-text-md" style="padding-left: 40px"> 客户基本信息 </legend>
     <div class="am-u-sm-7 am-fl" >
       <form class="am-form am-form-horizontal">
         <div class="am-form-group">
@@ -24,13 +46,24 @@
             <input type="text" id="doc-ipt-33" placeholder="可不填" ng-model="order.shopOrderNumber"/>
           </div>
         </div>
-        <legend></legend>
-
 
         <div class="am-form-group">
           <label for="doc-ipt-31" class="am-u-sm-4 am-form-label am-text-sm">姓名:</label>
           <div class="am-u-sm-8">
             <input type="text" id="doc-ipt-31" placeholder="必填" ng-model="order.customerName"/>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">类别:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control " style="font-size: smaller" ng-model="order.gender" id="_gender">
+              <option ng-selected="gender === order.gender"
+                      ng-repeat="gender in genders"
+                      value="{{gender.shortName}}">
+                {{gender.fullName}}
+              </option>
+            </select>
           </div>
         </div>
 
@@ -48,6 +81,328 @@
         </div>
 
         <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">手机:</label>
+          <div class="am-u-sm-8">
+            <input ng-model="order.phone" type="tel" placeholder="可不填"   />
+          </div>
+        </div>
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">邮箱:</label>
+          <div class="am-u-sm-8">
+            <input ng-model="order.email" type="email" placeholder="可不填"   />
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">穿着偏好:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.dressingStyle" >
+              <option ng-selected="item.shortName === order.dressingStyle"
+                      ng-repeat="item in dressingStyles"
+                      value="{{item.shortName}}">
+                {{item.fullName}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">身材类型:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.figure.figureType" >
+              <option ng-selected="item.shortName === order.figure.figureType"
+                      ng-repeat="item in figureTypes"
+                      value="{{item.shortName}}">
+                {{item.fullName}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">左肩:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.figure.leftShoulder" >
+              <option ng-selected="item === order.figure.leftShoulder"
+                      ng-repeat="item in shoulderTypes"
+                      value="{{item}}">
+                {{item}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">右肩:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.figure.rightShoulder" >
+              <option ng-selected="item === order.figure.rightShoulder"
+                      ng-repeat="item in shoulderTypes"
+                      value="{{item}}">
+                {{item}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">手臂:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.figure.arm" >
+              <option ng-selected="item === order.figure.arm"
+                      ng-repeat="item in armTypes"
+                      value="{{item}}">
+                {{item}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">肚子:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.figure.abdomen" >
+              <option ng-selected="item === order.figure.abdomen"
+                      ng-repeat="item in abdomenTypes"
+                      value="{{item}}">
+                {{item}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">脖颈:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.figure.neck" >
+              <option ng-selected="item === order.figure.neck"
+                      ng-repeat="item in neckTypes"
+                      value="{{item}}">
+                {{item}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">臀部:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.figure.hip" >
+              <option ng-selected="item === order.figure.hip"
+                      ng-repeat="item in hipTypes"
+                      value="{{item}}">
+                {{item}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">裤腰:</label>
+          <div class="am-u-sm-8">
+            <select class="form-control "  style="font-size: smaller" ng-model="order.figure.waist" >
+              <option ng-selected="item === order.figure.waist"
+                      ng-repeat="item in waistHeights"
+                      value="{{item}}">
+                {{item}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label class="am-u-sm-4 am-form-label am-text-sm">其他特殊体型:</label>
+          <div class="am-u-sm-8">
+            <div style="width: 600px">
+              <label class="am-checkbox-inline" ng-repeat="specialType in specialTypes">
+                <input type="checkbox" checklist-model="specialTypeList" checklist-value="specialType"> {{specialType}}
+              </label>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+      <div class="am-u-sm-5">
+        <span class="am-text-secondary am-text-sm">提示：可不填，是客户在你店里的记录单号。</span>
+      </div>
+    </div>
+    <div class="am-g">
+      <legend class="am-text-primary am-text-md" style="padding-left: 40px;"> 尺寸基本信息：（以下尺寸信息会保存为一个名为“20150602量测”的尺寸版本，将来可随时查询） </legend>
+      <div class="am-u-sm-7 am-fl" >
+        <form class="am-form am-form-horizontal">
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">身高:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.height"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">体重:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.weight"/>
+            </div>
+          </div>
+          <legend class="am-text-primary am-text-sm" style="padding-left: 40px;"> 上身净尺寸：以下尺寸单位全部为cm</legend>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">领围:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.neck"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">肩宽:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.shoulder"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">前肩宽:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.frontShoulder"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">左袖长:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.leftSleeve"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">右袖长:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.rigthSleeve"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">袖笼:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.armhole"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">上臂围:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.upperArm"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">腕围:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.wrist"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">胸围:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.chest"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">中腰:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.middleChest"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">下摆:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.lowerHem"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">前胸宽:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.frontWidth"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">后背宽:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.backWidth"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">前腰节:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.frontWaist"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">后腰节:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.upperBody.backWaist"/>
+            </div>
+          </div>
+          <legend class="am-text-primary am-text-sm" style="padding-left: 40px;"> 下身净尺寸：以下尺寸单位全部为cm</legend>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">腰围:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.waist"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">臀围:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.ass"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">通裆:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.crotch"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">立裆:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.rise"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">横裆:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.crosspiece"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">裤长:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.leg"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">内长:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.insideLeg"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">膝围:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.knee"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">前腰高:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.frontRise"/>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">后腰高:</label>
+            <div class="am-u-sm-8">
+              <input type="number" ng-model="order.bodySize.lowerBody.backRise"/>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  <div class="am-g">
+    <legend class="am-text-primary am-text-md" style="padding-left: 40px"> 客户基本信息 </legend>
+    <div class="am-u-sm-7 am-fl" >
+      <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
           <label class="am-u-sm-4 am-form-label am-text-sm">购买日:</label>
           <div class="am-u-sm-8">
             <input ng-model="order.purharseDate" class="am-form-field setOrderPurchaseDate" />
@@ -57,14 +412,14 @@
         <div class="am-form-group">
           <label for="doc-ipt-3" class="am-u-sm-4 am-form-label am-text-sm">总价:</label>
           <div class="am-u-sm-8">
-            <input type="text" id="doc-ipt-3" placeholder="" ng-model="order.price"/>
+            <input type="number" id="doc-ipt-3" placeholder="" ng-model="order.price"/>
           </div>
         </div>
 
         <div class="am-form-group">
           <label for="doc-ipt-4" class="am-u-sm-4 am-form-label am-text-sm">预付:</label>
           <div class="am-u-sm-8">
-            <input type="text" id="doc-ipt-4" placeholder="" ng-model="order.advance"/>
+            <input type="number" id="doc-ipt-4" placeholder="" ng-model="order.advance"/>
           </div>
         </div>
 
@@ -76,6 +431,36 @@
         </div>
 
         <div class="am-form-group">
+          <label for="doc-ipt-6" class="am-u-sm-4 am-form-label am-text-sm">上传基础照片:</label>
+          <div class="am-u-sm-8">
+            <p class="am-text-secondary am-text-sm">文件列表：</p>
+            <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+            <br />
+
+            <div id="container">
+              <a id="pickfiles" class="am-btn am-btn-secondary"
+                 plupload="fileUpload.url"
+                 plupload-options="fileUpload.options"
+                 plupload-callbacks="fileUpload.callbacks">
+                选择图片(可多选)
+              </a>
+              <!--<a id="pickfiles" class="am-btn am-btn-secondary" href="javascript:;" ng-click="chooseImage()">选择图片(可多选)</a>-->
+              <a id="uploadfiles" class="am-btn am-btn-primary" href="javascript:;">上传文件</a>
+            </div>
+            <br />
+
+            <div style="width: 1000px">
+              <div class="img-container" style="float: left;" ng-click="deleteImage($index)" ng-repeat="img in uploadImages track by $index">
+                <img  ng-src="{{img}}" style="width: 100%;height: 100%" />
+                <div class="button-container">点击删除</div>
+              </div>
+            </div>
+
+            <!--<pre id="console"></pre>-->
+          </div>
+        </div>
+
+        <div class="am-form-group">
           <label  class="am-u-sm-4 am-form-label am-text-sm">订单备注:</label>
           <div class="am-u-sm-8">
             <textarea type="text" class="am-form-field"  placeholder="输入备注..." ng-model="order.remark"></textarea>
@@ -83,13 +468,11 @@
         </div>
       </form>
     </div>
-    <div class="am-u-sm-5">
-      <span class="am-text-secondary am-text-sm">提示：可不填，是客户在你店里的记录单号。</span>
-    </div>
+  </div>
 
   <div class="am-g">
     <div class="am-u-sm-12">
-      <legend><span class="am-text-sm am-text-primary" style="margin-left: 80px" >填写产品信息或者拆分子订单:</span></legend>
+      <legend><span class="am-text-md am-text-primary" style="margin-left: 40px" >填写产品信息或者拆分子订单:</span></legend>
 
       <div class="am-u-sm-8 am-u-sm-offset-4">
         <article class="am-article">
@@ -161,8 +544,6 @@
     </form>
     </div>
   </div>
-
-
 
 </div>
 

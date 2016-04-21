@@ -87,7 +87,7 @@ angular.module('tailorApp')
         className: 'ngdialog-theme-default dialogcaseeditor'
       }).then(
         function (value) {
-          
+          $state.go('tailor.shopManage.addOrderRecordWithSize');
         },
         function (value) {
           if (value == 'no_size') {

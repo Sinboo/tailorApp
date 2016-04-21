@@ -4,11 +4,11 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('FillSizesCtrl', function ($scope, dataSetterGetter, $http, $state, toaster, ngDialog, factoryService, SPECIFICATION_GENDER, CUSTOMCLOTHING_TYPE, not_trousers_parts, trousers_parts) {
+  .controller('FillSizesCtrl', function ($scope, dataSetterGetter, $http, $state, toaster, ngDialog, factoryService, SPECIFICATION_GENDER, specification_clothing_type, not_trousers_parts, trousers_parts) {
     $scope.item = dataSetterGetter.get('fillSizesInitData');
     console.log($scope.item);
     $scope.SPECIFICATION_GENDER = SPECIFICATION_GENDER;
-    $scope.CUSTOMCLOTHING_TYPE = CUSTOMCLOTHING_TYPE;
+    $scope.specification_clothing_type = specification_clothing_type;
     $scope.not_trousers_parts = not_trousers_parts;
     $scope.trousers_parts = trousers_parts;
 

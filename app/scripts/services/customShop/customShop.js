@@ -131,12 +131,28 @@ angular.module('tailorApp')
       private_fabrics: {
         url: 'partner/fabric/private',
         method: 'GET'
+      },
+      factory_specification: {
+        url: 'partner/factory/{ID}/specification',
+        method: 'GET'
       }
 
     };
     return publicFunc.urlAddPrefix(url, prefix);
   })
-  .service('customShopService', function (httpService, customShopUrl) {
+  .factory('customShopUrlV2', function (publicFunc) {
+    var prefix = '/api/v2/shop/';
+    var url = {
+      add_order: {
+        url: 'order/tailoring',
+        method: 'POST'
+      }
+
+    };
+    return publicFunc.urlAddPrefix(url, prefix);
+  })
+
+  .service('customShopService', function (httpService, customShopUrl, customShopUrlV2) {
     this.factoryPartners = function () {
       return httpService.http({}, customShopUrl.factory_partner, {})
     };
@@ -145,6 +161,9 @@ angular.module('tailorApp')
     };
     this.addOrder = function (postData) {
       return httpService.http(postData, customShopUrl.add_order, {})
+    };
+    this.addOrderV2 = function (postData) {
+      return httpService.http(postData, customShopUrlV2.add_order, {})
     };
     this.editOrder = function (postData, ID) {
       return httpService.http(postData, customShopUrl.edit_order, {ID: ID})
@@ -232,7 +251,10 @@ angular.module('tailorApp')
     };
     this.privateFabrics = function () {
       return httpService.http({}, customShopUrl.private_fabrics, {})
-    }
+    };
+    this.factorySpecification = function (queryParams) {
+      return httpService.http({}, customShopUrl.factory_specification, queryParams)
+    };
 
 
   });

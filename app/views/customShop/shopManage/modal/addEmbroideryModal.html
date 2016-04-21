@@ -1,0 +1,78 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 650px;
+    height: auto;
+    margin-top:-150px;
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">填写刺绣说明:</span></legend>
+
+  <table class="am-table am-table-striped am-table-hover">
+    <thead>
+    <tr>
+      <th style="width: 100px;"></th>
+      <th style="width: 100px;"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="am-text-center">位置:</td>
+      <td>
+        <select class="form-control am-form-field" style="font-size: smaller" ng-model="formData.position">
+          <option ng-selected="item.fullName === formData.position"
+                  ng-repeat="item in POSITION"
+                  value="{{item.fullName}}">
+            {{item.fullName}}
+          </option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="am-text-center">字体:</td>
+      <td>
+        <select class="form-control am-form-field" style="font-size: smaller" ng-model="formData.font">
+          <option ng-selected="item === formData.font"
+                  ng-repeat="item in FONT"
+                  value="{{item}}">
+            {{item}}
+          </option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="am-text-center">颜色:</td>
+      <td>
+        <select class="form-control am-form-field" style="font-size: smaller" ng-model="formData.color">
+          <option ng-selected="item === formData.color"
+                  ng-repeat="item in COLOR"
+                  value="{{item}}">
+            {{item}}
+          </option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="am-text-center">内容:</td>
+      <td>
+        <textarea type="text" ng-model="formData.remark" class="am-form-field"></textarea>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <legend></legend>
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(formData)">确认</button>
+  </div>
+</div>

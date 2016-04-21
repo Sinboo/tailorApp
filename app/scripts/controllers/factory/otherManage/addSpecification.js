@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('AddSpecificationCtrl', function ($scope, dataSetterGetter, $http, $state, toaster, ngDialog, factoryService, SPECIFICATION_GENDER, CUSTOMCLOTHING_TYPE, not_trousers_parts, trousers_parts) {
+  .controller('AddSpecificationCtrl', function ($scope, dataSetterGetter, $http, $state, toaster, ngDialog, factoryService, SPECIFICATION_GENDER, specification_clothing_type, not_trousers_parts, trousers_parts) {
     $scope.item = {};
     $scope.flag = false;
 
@@ -17,7 +17,7 @@ angular.module('tailorApp')
     });
 
     $scope.clothings = [];
-    $.each(CUSTOMCLOTHING_TYPE, function (key, value) {
+    $.each(specification_clothing_type, function (key, value) {
       var typeItem = {};
       typeItem.shortName = key;
       typeItem.fullName = value;
@@ -42,7 +42,7 @@ angular.module('tailorApp')
 
     $scope.setFlag = function (clothing) {
       $scope.item.part = [];
-      $scope.item.flag = clothing == 'JEANS';
+      $scope.item.flag = clothing == 'B';
     };
     
     $scope.choose = function () {

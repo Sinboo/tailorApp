@@ -1,0 +1,25 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 650px;
+    height: auto;
+    /*margin-top:-150px;*/
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">请输入信息:</span></legend>
+  <textarea type="text" class="am-form-field" ng-model="inputText" ></textarea>
+  <legend></legend>
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(inputText)">确认</button>
+  </div>
+</div>

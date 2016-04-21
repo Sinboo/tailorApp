@@ -3,7 +3,8 @@
 angular.module('gitdao').factory('publicFunc', function () {
     return {
         urlAddPrefix: urlAddPrefix,
-        arrayToMap: arrayToMap
+        arrayToMap: arrayToMap,
+        mapToArray: mapToArray
     };
 
     function urlAddPrefix (url, prefix) {
@@ -32,5 +33,16 @@ angular.module('gitdao').factory('publicFunc', function () {
                 }
             });
         }
+    }
+
+    function mapToArray(map) {
+      var array = [];
+      $.each(map, function (key, value) {
+        var item = {};
+        item.shortName = key;
+        item.fullName = value;
+        array.push(item);
+      });
+      return array;
     }
 });

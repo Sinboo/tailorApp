@@ -25,6 +25,7 @@ angular
     'Firestitch.angular-counter',
     'upyun',
     'uuid',
+    'angular-plupload',
     'Big',
     'ui.date',
     'ui.router',
@@ -35,6 +36,15 @@ angular
     'ngTouch',
     'gitdao'
   ])
+  .config(function (pluploadOptionProvider) {
+    // global setting
+    pluploadOptionProvider.setOptions({
+      runtimes : 'html5,flash,silverlight,html4',
+      flash_swf_url: '/bower_components/plupload/js/Moxie.swf',
+      silverlight_xap_url: '/bower_components/plupload/js/Moxie.xap',
+      max_file_size: '10mb'
+    })
+  })
   .config(function($animateProvider) {
     $animateProvider.classNameFilter(/^(?:(?!ng-animate-disabled).)*$/);
   })
@@ -330,6 +340,11 @@ angular
         templateUrl: '/views/customShop/shopManage/addOrderRecord.html',
         controller: 'AddOrderRecordCtrl'
       })
+      .state('tailor.shopManage.addOrderRecordWithSize', {
+        url: '/addOrderRecordWithSize/:ID',
+        templateUrl: '/views/customShop/shopManage/addOrderRecordWithSize.html',
+        controller: 'AddOrderRecordWithSizeCtrl'
+      })
       .state('tailor.shopManage.fabricManage', {
         url: '/fabricManage/:clothingType',
         templateUrl: '/views/customShop/shopManage/fabricManage.html',
@@ -467,7 +482,7 @@ angular
         if (error.state) {
           $state.go('error');
         }
-        if(error == "Not Authorized"){
+        if (error == "Not Authorized") {
           $state.go("notAuthorized");
         }
       });
@@ -475,13 +490,12 @@ angular
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
 
-        if(toState.name=='login') return;
+        if (toState.name == 'login') return;
 
         if (localStorageService.cookie.get('user') == undefined || localStorageService.cookie.get('user').anonymous) {
           event.preventDefault();
-          $state.go("login",{from:fromState.name});
+          $state.go("login", {from: fromState.name});
         }
-
 
 
         layer.close($rootScope.ii);
@@ -490,4 +504,6 @@ angular
 
     loginService.initUser()
 
-  });
+
+  })
+
