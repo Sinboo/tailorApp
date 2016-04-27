@@ -268,9 +268,9 @@ void function () {
         '正常', '前高1cm', '前高2cm', '前高3cm', '前高4cm', '前低1cm', '前低2cm', '前低3cm', '前低4cm',
         '前低5cm', '前低6cm', '前低7cm', '前低8cm'
       ],
-      SPECIAL_TYPE: [
-        '驼背', '鸡胸', '挺胸', '肌肉型', '前冲肩', '后掰肩'
-      ],
+      SPECIAL_TYPE: {
+        hunched: '驼背', pigeonBreast: '鸡胸', chestOut: '挺胸', muscular: '肌肉型', forwardShoulder: '前冲肩', breakingShoulder: '后掰肩'
+      },
       DRESSING_STYLE: {
         NORMAL: '标准', LOOSE: '宽松', FIT: '收身合体', TIGHT: '紧身'
       },
@@ -288,7 +288,7 @@ void function () {
         '肚省', '前冲肩'
       ],
       NET_SIZE_B_PART: {
-        waist: '腰围', ass: '臀围', crotch: '通裆', rise: '立裆', crosspiece: '横档',
+        waist: '腰围', ass: '臀围', crotch: '通裆', rise: '立裆', crosspiece: '横档', bottom: '裤脚口',
         leg: '裤长', insideLeg: '内长', knee: '膝围', frontRise: '前腰高/前浪', backRise: '后腰高/后浪'
       },
       OTHER_B_PART: [
@@ -320,7 +320,8 @@ void function () {
       ],
       FIGURE_A_E_PART: {
         leftShoulder: '左肩', rightShoulder: '右肩', arm: '手臂', abdomen: '肚子',
-        neck: '脖颈', hip: '臀部', hunched: '驼背'
+        neck: '脖颈', hip: '臀部', hunched: '驼背', pigeonBreast: '鸡胸', chestOut: '挺胸',
+        muscular: '肌肉型', forwardShoulder: '前冲肩', breakingShoulder: '后掰肩'
       },
       FIGURE_B_PART: {
         hip: '臀部', waist: '裤腰'

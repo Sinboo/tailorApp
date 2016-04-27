@@ -209,25 +209,25 @@
     </div>
   </form>
   <legend class="am-text-sm am-text-secondary"><h4>添加尺寸和款式</h4></legend>
-  <form class="am-form am-form-horizontal">
-    <div class="am-form-group">
-      <label class="am-u-sm-4 am-form-label">穿着偏好:</label>
-      <div class="am-u-sm-8">
-        <select class="form-control "  style="font-size: smaller" ng-model="item.produceOrder.dressingStyle" >
-          <option ng-selected="item.shortName === item.produceOrder.dressingStyle"
-                  ng-repeat="item in dressingStyles"
-                  value="{{item.shortName}}">
-            {{item.fullName}}
-          </option>
-        </select>
-      </div>
-    </div>
-  </form>
 
   <div class="am-g"  ng-repeat="set in settings">
-    <div class="am-g" style="padding: 20px" ng-show="item.tailoringType.indexOf(set.I) > -1">
+    <div class="am-g" style="padding: 20px" ng-if="item.tailoringType.indexOf(set.I) > -1">
       <legend class="am-text-sm am-text-secondary" style="padding-left: 20px"><h4>{{set.name}}尺寸:</h4></legend>
       <div class="am-g">
+        <form class="am-form am-form-horizontal">
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">穿着偏好:</label>
+            <div class="am-u-sm-8">
+              <select class="form-control "  style="font-size: smaller;width: 200px" ng-model="set.dressingStyle" >
+                <option ng-selected="item.shortName === set.dressingStyle"
+                        ng-repeat="item in dressingStyles"
+                        value="{{item.shortName}}">
+                  {{item.fullName}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </form>
         <form class="am-form am-form-horizontal">
           <div class="am-form-group">
             <label  class="am-u-sm-4 am-form-label am-text-sm">尺寸类型:</label>
@@ -237,24 +237,24 @@
               </label>
             </div>
           </div>
-          <div class="am-form-group" ng-if="set.useSpecification[0] && specifications && specifications.length > 0">
+          <div class="am-form-group" ng-if="set.useSpecification[0] && set.specifications && set.specifications.length > 0">
             <label  class="am-u-sm-4 am-form-label am-text-sm">规格单:</label>
             <div class="am-u-sm-8">
-              <select class="form-control "  style="font-size: smaller;width: 100px" ng-model="specification" ng-change="setSpecification(specification, set)">
-                <option ng-selected="item === specification"
-                        ng-repeat="item in specifications"
+              <select class="form-control "  style="font-size: smaller;width: 100px" ng-model="set.specification" ng-change="setSpecification(set.specification, set)">
+                <option ng-selected="item === set.specification"
+                        ng-repeat="item in set.specifications"
                         value="{{item}}">
                   {{item.name}}
                 </option>
               </select>
             </div>
           </div>
-          <div class="am-form-group" ng-if="set.useSpecification[0] && specifications && specifications.length > 0">
+          <div class="am-form-group" ng-if="set.useSpecification[0] && set.specifications && set.specifications.length > 0">
             <label  class="am-u-sm-4 am-form-label am-text-sm">号型:</label>
             <div class="am-u-sm-8">
-              <select class="form-control"  style="font-size: smaller;width: 100px" ng-model="standardName" ng-change="setStandard(standardName, set.NET_SIZE)">
-                <option ng-selected="k === standardName"
-                        ng-repeat="k in standardNames"
+              <select class="form-control"  style="font-size: smaller;width: 100px" ng-model="set.model" ng-change="setStandard(set.model, set.NET_SIZE)">
+                <option ng-selected="k === set.model"
+                        ng-repeat="k in set.standardNames"
                         value="{{k}}">
                   {{k}}
                 </option>
@@ -271,7 +271,7 @@
               <th class="table-title"></th>
               <th class="table-title am-text-center">净寸</th>
               <th class="table-title am-text-center">成衣</th>
-              <th class="table-title am-text-center" ng-show="set.useSpecification[0]">补正</th>
+              <th class="table-title am-text-center" ng-if="set.useSpecification[0]">补正</th>
             </tr>
             </thead>
             <tbody>
@@ -281,7 +281,7 @@
               <td style="width: 90px">
                 <input type="number" class="am-form-field am-text-center" ng-model="A.clothSize">
               </td>
-              <td ng-show="set.useSpecification[0]">
+              <td ng-if="set.useSpecification[0]">
                 <div fs-counter value="A.alignment" valuechanged="A.clothSize"
                      data-step="0.5"
                      data-width="130px"
@@ -303,16 +303,10 @@
             <tr>
               <td colspan="15"><span class="am-text-warning am-text-sm">{{set.name}}特殊体型及处理</span></td>
             </tr>
-            <tr ng-repeat="A in set.FIGURE_PART">
-              <td class="am-text-center">{{A.fullName}}</td>
+            <tr ng-repeat="A in set.figure_part">
+              <td class="am-text-center">{{set.FIGURE_PART[A.shortName]}}</td>
               <td class="am-text-center">
-                <select class="form-control "  style="font-size: smaller" ng-model="A.bodyProblem" ng-if="A.shortName !== 'hunched'">
-                  <option ng-selected="bodyProblem.fullName === A.bodyProblem"
-                          ng-repeat="bodyProblem in BODY_TYPE[A.shortName]"
-                          value="{{bodyProblem.fullName}}">
-                    {{bodyProblem.fullName}}
-                  </option>
-                </select>
+                {{A.fullName == true ? '' : A.fullName}}
               </td>
               <td class="am-text-center">
                 <button class="am-btn am-btn-secondary am-btn-xs" ng-click="inputTreatment(A)">处理方案</button>
@@ -359,18 +353,12 @@
             <tr>
               <td colspan="15"><span class="am-text-warning am-text-sm">{{set.name}}特殊体型及处理</span></td>
             </tr>
-            <tr ng-repeat="A in set.FIGURE_PART">
-              <td>{{A.fullName}}</td>
-              <td>
-                <select class="form-control "  style="font-size: smaller" ng-model="A.bodyProblem" ng-if="A.shortName !== 'hunched'">
-                  <option ng-selected="bodyProblem.fullName === A.bodyProblem"
-                          ng-repeat="bodyProblem in BODY_TYPE[A.shortName]"
-                          value="{{bodyProblem.fullName}}">
-                    {{bodyProblem.fullName}}
-                  </option>
-                </select>
+            <tr ng-repeat="A in set.figure_part">
+              <td class="am-text-center">{{set.FIGURE_PART[A.shortName]}}</td>
+              <td class="am-text-center">
+                {{A.fullName == true ? '' : A.fullName}}
               </td>
-              <td>
+              <td class="am-text-center">
                 <button class="am-btn am-btn-secondary am-btn-xs" ng-click="inputTreatment(A)">处理方案</button>
               </td>
             </tr>

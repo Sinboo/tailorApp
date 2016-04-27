@@ -215,7 +215,7 @@
           <div class="am-u-sm-8">
             <div style="width: 600px">
               <label class="am-checkbox-inline" ng-repeat="specialType in specialTypes">
-                <input type="checkbox" checklist-model="specialTypeList" checklist-value="specialType"> {{specialType}}
+                <input type="checkbox" checklist-model="specialTypeList" checklist-value="specialType.shortName" ng-click="choose()"> {{specialType.fullName}}
               </label>
             </div>
           </div>
@@ -227,19 +227,19 @@
       </div>
     </div>
     <div class="am-g">
-      <legend class="am-text-primary am-text-md" style="padding-left: 40px;"> 尺寸基本信息：（以下尺寸信息会保存为一个名为“20150602量测”的尺寸版本，将来可随时查询） </legend>
+      <legend class="am-text-primary am-text-md" style="padding-left: 40px;"> 尺寸基本信息</legend>
       <div class="am-u-sm-7 am-fl" >
         <form class="am-form am-form-horizontal">
           <div class="am-form-group">
             <label class="am-u-sm-4 am-form-label am-text-sm">身高:</label>
             <div class="am-u-sm-8">
-              <input type="number" ng-model="order.bodySize.height"/>
+              <input type="number" ng-model="order.bodySize.height" id="_height"/>
             </div>
           </div>
           <div class="am-form-group">
             <label class="am-u-sm-4 am-form-label am-text-sm">体重:</label>
             <div class="am-u-sm-8">
-              <input type="number" ng-model="order.bodySize.weight"/>
+              <input type="number" ng-model="order.bodySize.weight" id="_weight"/>
             </div>
           </div>
           <legend class="am-text-primary am-text-sm" style="padding-left: 40px;"> 上身净尺寸：以下尺寸单位全部为cm</legend>

@@ -7,6 +7,18 @@ angular.module('tailorApp')
   .controller('AddOrderRecordWithSizeCtrl', function ($scope, ngDialog, $state, publicFunc, $stateParams, CLOTHING_TYPE, commonService, customShopService, providerService, toaster, DRESSING_STYLE, FIGURE_TYPE, SHOULDER_TYPE, ARM_TYPE, ABDOMEN_TYPE, NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, SPECIAL_TYPE, SPECIFICATION_GENDER) {
     if ($stateParams.ID) {
       $scope.editFlag = true;
+      customShopService.orderDetail($stateParams.ID).then(function (data) {
+        $scope.order = data.data;
+        $scope.data = data.data.items;
+
+        $scope.order.birthday = commonService.convertDate($scope.order.birthday).split('-')[0];
+        $scope.order.purharseDate = commonService.convertDate($scope.order.purharseDate);
+        angular.forEach($scope.data, function (item) {
+          item.deliveryDate = commonService.convertDate(item.deliveryDate);
+          item.editFlag = true;
+          item.tailoringType = item.clothingTypes=='OTHER' ? item.otherClothes : tailoringTypes[item.clothingTypes.toString()]
+        });
+      });
     }
     else {
       $scope.order = {};
@@ -24,7 +36,7 @@ angular.module('tailorApp')
     $scope.neckTypes = NECK_TYPE;
     $scope.hipTypes = HIP_TYPE;
     $scope.waistHeights = WAIST_HEIGHT;
-    $scope.specialTypes = SPECIAL_TYPE;
+    $scope.specialTypes = publicFunc.mapToArray(SPECIAL_TYPE);
 
     $scope.item = {};
     $scope.item.quantity = 1;
@@ -49,6 +61,12 @@ angular.module('tailorApp')
       $scope.privateFabrics = data.data;
     });
 
+    $scope.choose = function () {
+      angular.forEach($scope.specialTypeList, function(spec) {
+        $scope.order.figure[spec] = true;
+      });
+    }
+
     $scope.deleteInputRow = function (index) {
       ngDialog.openConfirm({
         template: 'views/common/modal/confirmModal.html',
@@ -67,10 +85,10 @@ angular.module('tailorApp')
       var editItem = {};
       angular.copy(d, editItem);
       ngDialog.openConfirm({
-        template: 'views/customShop/shopManage/modal/addInputRowModal.html',
+        template: 'views/customShop/shopManage/modal/addInputRowModalWithSize.html',
         className: 'ngdialog-theme-default dialogcaseeditor',
-        controller: 'AddSubOrderModalCtrl',
-        data: {fabrics: $scope.fabrics, factories: $scope.factories, editItem: editItem }
+        controller: 'AddSubOrderModalCtrlWithSize',
+        data: {fabrics: $scope.fabrics, factories: $scope.factories, editItem: editItem, order: $scope.order  }
       }).then(
         function(value) {
           $scope.data[index] = value;
@@ -148,9 +166,6 @@ angular.module('tailorApp')
       if(!valid()){
         return;
       }
-      angular.forEach($scope.specialTypeList, function(spec) {
-        $scope.order.figure[spec] = true;
-      });
 
       $scope.order.figure.photos = $scope.uploadImages;
 
@@ -210,6 +225,8 @@ angular.module('tailorApp')
 
     var valid = function() {
       if (!$scope.order.customerName) {layer.tips('姓名不能为空', '#doc-ipt-31'); scrollTo('#doc-ipt-31'); return false;}
+      if (!$scope.order.bodySize.height) {layer.tips('身高不能为空', '#_height'); scrollTo('#_height'); return false;}
+      if (!$scope.order.bodySize.weight) {layer.tips('体重不能为空', '#_weight'); scrollTo('#_weight'); return false;}
       if ($scope.data.length == 0) {layer.tips('子订单不能为空', '#addItem'); scrollTo('#daddItem'); return false;}
       return true;
     };

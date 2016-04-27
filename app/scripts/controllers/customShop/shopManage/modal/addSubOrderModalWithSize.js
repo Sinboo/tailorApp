@@ -10,10 +10,16 @@ angular.module('tailorApp')
           NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, FIGURE_A_E_PART, FIGURE_B_PART, FIGURE_C_PART, FIGURE_D_PART, A_STYLE,
           B_STYLE, C_STYLE, D_STYLE, E_STYLE, OTHER_A_PART, OTHER_B_PART, OTHER_C_PART, OTHER_D_PART, OTHER_E_PART,
           A_E_POSITION, B_POSITION, C_POSITION, D_POSITION) {
+
+
     $scope.bodySize = {};
     if ($scope.ngDialogData.order && $scope.ngDialogData.order.bodySize) {
       $scope.bodySize = $scope.ngDialogData.order.bodySize.upperBody;
       angular.extend($scope.bodySize, $scope.ngDialogData.order.bodySize.lowerBody);
+    }
+    $scope.bodyFigures = [];
+    if ($scope.ngDialogData.order && $scope.ngDialogData.order.figure) {
+      $scope.bodyFigures = publicFunc.mapToArray($scope.ngDialogData.order.figure);
     }
 
     $scope.A_STYLE = publicFunc.mapToArray(A_STYLE);
@@ -31,16 +37,16 @@ angular.module('tailorApp')
     $scope.OTHER_C_PART = publicFunc.mapToArray(OTHER_C_PART);
     $scope.OTHER_D_PART = publicFunc.mapToArray(OTHER_D_PART);
     $scope.OTHER_E_PART = publicFunc.mapToArray(OTHER_E_PART);
-    $scope.FIGURE_A_PART = publicFunc.mapToArray(FIGURE_A_E_PART);
     $scope.A_POSITION = publicFunc.mapToArray(A_E_POSITION);
     $scope.E_POSITION = publicFunc.mapToArray(A_E_POSITION);
     $scope.B_POSITION = publicFunc.mapToArray(B_POSITION);
     $scope.C_POSITION = publicFunc.mapToArray(C_POSITION);
     $scope.D_POSITION = publicFunc.mapToArray(D_POSITION);
-    $scope.FIGURE_B_PART = publicFunc.mapToArray(FIGURE_B_PART);
-    $scope.FIGURE_C_PART = publicFunc.mapToArray(FIGURE_C_PART);
-    $scope.FIGURE_D_PART = publicFunc.mapToArray(FIGURE_D_PART);
-    $scope.FIGURE_E_PART = publicFunc.mapToArray(FIGURE_A_E_PART);
+    $scope.FIGURE_A_PART = FIGURE_A_E_PART;
+    $scope.FIGURE_B_PART = FIGURE_B_PART;
+    $scope.FIGURE_C_PART = FIGURE_C_PART;
+    $scope.FIGURE_D_PART = FIGURE_D_PART;
+    $scope.FIGURE_E_PART = FIGURE_A_E_PART;
     $scope.BODY_TYPE = {};
     $scope.BODY_TYPE.leftShoulder = publicFunc.mapToArray(SHOULDER_TYPE);
     $scope.BODY_TYPE.rightShoulder = publicFunc.mapToArray(SHOULDER_TYPE);
@@ -51,24 +57,122 @@ angular.module('tailorApp')
     $scope.BODY_TYPE.waist = publicFunc.mapToArray(WAIST_HEIGHT);
 
     var nameMap = {A: '西服上衣', B: '裤子', C: '马甲', D: '衬衫', E: '大衣'};
-    $scope.settings = [];
-    angular.forEach(['A','B','C','D','E'], function (i) {
-      var item = {};
-      item.I = i;
-      item.name = nameMap[i];
-      item.alignment = 0;
-      item.OTHER_PART = $scope['OTHER_' + i + '_PART'];
-      angular.forEach(item.OTHER_PART, function (it) {it.alignment = 0;});
-      item.NET_SIZE = $scope['NET_SIZE_' + i + '_PART'];
-      angular.forEach(item.NET_SIZE, function (it) {it.alignment = 0;});
-      item.FIGURE_PART = $scope['FIGURE_' + i + '_PART'];
-      item.STYLE = $scope[i+'_STYLE'];
-      item.POSITION = $scope[i + '_POSITION'];
-      item.useSpecification = [false];
-      item.stitchworks = [];
-      $scope.settings.push(item);
-    });
-    console.log($scope.settings)
+
+    if ($scope.ngDialogData.editItem) {
+      $scope.item = $scope.ngDialogData.editItem;
+      console.log($scope.item);
+      $scope.fabric = _.findWhere($scope.ngDialogData.fabrics, {number: $scope.ngDialogData.editItem.purchaseOrder.supplierNumber});
+      $scope.brands = $scope.fabric.brands;
+      if ($scope.ngDialogData.editItem.editFlag) {
+        $scope.brand = _.findWhere($scope.fabric.brands, {number: $scope.ngDialogData.editItem.purchaseOrder.brand.number});
+        $scope.factory = {};
+        $scope.factory.shortName = $scope.item.factoryName;
+        $scope.factory.number = $scope.item.factoryNumber;
+        $scope.item.urgent = $scope.item.urgent.toString();
+        $scope.item.halfFinished = $scope.item.halfFinished.toString();
+      }
+      else {
+        $scope.brand = _.findWhere($scope.fabric.brands, {number: $scope.ngDialogData.editItem.purchaseOrder.brand});
+      }
+
+      $scope.settings = [];
+      angular.forEach(['A','B','C','D','E'], function (i) {
+        var item = {};
+        if ($scope.item.produceOrder.produceDetails[i].useSpecification) {
+          var params = {};
+          params.ID = $scope.item.factoryNumber;
+          params.gender = $scope.ngDialogData.order.gender;
+          params.clothing = i;
+          customShopService.factorySpecification(params).then(function (data) {
+            if (data && data.success == true) {
+              if (data.data.length > 0) {
+                item.specifications = data.data;
+                item.specification = _.findWhere(item.specifications, {number: $scope.item.produceOrder.produceDetails[i].specification});
+                item.standardNames = Object.keys(item.specification.standard);
+                item.model = $scope.item.produceOrder.produceDetails[i].model;
+                item.NET_SIZE = $scope['NET_SIZE_' + i + '_PART'];
+                angular.forEach(item.NET_SIZE, function (it) {
+                  if ($scope.item.produceOrder.produceDetails[i].useSpecification) {
+                    it.alignment = $scope.item.produceOrder.produceDetails[i].alignment[it.shortName];
+                    it.clothSize = item.specification.standard[item.model][it.shortName] + it.alignment; //计算成衣尺寸
+                  }
+                  else {
+                    it.clothSize = $scope.item.produceOrder.produceDetails[i].garmentLowerSize[it.shortName] || $scope.item.produceOrder.produceDetails[i].garmentUpperSize[it.shortName];
+                  }
+                });
+              }
+            }
+            else if (data && data.success == false) {
+              toaster.pop('error', data.error.message)
+            }
+          });
+        }
+
+        item.dressingStyle = $scope.item.produceOrder.produceDetails[i].dressingStyle;
+        item.remark = $scope.item.produceOrder.produceDetails[i].remark;
+        item.figure_part = [];
+        item.I = i;
+        item.name = nameMap[i];
+        item.OTHER_PART = $scope['OTHER_' + i + '_PART'];
+        if ($scope.item.produceOrder.produceDetails[i].useSpecification) {
+          angular.forEach(item.OTHER_PART, function (it) {
+            it.alignment = $scope.item.produceOrder.produceDetails[i].alignment[it.fullName];
+          });
+        }
+        item.FIGURE_PART = $scope['FIGURE_' + i + '_PART'];
+        $.each(item.FIGURE_PART, function (k, v) {
+          angular.forEach($scope.bodyFigures, function (b) {
+            if (b.shortName == k) {
+              b.treatment = $scope.item.produceOrder.produceDetails[i].specFigure[b.shortName].split(':')[1];
+              item.figure_part.push(b);
+            }
+          })
+        });
+
+        item.STYLE = $scope[i+'_STYLE'];
+        angular.forEach(item.STYLE, function (s) {
+          s.design = $scope.item.produceOrder.produceDetails[i].design[s.shortName];
+        });
+        item.POSITION = $scope[i + '_POSITION'];
+        item.useSpecification = $scope.item.produceOrder.produceDetails[i].useSpecification ? [true] : [false];
+        item.stitchworks = $scope.item.produceOrder.produceDetails[i].stitchworks;
+        $scope.settings.push(item);
+      });
+      console.log($scope.settings)
+    }
+    else {
+      $scope.item = {};
+      $scope.item.quantity = 1;
+      $scope.item.purchaseOrder = {};
+      $scope.item.produceOrder = {};
+      $scope.item.produceOrder.produceDetails = {};
+
+      $scope.settings = [];
+      angular.forEach(['A','B','C','D','E'], function (i) {
+        var item = {};
+        item.figure_part = [];
+        item.I = i;
+        item.name = nameMap[i];
+        item.OTHER_PART = $scope['OTHER_' + i + '_PART'];
+        angular.forEach(item.OTHER_PART, function (it) {it.alignment = 0;});
+        item.NET_SIZE = $scope['NET_SIZE_' + i + '_PART'];
+        angular.forEach(item.NET_SIZE, function (it) {it.alignment = 0;});
+        item.FIGURE_PART = $scope['FIGURE_' + i + '_PART'];
+        $.each(item.FIGURE_PART, function (k, v) {
+          angular.forEach($scope.bodyFigures, function (b) {
+            if (b.shortName == k) {
+              item.figure_part.push(b);
+            }
+          })
+        });
+        item.STYLE = $scope[i+'_STYLE'];
+        item.POSITION = $scope[i + '_POSITION'];
+        item.useSpecification = [false];
+        item.stitchworks = [];
+        $scope.settings.push(item);
+      });
+      console.log($scope.settings)
+    }
 
     $scope.types = [{shortName: false, fullName: '净尺寸和成衣尺寸'},{shortName: true, fullName: '净尺寸和号衣调整'}];
 
@@ -89,7 +193,7 @@ angular.module('tailorApp')
         params.clothing = set.I;
         customShopService.factorySpecification(params).then(function (data) {
           if (data && data.success == true) {
-            $scope.specifications = data.data;
+            set.specifications = data.data;
           }
           else if (data && data.success == false) {
             toaster.pop('error', data.error.message)
@@ -100,10 +204,10 @@ angular.module('tailorApp')
 
     $scope.setSpecification = function (specification, set) {
       var speci = JSON.parse(specification)
-      console.log(specification)
-      set.specification = speci.number;
+      console.log(specification);
+      set.specificationNumber = speci.number;
       $scope.standards = speci.standard;
-      $scope.standardNames = Object.keys($scope.standards);
+      set.standardNames = Object.keys($scope.standards);
     };
 
     $scope.setStandard = function (standardName, NET_SIZE) {
@@ -118,7 +222,9 @@ angular.module('tailorApp')
       console.log(A);
       ngDialog.openConfirm({
         template: 'views/common/modal/inputModal.html',
-        className: 'ngdialog-theme-default dialogcaseeditor'
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        controller: 'InputModalCtrl',
+        data: {inputText: A.treatment}
       }).then(
         function (value) {
           A.treatment = value;
@@ -145,31 +251,6 @@ angular.module('tailorApp')
         }
       )
     };
-
-    if ($scope.ngDialogData.editItem) {
-      $scope.item = $scope.ngDialogData.editItem;
-      console.log($scope.item)
-      $scope.fabric = _.findWhere($scope.ngDialogData.fabrics, {number: $scope.ngDialogData.editItem.purchaseOrder.supplierNumber});
-      $scope.brands = $scope.fabric.brands;
-      if ($scope.ngDialogData.editItem.editFlag) {
-        $scope.brand = _.findWhere($scope.fabric.brands, {number: $scope.ngDialogData.editItem.purchaseOrder.brand.number});
-        $scope.factory = {};
-        $scope.factory.shortName = $scope.item.factoryName;
-        $scope.factory.number = $scope.item.factoryNumber;
-        $scope.item.urgent = $scope.item.urgent.toString();
-        $scope.item.halfFinished = $scope.item.halfFinished.toString();
-      }
-      else {
-        $scope.brand = _.findWhere($scope.fabric.brands, {number: $scope.ngDialogData.editItem.purchaseOrder.brand});
-      }
-    }
-    else {
-      $scope.item = {};
-      $scope.item.quantity = 1;
-      $scope.item.purchaseOrder = {};
-      $scope.item.produceOrder = {};
-      $scope.item.produceOrder.produceDetails = {};
-    }
 
     $scope.yarnCounts = YARN_COUNT;
     $scope.breadths = BREADTH;
@@ -273,13 +354,15 @@ angular.module('tailorApp')
       if(!$scope.item.factoryNumber) {layer.msg('请设置工厂!', {offset: 0, shift: 6}); return false;}
       angular.forEach($scope.settings, function (item) {
         var produceDetail = {};
+        produceDetail.remark = item.remark;
+        produceDetail.dressingStyle = item.dressingStyle;
         produceDetail.design = {};
         angular.forEach(item.STYLE, function (a) {
           produceDetail.design[a.shortName] = a.design;
         });
         produceDetail.specFigure = {};
-        angular.forEach(item.FIGURE_PART, function (a) {
-          produceDetail.specFigure[a.shortName] = (!a.bodyProblem && !a.treatment) ? undefined : (a.bodyProblem ? a.bodyProblem + ':' : '' ) + (a.treatment ? a.treatment : '' );
+        angular.forEach(item.figure_part, function (a) {
+          produceDetail.specFigure[a.shortName] = (!a.fullName && !a.treatment) ? undefined : (a.fullName ? a.fullName + ':' : '' ) + (a.treatment ? a.treatment : '' );
         });
         produceDetail.stitchworks = item.stitchworks;
 
@@ -298,16 +381,12 @@ angular.module('tailorApp')
           }
         }
         if (item.useSpecification[0]) {
-          produceDetail.specification = item.specification;
+          produceDetail.specification = item.specificationNumber;
           produceDetail.useSpecification = item.useSpecification[0];
+          produceDetail.model = item.model;
           produceDetail.alignment = {};
           angular.forEach(item.NET_SIZE, function (n) {
-            if (n.fullName !== '首扣距肩') {
-              produceDetail.alignment[n.shortName] = n.alignment;
-            }
-            else {
-              produceDetail.alignment[n.fullName] = n.alignment;
-            }
+            produceDetail.alignment[n.shortName] = n.alignment;
           });
           angular.forEach(item.OTHER_PART, function (n) {
             produceDetail.alignment[n.fullName] = n.alignment;
