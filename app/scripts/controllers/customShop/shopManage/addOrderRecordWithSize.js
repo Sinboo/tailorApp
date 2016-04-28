@@ -112,10 +112,10 @@ angular.module('tailorApp')
         className: 'ngdialog-theme-default dialogcaseeditor'
       }).then(function (value) {
         ngDialog.openConfirm({
-          template: 'views/customShop/shopManage/modal/addInputRowModalNoPlatformWithSize.html',
+          template: 'views/customShop/shopManage/modal/addInputRowModalNoPlatform.html',
           className: 'ngdialog-theme-default dialogcaseeditor',
-          controller: 'AddSubOrderModalCtrlNoPlatformWithSize',
-          data: {fabrics: $scope.privateFabrics, factories: $scope.factories}
+          controller: 'AddSubOrderModalCtrlNoPlatform',
+          data: {fabrics: $scope.privateFabrics, factories: $scope.factories }
         }).then(
           function(value) {
             $scope.data.push(value);

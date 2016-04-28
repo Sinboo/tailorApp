@@ -72,6 +72,9 @@ angular.module('tailorApp')
         $scope.item.halfFinished = $scope.item.halfFinished.toString();
       }
       else {
+        $scope.factory = {};
+        $scope.factory.shortName = _.findWhere($scope.ngDialogData.factories, {number: $scope.item.factoryNumber}).shortName;
+        $scope.factory.number = $scope.item.factoryNumber;
         $scope.brand = _.findWhere($scope.fabric.brands, {number: $scope.ngDialogData.editItem.purchaseOrder.brand});
       }
 

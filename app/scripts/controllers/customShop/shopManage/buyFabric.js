@@ -215,7 +215,7 @@ angular.module('tailorApp')
           customShopService.confirmExpressFee(queryParams).then(function (data) {
             if (data && data.success == true) {
               $state.go('tailor.shopManage.orderManage', {STATUS: 'EXPRESSFEE_CONFIRMED'}, {inherit: false, reload: true});
-              toaster.pop('success', '确认运费成功!');
+              toaster.pop('success', '付款成功!');
             }
             if (data && data.success == false) {
               toaster.pop('error', data.error.message);
