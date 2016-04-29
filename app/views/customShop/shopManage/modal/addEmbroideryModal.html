@@ -39,8 +39,8 @@
     <tr>
       <td class="am-text-center">字体:</td>
       <td>
-        <select class="form-control am-form-field" style="font-size: smaller" ng-model="formData.font">
-          <option ng-selected="item === formData.font"
+        <select class="form-control am-form-field" style="font-size: smaller" ng-model="formData.typeface">
+          <option ng-selected="item === formData.typeface"
                   ng-repeat="item in FONT"
                   value="{{item}}">
             {{item}}
@@ -63,7 +63,7 @@
     <tr>
       <td class="am-text-center">内容:</td>
       <td>
-        <textarea type="text" ng-model="formData.remark" class="am-form-field"></textarea>
+        <textarea type="text" ng-model="formData.content" class="am-form-field"></textarea>
       </td>
     </tr>
     </tbody>

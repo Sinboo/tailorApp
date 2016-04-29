@@ -4,13 +4,21 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('AddOrderRecordWithSizeCtrl', function ($scope, ngDialog, $state, publicFunc, $stateParams, CLOTHING_TYPE, commonService, customShopService, providerService, toaster, DRESSING_STYLE, FIGURE_TYPE, SHOULDER_TYPE, ARM_TYPE, ABDOMEN_TYPE, NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, SPECIAL_TYPE, SPECIFICATION_GENDER) {
+  .controller('AddOrderRecordWithSizeCtrl', function ($scope, ngDialog, $state, publicFunc, $stateParams, CLOTHING_TYPE, tailoringTypes, commonService, customShopService, providerService, toaster, DRESSING_STYLE, FIGURE_TYPE, SHOULDER_TYPE, ARM_TYPE, ABDOMEN_TYPE, NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, SPECIAL_TYPE, SPECIFICATION_GENDER) {
     if ($stateParams.ID) {
       $scope.editFlag = true;
       customShopService.orderDetail($stateParams.ID).then(function (data) {
         $scope.order = data.data;
         $scope.data = data.data.items;
 
+        $scope.specialTypeList = [];
+        $.each($scope.order.figure, function(k, v){
+          if (_.has(SPECIAL_TYPE, k)) {
+            if (v) {
+              $scope.specialTypeList.push(k);
+            }
+          }
+        });
         $scope.order.birthday = commonService.convertDate($scope.order.birthday).split('-')[0];
         $scope.order.purharseDate = commonService.convertDate($scope.order.purharseDate);
         angular.forEach($scope.data, function (item) {
@@ -18,6 +26,8 @@ angular.module('tailorApp')
           item.editFlag = true;
           item.tailoringType = item.clothingTypes=='OTHER' ? item.otherClothes : tailoringTypes[item.clothingTypes.toString()]
         });
+
+        $scope.uploadImages = $scope.order.figure.photos;
       });
     }
     else {
@@ -25,6 +35,7 @@ angular.module('tailorApp')
       $scope.specialTypeList = [];
       $scope.data = [];
       $scope.order.birthday = '无';
+      $scope.uploadImages = [];
     }
 
     $scope.genders = publicFunc.mapToArray(SPECIFICATION_GENDER);
@@ -248,7 +259,6 @@ angular.module('tailorApp')
     });
 
     //multi images upload
-    $scope.uploadImages = [];
     var options = {
       'bucket': 'imtailor',
       'save-key': '/{year}/{mon}/{day}/{filemd5}{.suffix}',

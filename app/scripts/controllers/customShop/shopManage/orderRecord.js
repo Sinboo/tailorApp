@@ -46,8 +46,12 @@ angular.module('tailorApp')
         data: {message: '修改此订单？'}
       }).then(
         function () {
-          //dataSetterGetter.set('editOrderInitData', order)
-          $state.go('tailor.shopManage.addOrderRecord', {ID: order.number})
+          if (order.bodySize) {
+            $state.go('tailor.shopManage.addOrderRecordWithSize', {ID: order.number})
+          }
+          else {
+            $state.go('tailor.shopManage.addOrderRecord', {ID: order.number})
+          }
         },
         function () {
 

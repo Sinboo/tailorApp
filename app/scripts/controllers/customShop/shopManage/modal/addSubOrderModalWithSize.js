@@ -9,7 +9,7 @@ angular.module('tailorApp')
           NET_SIZE_B_PART, NET_SIZE_C_PART, NET_SIZE_D_PART, NET_SIZE_E_PART, SHOULDER_TYPE, ARM_TYPE, ABDOMEN_TYPE,
           NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, FIGURE_A_E_PART, FIGURE_B_PART, FIGURE_C_PART, FIGURE_D_PART, A_STYLE,
           B_STYLE, C_STYLE, D_STYLE, E_STYLE, OTHER_A_PART, OTHER_B_PART, OTHER_C_PART, OTHER_D_PART, OTHER_E_PART,
-          A_E_POSITION, B_POSITION, C_POSITION, D_POSITION) {
+          A_E_POSITION, B_POSITION, C_POSITION, D_POSITION, SPECIAL_TYPE) {
 
 
     $scope.bodySize = {};
@@ -17,10 +17,13 @@ angular.module('tailorApp')
       $scope.bodySize = $scope.ngDialogData.order.bodySize.upperBody;
       angular.extend($scope.bodySize, $scope.ngDialogData.order.bodySize.lowerBody);
     }
+
     $scope.bodyFigures = [];
     if ($scope.ngDialogData.order && $scope.ngDialogData.order.figure) {
-      $scope.bodyFigures = publicFunc.mapToArray($scope.ngDialogData.order.figure);
+      var figureObj = JSON.parse(JSON.stringify($scope.ngDialogData.order.figure));
+      $scope.bodyFigures = publicFunc.mapToArray(figureObj);
     }
+    console.log($scope.bodyFigures);
 
     $scope.A_STYLE = publicFunc.mapToArray(A_STYLE);
     $scope.B_STYLE = publicFunc.mapToArray(B_STYLE);
@@ -90,7 +93,13 @@ angular.module('tailorApp')
             if (data && data.success == true) {
               if (data.data.length > 0) {
                 item.specifications = data.data;
-                item.specification = _.findWhere(item.specifications, {number: $scope.item.produceOrder.produceDetails[i].specification});
+                if ($scope.ngDialogData.editItem.editFlag) {
+                  item.specification = _.findWhere(item.specifications, {number: $scope.item.produceOrder.produceDetails[i].specification.number});
+                }
+                else {
+                  item.specification = _.findWhere(item.specifications, {number: $scope.item.produceOrder.produceDetails[i].specification});
+                }
+                console.log(item.specification)
                 item.standardNames = Object.keys(item.specification.standard);
                 item.model = $scope.item.produceOrder.produceDetails[i].model;
                 item.NET_SIZE = $scope['NET_SIZE_' + i + '_PART'];
@@ -126,7 +135,9 @@ angular.module('tailorApp')
         $.each(item.FIGURE_PART, function (k, v) {
           angular.forEach($scope.bodyFigures, function (b) {
             if (b.shortName == k) {
-              b.treatment = $scope.item.produceOrder.produceDetails[i].specFigure[b.shortName].split(':')[1];
+              if(b.treatment = $scope.item.produceOrder.produceDetails[i].specFigure[b.shortName]) {
+                b.treatment = $scope.item.produceOrder.produceDetails[i].specFigure[b.shortName].split(':')[1];
+              }
               item.figure_part.push(b);
             }
           })
