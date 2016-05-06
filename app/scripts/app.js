@@ -504,6 +504,5 @@ angular
 
     loginService.initUser()
 
-
   })
 

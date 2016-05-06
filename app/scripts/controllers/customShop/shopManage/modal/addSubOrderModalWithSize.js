@@ -11,6 +11,9 @@ angular.module('tailorApp')
           B_STYLE, C_STYLE, D_STYLE, E_STYLE, OTHER_A_PART, OTHER_B_PART, OTHER_C_PART, OTHER_D_PART, OTHER_E_PART,
           A_E_POSITION, B_POSITION, C_POSITION, D_POSITION, SPECIAL_TYPE) {
 
+    if ($scope.ngDialogData.order) {
+      $scope.WeChatOrderNumber = $scope.ngDialogData.order.WeChatOrderNumber;
+    }
 
     $scope.bodySize = {};
     if ($scope.ngDialogData.order && $scope.ngDialogData.order.bodySize) {
@@ -134,7 +137,7 @@ angular.module('tailorApp')
         item.FIGURE_PART = $scope['FIGURE_' + i + '_PART'];
         $.each(item.FIGURE_PART, function (k, v) {
           angular.forEach($scope.bodyFigures, function (b) {
-            if (b.shortName == k) {
+            if (b.shortName == k && b.fullName !== false) {
               if(b.treatment = $scope.item.produceOrder.produceDetails[i].specFigure[b.shortName]) {
                 b.treatment = $scope.item.produceOrder.produceDetails[i].specFigure[b.shortName].split(':')[1];
               }

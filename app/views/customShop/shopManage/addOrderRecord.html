@@ -30,7 +30,7 @@
         <div class="am-form-group">
           <label for="doc-ipt-31" class="am-u-sm-4 am-form-label am-text-sm">姓名:</label>
           <div class="am-u-sm-8">
-            <input type="text" id="doc-ipt-31" placeholder="必填" ng-model="order.customerName"/>
+            <input type="text" id="doc-ipt-31" placeholder="必填" ng-model="order.customerName" ng-blur="getWeChatOrderNumber(order.customerName)"/>
           </div>
         </div>
 

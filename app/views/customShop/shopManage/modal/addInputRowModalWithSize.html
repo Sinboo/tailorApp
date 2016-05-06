@@ -207,6 +207,17 @@
         </select>
       </div>
     </div>
+
+    <div class="am-form-group" ng-if="WeChatOrderNumber !== null">
+      <label  class="am-u-sm-4 am-form-label">到店通知设置:</label>
+      <div class="am-u-sm-8">
+        <select class="form-control "  style="font-size: smaller" ng-model="item.pushNotifyCustomer">
+          <option value="false">全部到店再通知</option>
+          <option value="true">到店即通知</option>
+        </select>
+      </div>
+    </div>
+
   </form>
   <legend class="am-text-sm am-text-secondary"><h4>添加尺寸和款式</h4></legend>
 

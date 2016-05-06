@@ -72,6 +72,17 @@ angular.module('tailorApp')
       $scope.privateFabrics = data.data;
     });
 
+    $scope.getWeChatOrderNumber = function (customerName) {
+      var param = {};
+      param.customerName = customerName;
+      customShopService.getWeChatOrderNumber(param).then(function (data) {
+        if (data && data.success == true) {
+          $scope.order.WeChatOrderNumber = data.data;
+        }
+      })
+    };
+
+
     $scope.choose = function () {
       angular.forEach($scope.specialTypeList, function(spec) {
         $scope.order.figure[spec] = true;
@@ -126,7 +137,7 @@ angular.module('tailorApp')
           template: 'views/customShop/shopManage/modal/addInputRowModalNoPlatform.html',
           className: 'ngdialog-theme-default dialogcaseeditor',
           controller: 'AddSubOrderModalCtrlNoPlatform',
-          data: {fabrics: $scope.privateFabrics, factories: $scope.factories }
+          data: {fabrics: $scope.privateFabrics, factories: $scope.factories, order: $scope.order }
         }).then(
           function(value) {
             $scope.data.push(value);
@@ -199,6 +210,23 @@ angular.module('tailorApp')
       $scope.disable = true;
       if ( $scope.editFlag ) {
         customShopService.editOrder(postString, $scope.order.number).then(function (data) {
+          console.log(data);
+          if (data && data.success == true) {
+            toaster.pop('success', '修改订单成功!');
+            $state.go('tailor.shopManage.orderRecord', {STATUS: 'DOING'});
+          }
+          else if (data && data.success == false) {
+            toaster.pop('error', data.error.message );
+            $scope.disable = false;
+          }
+          else {
+            toaster.pop('error', '修改订单失败!');
+            $scope.disable = false;
+          }
+        })
+      }
+      else if ($scope.order.WeChatOrderNumber !== null) {
+        customShopService.editOrder(postString, $scope.order.WeChatOrderNumber).then(function (data) {
           console.log(data);
           if (data && data.success == true) {
             toaster.pop('success', '修改订单成功!');

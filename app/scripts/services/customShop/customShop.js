@@ -135,6 +135,10 @@ angular.module('tailorApp')
       factory_specification: {
         url: 'partner/factory/{ID}/specification',
         method: 'GET'
+      },
+      weChat_orderNumber: {
+        url: 'order/tailoring',
+        method: 'GET'
       }
 
     };
@@ -254,6 +258,9 @@ angular.module('tailorApp')
     };
     this.factorySpecification = function (queryParams) {
       return httpService.http({}, customShopUrl.factory_specification, queryParams)
+    };
+    this.getWeChatOrderNumber = function (queryParams) {
+      return httpService.http({}, customShopUrl.weChat_orderNumber, queryParams)
     };
 
 

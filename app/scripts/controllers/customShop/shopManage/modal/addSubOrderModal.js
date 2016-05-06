@@ -5,6 +5,10 @@
 
 angular.module('tailorApp')
   .controller('AddSubOrderModalCtrl', function ($scope, customShopService, providerService, BREADTH, YARN_COUNT, CRAFT, COMPOSITION, FABRIC_COLOR, FLOWER_PATTERN) {
+    if ($scope.ngDialogData.order) {
+      $scope.WeChatOrderNumber = $scope.ngDialogData.order.WeChatOrderNumber;
+    }
+
     if ($scope.ngDialogData.editItem) {
       $scope.item = $scope.ngDialogData.editItem;
       console.log($scope.item)
