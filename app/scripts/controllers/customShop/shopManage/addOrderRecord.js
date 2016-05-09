@@ -50,16 +50,6 @@ angular.module('tailorApp')
       $scope.privateFabrics = data.data;
     });
 
-    $scope.getWeChatOrderNumber = function (customerName) {
-      var param = {};
-      param.customerName = customerName;
-      customShopService.getWeChatOrderNumber(param).then(function (data) {
-        if (data && data.success == true) {
-          $scope.order.WeChatOrderNumber = data.data;
-        }
-      })
-    };
-
     $scope.deleteInputRow = function (index) {
       ngDialog.openConfirm({
         template: 'views/common/modal/confirmModal.html',
@@ -100,6 +90,15 @@ angular.module('tailorApp')
 
 
     $scope.addInputRow = function () {
+      var param = {};
+      param.customerName = $scope.order.customerName;
+      param.phone = $scope.order.phone;
+      var queryParams = JSON.parse(JSON.stringify(param));
+      customShopService.getWeChatOrderNumber(queryParams).then(function (data) {
+        if (data && data.success == true) {
+          $scope.order.WeChatOrderNumber = data.data;
+        }
+      });
       ngDialog.openConfirm({
         template: "views/customShop/shopManage/modal/addOrderChooseModal.html",
         className: 'ngdialog-theme-default dialogcaseeditor'
