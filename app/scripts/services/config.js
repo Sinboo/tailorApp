@@ -311,8 +311,8 @@ void function () {
         '肚省', '前冲肩'
       ],
       NET_SIZE_D_PART: {
-        frontLength: '前长', backLength: '后长', waist: '腰围', middleChest: '中腰', lowerHem: '下摆',
-        shoulder: '肩宽', sleeve: '袖长', neck: '领围', leftWrist: '左手腕围', rightWrist: '右手腕围',
+        frontLength: '前长', backLength: '后长', chest: '胸围', middleChest: '中腰', lowerHem: '下摆',
+        shoulder: '肩宽', leftSleeve: '左袖长', rightSleeve: '右袖长', neck: '领围', leftWrist: '左手腕围', rightWrist: '右手腕围',
         upperArm: '上臂围', frontWaist: '前腰节', backWaist: '后腰节'
       },
       OTHER_D_PART: [
