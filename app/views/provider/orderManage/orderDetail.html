@@ -96,13 +96,13 @@
                   <td class="am-text-sm">运费:</td>
                   <td class="am-text-sm" id="_expressFee"><input class="form-control" ng-model="expressFee" ng-disabled="STATUS !=='PLACED'" ng-change="setExpressFee(expressFee)" /></td>
                 </tr>
-                <tr>
-                  <td class="am-text-sm">合计港元:</td>
+                <tr ng-if="currency !== 'CNY'">
+                  <td class="am-text-sm">合计{{CURRENCY[currency]}}:</td>
                   <td class="am-text-sm">{{truncateDecimals(totalPrice, 2)}}</td>
                 </tr>
                 <tr>
                   <td class="am-text-sm">合计人民币:</td>
-                  <td class="am-text-sm">{{truncateDecimals(totalPrice4CNY, 2)}}</td>
+                  <td class="am-text-sm">{{currency !== 'CNY' ? truncateDecimals(totalPrice4CNY, 2) : truncateDecimals(totalPrice, 2)}}</td>
                 </tr>
                 </tbody>
               </table>
