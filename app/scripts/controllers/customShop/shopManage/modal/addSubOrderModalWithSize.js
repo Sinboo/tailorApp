@@ -9,7 +9,7 @@ angular.module('tailorApp')
           NET_SIZE_B_PART, NET_SIZE_C_PART, NET_SIZE_D_PART, NET_SIZE_E_PART, SHOULDER_TYPE, ARM_TYPE, ABDOMEN_TYPE,
           NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, FIGURE_A_E_PART, FIGURE_B_PART, FIGURE_C_PART, FIGURE_D_PART, A_STYLE,
           B_STYLE, C_STYLE, D_STYLE, E_STYLE, OTHER_A_PART, OTHER_B_PART, OTHER_C_PART, OTHER_D_PART, OTHER_E_PART,
-          A_E_POSITION, B_POSITION, C_POSITION, D_POSITION, SPECIAL_TYPE) {
+          A_E_POSITION, B_POSITION, C_POSITION, D_POSITION, SPECIAL_TYPE, PAGE_SIZE) {
 
     if ($scope.ngDialogData.order) {
       $scope.WeChatOrderNumber = $scope.ngDialogData.order.WeChatOrderNumber;
@@ -327,11 +327,13 @@ angular.module('tailorApp')
       var queryParams = {};
       queryParams.productNumber = productNumber == "" ? undefined : productNumber;
       queryParams.id = $scope.item.purchaseOrder.supplierNumber == "" ? undefined : $scope.item.purchaseOrder.supplierNumber;
+      queryParams.page = 0;
+      queryParams.pageSize = PAGE_SIZE*100;
       queryParams = JSON.parse(JSON.stringify(queryParams));
-      console.log(queryParams)
-      customShopService.queryFabric(queryParams).then(function (data) {
+      console.log(queryParams);
+      customShopService.fuzzyQueryFabric(queryParams).then(function (data) {
         var productList = [];
-        angular.forEach(data.data, function (item) {
+        angular.forEach(data.data.content, function (item) {
           if (item.salesStatus == 'NORMAL') {
             productList.push(item);
           }

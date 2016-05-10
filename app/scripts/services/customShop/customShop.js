@@ -36,6 +36,10 @@ angular.module('tailorApp')
         url: 'partner/fabric/{id}/product',
         method: 'GET'
       },
+      fabric_fuzzyQuery: {
+        url: 'partner/fabric/{id}/product/search',
+        method: 'GET'
+      },
       unPurchase_order: {
         url: 'order/fabric/init/{CLOTHING}',
         method: 'GET'
@@ -183,6 +187,9 @@ angular.module('tailorApp')
     };
     this.queryFabric = function (queryParams) {
       return httpService.http({}, customShopUrl.fabric_query, queryParams)
+    };
+    this.fuzzyQueryFabric = function (queryParams) {
+      return httpService.http({}, customShopUrl.fabric_fuzzyQuery, queryParams)
     };
     this.unPurchaseOrder = function (CLOTHING) {
       return httpService.http({}, customShopUrl.unPurchase_order, {CLOTHING: CLOTHING})

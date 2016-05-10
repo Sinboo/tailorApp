@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('AddSubOrderModalCtrlNoPlatform', function ($scope, customShopService, providerService, BREADTH, YARN_COUNT, CRAFT, COMPOSITION, FABRIC_COLOR, FLOWER_PATTERN) {
+  .controller('AddSubOrderModalCtrlNoPlatform', function ($scope, customShopService, providerService, BREADTH, YARN_COUNT, CRAFT, COMPOSITION, FABRIC_COLOR, FLOWER_PATTERN, PAGE_SIZE) {
     if ($scope.ngDialogData.order) {
       $scope.WeChatOrderNumber = $scope.ngDialogData.order.WeChatOrderNumber;
     }
@@ -58,31 +58,32 @@ angular.module('tailorApp')
       $scope.item.purchaseOrder.supplierName = fabric.shortName;
       $scope.item.purchaseOrder.supplierNumber = fabric.number;
       $scope.brands = fabric.brands;
-    }
+    };
 
     $scope.setBrand = function (brand) {
       $scope.item.purchaseOrder.brand = brand.number;
-    }
+    };
 
     $scope.setFactory = function (factory) {
       $scope.item.factoryNumber = factory.number;
-    }
+    };
 
     $scope.getFabricsByProductNumber = function(productNumber) {
       var queryParams = {};
       queryParams.productNumber = productNumber == "" ? undefined : productNumber;
       queryParams.id = $scope.item.purchaseOrder.supplierNumber == "" ? undefined : $scope.item.purchaseOrder.supplierNumber;
+      queryParams.page = 0;
+      queryParams.pageSize = PAGE_SIZE*100;
       queryParams = JSON.parse(JSON.stringify(queryParams));
-      console.log(queryParams)
-      customShopService.queryFabric(queryParams).then(function (data) {
+      console.log(queryParams);
+      customShopService.fuzzyQueryFabric(queryParams).then(function (data) {
         var productList = [];
-        angular.forEach(data.data, function (item) {
+        angular.forEach(data.data.content, function (item) {
           if (item.salesStatus == 'NORMAL') {
             productList.push(item);
           }
-        })
+        });
         $scope.queriedProducts = productList;
-        console.log($scope.queriedProducts)
       })
     };
 
