@@ -288,7 +288,7 @@
             <tbody>
             <tr ng-repeat="A in set.NET_SIZE">
               <td class="am-text-center" style="width: 40px">{{A.fullName}}</td>
-              <td class="am-text-center" style="width: 60px">{{bodySize[A.shortName] || '—'}}</td>
+              <td class="am-text-center" style="width: 60px">{{bodySize[A.shortName.toLowerCase().indexOf('wrist') == -1 ? A.shortName : 'wrist'] || '—'}}</td>
               <td style="width: 90px">
                 <input type="number" class="am-form-field am-text-center" ng-model="A.clothSize">
               </td>
