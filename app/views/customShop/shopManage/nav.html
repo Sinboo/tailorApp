@@ -40,7 +40,8 @@
               <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: 'F'})" ><span ng-class="getClass('productionRecord/READY/F')" >夹克下单</span></a></li>
             </ul>
           </li>
-          <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'PLACED'})" class="am-text-sm"><span ng-class="getClass('productionRecord/PLACED')">生产中</span></a></li>
+          <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'PLACED'})" class="am-text-sm"><span ng-class="getClass('productionRecord/PLACED')">已下单,未生产</span></a></li>
+          <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'PRODUCE'})" class="am-text-sm"><span ng-class="getClass('productionRecord/PRODUCE')">生产中</span></a></li>
           <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'DELIVERED'})" class="am-text-sm"><span ng-class="getClass('productionRecord/DELIVERED')">已完成</span></a></li>
         </ul>
       </li>
