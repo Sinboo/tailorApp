@@ -372,7 +372,7 @@ angular
         controller: 'BoughtFabricCtrl'
       })
       .state('tailor.shopManage.productionRecord', {
-        url: '/productionRecord/:STATUS',
+        url: '/productionRecord/:STATUS/:clothingType',
         templateUrl: '/views/customShop/shopManage/productionRecord.html',
         controller: 'ProductionRecordCtrl'
       })

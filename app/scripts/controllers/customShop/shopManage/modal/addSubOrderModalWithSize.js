@@ -122,6 +122,13 @@ angular.module('tailorApp')
             }
           });
         }
+        else {
+          item.model = $scope.item.produceOrder.produceDetails[i].model;
+          item.NET_SIZE = $scope['NET_SIZE_' + i + '_PART'];
+          angular.forEach(item.NET_SIZE, function (it) {
+            it.clothSize = $scope.item.produceOrder.produceDetails[i].garmentLowerSize[it.shortName] || $scope.item.produceOrder.produceDetails[i].garmentUpperSize[it.shortName.toLowerCase().indexOf('wrist') == -1 ? it.shortName : 'wrist'];
+          })
+        }
 
         item.dressingStyle = $scope.item.produceOrder.produceDetails[i].dressingStyle;
         item.remark = $scope.item.produceOrder.produceDetails[i].remark;

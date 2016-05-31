@@ -1,0 +1,309 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 650px;
+    height: auto;
+    margin-top:-150px;
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">订单号：{{order.number}}</span></legend>
+
+  <legend class="am-text-sm am-text-secondary"><h3>基础信息:</h3></legend>
+  <div class="am-g am-text-sm" style="padding-left: 80px">
+    <form class="form-inline">
+      <div class="form-group">
+        <label>姓名:</label>
+        <p class="form-control" >{{order.orderItem.customerName}}</p>
+      </div>
+      <div class="form-group">
+        <label>定制商:</label>
+        <p class="form-control" >{{order.orderItem.shopName}}</p>
+      </div>
+      <div class="form-group">
+        <label>产品:</label>
+        <p class="form-control" >{{order.orderItem.clothingTypes}}</p>
+      </div>
+    </form>
+  </div>
+
+  <div class="am-g am-text-sm" style="padding-left: 80px">
+    <form class="form-inline">
+      <div class="form-group">
+        <label>工艺:</label>
+        <p class="form-control" >{{order.craft}}</p>
+      </div>
+      <div class="form-group">
+        <label>半成品:</label>
+        <p class="form-control" >{{order.orderItem.halfFinished==true?'是':'否'}}</p>
+      </div>
+      <div class="form-group">
+        <label>加急:</label>
+        <p class="form-control" >{{order.orderItem.urgent==true?'是':'否'}}</p>
+      </div>
+      <div class="form-group">
+        <label>预定交货日:</label>
+        <p class="form-control" >{{20160321}}</p>
+      </div>
+    </form>
+  </div>
+
+  <div class="am-g am-text-sm" style="padding-left: 80px">
+    <form class="form-inline">
+      <div class="form-group">
+        <label>面料货号:</label>
+        <p class="form-control" >{{order.craft}}</p>
+      </div>
+      <div class="form-group">
+        <label>面料色号:</label>
+        <p class="form-control" >{{order.orderItem.halfFinished==true?'是':'否'}}</p>
+      </div>
+      <div class="form-group">
+        <label>花纹:</label>
+        <p class="form-control" >{{order.orderItem.urgent==true?'是':'否'}}</p>
+      </div>
+      <div class="form-group">
+        <label>颜色:</label>
+        <p class="form-control" >{{20160321}}</p>
+      </div>
+      <div class="form-group">
+        <label>数量:</label>
+        <p class="form-control" >{{20160321}}</p>
+      </div>
+    </form>
+  </div>
+  <legend></legend>
+
+
+  <legend class="am-text-sm am-text-secondary"><h4>尺寸详情:</h4></legend>
+
+  <div class="am-g"  ng-repeat="set in settings">
+    <div class="am-g" style="padding: 20px" ng-if="item.tailoringType.indexOf(set.I) > -1">
+      <legend class="am-text-sm am-text-secondary" style="padding-left: 20px"><h4>{{set.name}}尺寸:</h4></legend>
+      <div class="am-g">
+        <form class="am-form am-form-horizontal">
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">穿着偏好:</label>
+            <div class="am-u-sm-8">
+              <select class="form-control "  style="font-size: smaller;width: 200px" ng-model="set.dressingStyle" >
+                <option ng-selected="item.shortName === set.dressingStyle"
+                        ng-repeat="item in dressingStyles"
+                        value="{{item.shortName}}">
+                  {{item.fullName}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <form class="am-form am-form-horizontal">
+          <div class="am-form-group">
+            <label  class="am-u-sm-4 am-form-label am-text-sm">尺寸类型:</label>
+            <div class="am-u-sm-8">
+              <label class="am-checkbox-inline" ng-repeat="type in types">
+                <input type="checkbox" checklist-model="set.useSpecification" checklist-value="type.shortName" ng-click="choose(type, set)"> {{type.fullName}}
+              </label>
+            </div>
+          </div>
+          <div class="am-form-group" ng-if="set.useSpecification[0] && set.specifications && set.specifications.length > 0">
+            <label  class="am-u-sm-4 am-form-label am-text-sm">规格单:</label>
+            <div class="am-u-sm-8">
+              <select class="form-control "  style="font-size: smaller;width: 100px" ng-model="set.specification" ng-change="setSpecification(set.specification, set)">
+                <option ng-selected="item === set.specification"
+                        ng-repeat="item in set.specifications"
+                        value="{{item}}">
+                  {{item.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="am-form-group" ng-if="set.useSpecification[0] && set.specifications && set.specifications.length > 0">
+            <label  class="am-u-sm-4 am-form-label am-text-sm">号型:</label>
+            <div class="am-u-sm-8">
+              <select class="form-control"  style="font-size: smaller;width: 100px" ng-model="set.model" ng-change="setStandard(set.model, set.NET_SIZE)">
+                <option ng-selected="k === set.model"
+                        ng-repeat="k in set.standardNames"
+                        value="{{k}}">
+                  {{k}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="am-g">
+        <div class="am-u-sm-7">
+          <table class="am-table am-table-striped am-table-hover table-main-tailor">
+            <thead>
+            <tr>
+              <th class="table-title"></th>
+              <th class="table-title am-text-center">净寸</th>
+              <th class="table-title am-text-center">成衣</th>
+              <th class="table-title am-text-center" ng-if="set.useSpecification[0]">补正</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="A in set.NET_SIZE">
+              <td class="am-text-center" style="width: 40px">{{A.fullName}}</td>
+              <td class="am-text-center" style="width: 60px">{{bodySize[A.shortName.toLowerCase().indexOf('wrist') == -1 ? A.shortName : 'wrist'] || '—'}}</td>
+              <td style="width: 90px">
+                <input type="number" class="am-form-field am-text-center" ng-model="A.clothSize">
+              </td>
+              <td ng-if="set.useSpecification[0]">
+                <div fs-counter value="A.alignment" valuechanged="A.clothSize"
+                     data-step="0.5"
+                     data-width="130px"
+                     data-editable>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="am-table am-table-striped am-table-hover table-main-tailor" style="margin-top: 10px" ng-if="set.useSpecification[0] && set.I == 'A'">
+            <thead>
+            <tr>
+              <th class="table-title"></th>
+              <th class="table-title"></th>
+              <th class="table-title"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td colspan="15"><span class="am-text-warning am-text-sm">{{set.name}}特殊体型及处理</span></td>
+            </tr>
+            <tr ng-repeat="A in set.figure_part">
+              <td class="am-text-center">{{set.FIGURE_PART[A.shortName]}}</td>
+              <td class="am-text-center">
+                {{A.fullName == true ? '' : A.fullName}}
+              </td>
+              <td class="am-text-center">
+                <button class="am-btn am-btn-secondary am-btn-xs" ng-click="inputTreatment(A)">处理方案</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="am-u-sm-5" ng-if="set.useSpecification[0]">
+          <table class="am-table am-table-striped am-table-hover table-main-tailor" style="margin-top: 20px">
+            <thead>
+            <tr>
+              <th class="table-title"></th>
+              <th class="table-title"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td colspan="15"><span class="am-text-warning am-text-sm">{{set.name}}其他补正</span></td>
+            </tr>
+            <tr ng-repeat="B in set.OTHER_PART">
+              <td>{{B.fullName}}</td>
+              <td>
+                <div fs-counter value="B.alignment"
+                     data-step="0.5"
+                     data-width="130px"
+                     data-editable>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="am-u-sm-5" ng-if="!set.useSpecification[0] || set.I !== 'A'">
+          <table class="am-table am-table-striped am-table-hover table-main-tailor" style="margin-top: 20px;">
+            <thead>
+            <tr>
+              <th class="table-title"></th>
+              <th class="table-title"></th>
+              <th class="table-title"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td colspan="15"><span class="am-text-warning am-text-sm">{{set.name}}特殊体型及处理</span></td>
+            </tr>
+            <tr ng-repeat="A in set.figure_part">
+              <td class="am-text-center">{{set.FIGURE_PART[A.shortName]}}</td>
+              <td class="am-text-center">
+                {{A.fullName == true ? '' : A.fullName}}
+              </td>
+              <td class="am-text-center">
+                <button class="am-btn am-btn-secondary am-btn-xs" ng-click="inputTreatment(A)">处理方案</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="am-g" ng-if="item.tailoringType.indexOf(set.I) > -1">
+        <div class="am-u-sm-6">
+          <h6 class="am-text-sm" style="margin-left: 20px">{{set.name}}款式: </h6>
+          <form class="am-form am-form-horizontal">
+            <div class="am-form-group" ng-repeat="style in set.STYLE">
+              <label  class="am-u-sm-4 am-form-label am-text-xs">{{style.shortName}}:</label>
+              <div class="am-u-sm-8">
+                <select class="form-control "  style="font-size: smaller" ng-model="style.design">
+                  <option ng-selected="item === style.design"
+                          ng-repeat="item in style.fullName"
+                          value="{{item}}">
+                    {{item}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <form class="am-form am-form-horizontal">
+              <div class="am-form-group">
+                <label  class="am-u-sm-4 am-form-label am-text-xs">{{set.name}}备注:</label>
+                <div class="am-u-sm-8">
+                  <textarea type="text" class="am-form-field" style="width: 200px;height: 100px"  placeholder="输入备注..." ng-model="set.remark"></textarea>
+                </div>
+              </div>
+            </form>
+          </form>
+        </div>
+        <div class="am-u-sm-6">
+          <br/>
+          <legend class="am-text-sm am-text-warning">{{set.name}}刺绣说明 </legend>
+          <button class="am-btn am-btn-xs am-btn-secondary" ng-click="addEmbroidery(set)">新增</button>
+          <table class="am-table am-table-striped am-table-hover table-main-tailor" ng-if="set.stitchworks.length > 0">
+            <thead>
+            <tr>
+              <th class="table-title am-text-center">序号</th>
+              <th class="table-title am-text-center">位置</th>
+              <th class="table-title am-text-center">字体</th>
+              <th class="table-title am-text-center">颜色</th>
+              <th class="table-title am-text-center">内容</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="A in set.stitchworks">
+              <td class="am-text-center" >{{$index + 1}}</td>
+              <td class="am-text-center" >{{A.position}}</td>
+              <td class="am-text-center" >{{A.typeface}}</td>
+              <td class="am-text-center" >{{A.color}}</td>
+              <td class="am-text-center" >{{A.content}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(item)">确认</button>
+  </div>
+
+
+</div>

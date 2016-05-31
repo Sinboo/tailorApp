@@ -13,11 +13,11 @@ angular.module('tailorApp')
     param.page = 0;
     param.pageSize = PAGE_SIZE;
     param.STATUS = $stateParams.STATUS == "" ? undefined : $stateParams.STATUS;
+    param.clothingType = $stateParams.clothingType == "" ? undefined : $stateParams.clothingType;
     var queryParams = JSON.parse(JSON.stringify(param));
-
     customShopService.produceRecords(queryParams).then(function (data) {
       initData(queryParams, data.data)
-    })
+    });
 
     var initData = function (param, data) {
       $scope.orders = data.content;
@@ -92,6 +92,20 @@ angular.module('tailorApp')
           }
         })
       }, function(value) {
+
+      })
+    };
+
+    $scope.confirmSize = function (order) {
+      ngDialog.openConfirm({
+        template: "views/customShop/shopManage/modal/confirmSizeModal.html",
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        controller: 'ConfirmSizeModalCtrl',
+        data: {order: order}
+      }).then(function (value) {
+
+
+      }, function (value) {
 
       })
     };

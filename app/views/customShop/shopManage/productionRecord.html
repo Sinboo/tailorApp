@@ -51,7 +51,9 @@
             <td>{{order.placeRemark}}</td>
             <td ng-if="STATUS=='READY'">
               <div class="am-btn-group am-btn-group-xs">
-                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="updateOrder(order.number)" ><span class="am-text-primary">若工厂已下单,<br/> 更新下单状态</span></button>
+                <button ng-if="!order.isRegFactory" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="updateOrder(order.number)" ><span class="am-text-primary">若工厂已下单,<br/> 更新下单状态</span></button>
+                <button ng-if="order.isRegFactory && order.bodySize==null" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ><span class="am-text-primary">工厂尚未安排生产</span></button>
+                <button ng-if="order.isRegFactory && order.bodySize!==null" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="confirmSize(order)"><span class="am-text-primary">确认尺寸和款式</span></button>
               </div>
             </td>
             <td ng-if="STATUS=='PLACED'">
