@@ -63,7 +63,7 @@
     <form class="form-inline">
       <div class="form-group">
         <label>面料货号:</label>
-        <p class="form-control" >{{order.orderItem.purchaseOrder.number}}</p>
+        <p class="form-control" >{{order.orderItem.purchaseOrder.productNumber}}</p>
       </div>
       <div class="form-group">
         <label>面料色号:</label>
@@ -177,7 +177,7 @@
             <tr>
               <td colspan="15"><span class="am-text-warning am-text-sm">{{set.name}}特殊体型及处理</span></td>
             </tr>
-            <tr ng-repeat="A in set.figure_part">
+            <tr ng-repeat="A in set.figure_part" ng-if="A.fullName != '正常'">
               <td class="am-text-center">{{set.FIGURE_PART[A.shortName]}}</td>
               <td class="am-text-center">
                 {{A.fullName == true ? '' : A.fullName}}
@@ -227,7 +227,7 @@
             <tr>
               <td colspan="15"><span class="am-text-warning am-text-sm">{{set.name}}特殊体型及处理</span></td>
             </tr>
-            <tr ng-repeat="A in set.figure_part">
+            <tr ng-repeat="A in set.figure_part" ng-if="A.fullName != '正常'">
               <td class="am-text-center">{{set.FIGURE_PART[A.shortName]}}</td>
               <td class="am-text-center">
                 {{A.fullName == true ? '' : A.fullName}}

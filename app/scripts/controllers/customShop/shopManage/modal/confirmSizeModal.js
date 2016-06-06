@@ -83,8 +83,10 @@ angular.module('tailorApp')
           if (data && data.success == true) {
             if (data.data.length > 0) {
               item.specifications = data.data;
-              item.specification = _.findWhere(item.specifications, {number: $scope.order.produceDetails[i].specification.number});
-              item.standardNames = Object.keys(item.specification.standard);
+              if ($scope.order.produceDetails[i].specification) {
+                item.specification = _.findWhere(item.specifications, {number: $scope.order.produceDetails[i].specification.number});
+                item.standardNames = Object.keys(item.specification.standard);
+              }
               item.model = $scope.order.produceDetails[i].model;
               item.NET_SIZE = $scope['NET_SIZE_' + i + '_PART'];
               angular.forEach(item.NET_SIZE, function (it) {

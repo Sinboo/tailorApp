@@ -104,17 +104,17 @@ angular.module('tailorApp')
         data: {order: order}
       }).then(function (value) {
         console.log(value);
-        var param = {};
-        param.bodySize = {};
-        param.bodySize.lowerBody  = order.bodySize.lowerBody;
-        param.bodySize.upperBody  = order.bodySize.upperBody;
-        param.produceDetails = value;
-        param = JSON.parse(JSON.stringify(param));
-        console.log(param);
-        customShopService.confirmSize(param, order.number).then(function (data) {
+        var parameters = {};
+        parameters.bodySize = {};
+        parameters.bodySize.lowerBody  = order.bodySize.lowerBody;
+        parameters.bodySize.upperBody  = order.bodySize.upperBody;
+        parameters.produceDetails = value;
+        parameters = JSON.parse(JSON.stringify(parameters));
+        console.log(parameters);
+        customShopService.confirmSize(parameters, order.number).then(function (data) {
           if(data && data.success == true) {
             toaster.pop('success', '确认尺寸成功！');
-            var queryParams = JSON.parse(JSON.stringify(param))
+            var queryParams = JSON.parse(JSON.stringify(param));
             customShopService.produceRecords(queryParams).then(function(data){
               initData(queryParams, data.data)
             });
