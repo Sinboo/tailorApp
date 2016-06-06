@@ -28,7 +28,7 @@
     <div class="am-collapse am-topbar-collapse" id="collapse-head">
       <ul class="am-nav am-nav-pills am-topbar-nav">
         <li ng-if="admin || privilege.IN[0] == 'ALL'" class="tailor-padding" ng-class="getLayoutClass('fabricReceiveManage')"><a ui-sref="factory.fabricReceiveManage.fabricReceiveManage({STATUS: 'DELIVERED'})">面料到货管理</a></li>
-        <li ng-if="admin || privilege.DELIVER[0] == 'ALL' || privilege.PRODUCE.length > 0" class="tailor-padding" ng-class="getLayoutClass('businessManage')"><a ui-sref="factory.businessManage.addProduct()">生产管理</a></li>
+        <li ng-if="admin || privilege.DELIVER[0] == 'ALL' || privilege.PRODUCE.length > 0" class="tailor-padding" ng-class="getLayoutClass('produceManage')"><a ui-sref="factory.produceManage.produceOrder({STATUS: 'PLACED'})">生产管理</a></li>
         <li ng-if="admin || privilege.PARTNER[0] == 'ALL'" class="tailor-padding" ng-class="getLayoutClass('customShop')" ><a href="" ng-click="customShopClicked()"><span  class="">我的合作商户</span></a></li>
         <li ng-if="admin" class="tailor-padding" ng-class="getLayoutClass('otherManage')"><a ui-sref="factory.otherManage.addSubAccount()">其他管理</a></li>
       </ul>

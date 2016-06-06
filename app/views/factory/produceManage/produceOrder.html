@@ -3,8 +3,7 @@
   <div class="am-g am-u-sm-12">
     <div class="am-u-sm-12">
       <ol class="am-breadcrumb">
-        <li><a ui-sref="tailor.shopManage.orderRecord()">店内管理</a></li>
-        <li><a href=""></a>生产管理</li>
+        <li><a ui-sref="factory.produceManage.produceOrder()">生产管理</a></li>
         <li class="am-active">{{PRODUCE_STATUS[STATUS]}}</li>
       </ol>
     </div>
@@ -20,16 +19,19 @@
             <th class="table-title">序号</th>
             <th class="table-title">订单号</th>
             <th class="table-title">姓名</th>
-            <th class="table-title">消费产品</th>
-            <th class="table-title">工艺</th>
-            <th class="table-title">工厂下单日</th>
-            <th class="table-title">工厂预计交货日 </th>
-            <th class="table-title" ng-if="STATUS!=='DELIVERED'">提前三天提醒</th>
-            <th class="table-title" ng-if="STATUS!=='DELIVERED'">提前一天提醒</th>
+            <th class="table-title">定制产品</th>
+            <th class="table-title">面料商</th>
+            <th class="table-title">面料货号</th>
+            <th class="table-title">面料色号 </th>
+            <th class="table-title">颜色 </th>
+            <th class="table-title">花纹 </th>
+            <th class="table-title">定制商交货日  </th>
+            <th class="table-title" ng-if="STATUS!=='DELIVERED'">工厂下单日</th>
+            <th class="table-title" ng-if="STATUS!=='DELIVERED'">预计交货日</th>
             <th class="table-title" ng-if="STATUS=='DELIVERED'">工厂实际交货日</th>
             <th class="table-title" ng-if="STATUS=='DELIVERED'">快递公司</th>
             <th class="table-title" ng-if="STATUS=='DELIVERED'">快递单号</th>
-            <th class="table-title">备注</th>
+            <th class="table-title" ng-if="false">备注</th>
             <th class="table-title"></th>
 
           </tr>
@@ -40,9 +42,12 @@
             <td>{{order.number}}</td>
             <td>{{order.orderItem.customerName}}</td>
             <td>{{order.orderItem.clothingTypes=='OTHER'?order.orderItem.otherClothes:tailoringTypes[order.orderItem.clothingTypes.toString()]}}</td>
-            <td>{{order.craft}}</td>
-            <td>{{order.placeTime == null ? "—" : order.placeTime | date: 'yyyy-MM-dd'}}</td>
-            <td>{{order.expectDeliveryDay == null ? "—" : (order.expectDeliveryDay) | date: 'yyyy-MM-dd'}}</td>
+            <td>{{order.orderItem.purchaseOrder.supplierName}}</td>
+            <td>{{order.orderItem.purchaseOrder.productNumber}}</td>
+            <td>{{order.orderItem.purchaseOrder.color}}</td>
+            <td>{{order.orderItem.purchaseOrder.colorDesc}}</td>
+            <td>{{order.orderItem.purchaseOrder.figure}}</td>
+            <td>{{order.orderItem.deliveryDate == null ? "—" : (order.orderItem.deliveryDate) | date: 'yyyy-MM-dd'}}</td>
             <td ng-if="STATUS!=='DELIVERED'">{{order.expectDeliveryDay == null ? "—" : (order.expectDeliveryDay-3*24*3600*1000) | date: 'yyyy-MM-dd'}}</td>
             <td ng-if="STATUS!=='DELIVERED'">{{order.expectDeliveryDay == null ? "—" : (order.expectDeliveryDay-24*3600*1000) | date: 'yyyy-MM-dd'}}</td>
             <td ng-if="STATUS=='DELIVERED'">{{order.actualDeliveryTime == null ? "—" : (order.actualDeliveryTime) | date: 'yyyy-MM-dd'}}</td>
@@ -56,14 +61,9 @@
                 <button ng-if="order.isRegFactory && order.bodySize!==null" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="confirmSize(order)"><span class="am-text-primary">确认尺寸和款式</span></button>
               </div>
             </td>
-            <td ng-if="STATUS=='CONFIRM'">
-              <div class="am-btn-group am-btn-group-xs">
-                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="previewOrder(order)" ><span class="am-text-primary">预览生产单</span></button>
-              </div>
-            </td>
             <td ng-if="STATUS=='PLACED'">
               <div class="am-btn-group am-btn-group-xs">
-                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="updateOrderDeliver(order.number)" ><span class="am-text-primary">若生产完毕,<br/> 更新发货信息</span></button>
+                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="previewOrder(order)" ><span class="am-text-primary">已确认尺寸及款式</span></button>
               </div>
             </td>
           </tr>

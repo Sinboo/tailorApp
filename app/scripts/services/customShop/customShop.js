@@ -143,6 +143,14 @@ angular.module('tailorApp')
       weChat_orderNumber: {
         url: 'order/tailoring',
         method: 'GET'
+      },
+      confirm_size: {
+        url: 'order/produce/{NUMBER}/confirm',
+        method: 'PUT'
+      },
+      submit_produceOrder: {
+        url: 'order/produce/{NUMBER}/place2factory',
+        method: 'PUT'
       }
 
     };
@@ -269,6 +277,14 @@ angular.module('tailorApp')
     this.getWeChatOrderNumber = function (queryParams) {
       return httpService.http({}, customShopUrl.weChat_orderNumber, queryParams)
     };
+    this.confirmSize = function (postData, NUMBER) {
+      return httpService.http(postData, customShopUrl.confirm_size, {NUMBER: NUMBER})
+    };
+    this.submitProduceOrder = function (NUMBER) {
+      return httpService.http({}, customShopUrl.submit_produceOrder, {NUMBER: NUMBER})
+    };
+
+
 
 
   });

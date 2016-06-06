@@ -26,6 +26,7 @@ angular
     'upyun',
     'uuid',
     'angular-plupload',
+    'AngularPrint',
     'Big',
     'ui.date',
     'ui.router',
@@ -172,6 +173,11 @@ angular
         url: '^/3/produceManage',
         templateUrl: '/views/factory/produceManage/nav.html',
         controller: 'ProduceManageNavCtrl'
+      })
+      .state('factory.produceManage.produceOrder', {
+        url: '/produceOrder/:STATUS',
+        templateUrl: '/views/factory/produceManage/produceOrder.html',
+        controller: 'ProduceOrderCtrl'
       })
 
 
@@ -464,7 +470,15 @@ angular
         url: '^/login',
         templateUrl: '/views/login/login.html',
         controller: 'LoginRegisterCtrl'
+      })
+
+      .state('previewProduceOrder', {
+        url: '^/previewProduceOrder/:isFactory',
+        templateUrl: '/views/customShop/shopManage/previewProduceOrder.html',
+        controller: 'PreviewProduceOrderCtrl',
+        params: {order: null}
       });
+
   })
   .run(function ($rootScope, localStorageService, loginService, $location, $state) {
 

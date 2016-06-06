@@ -4,8 +4,8 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('ConfirmSizeModalCtrl', function (
-    customShopService, ngDialog, publicFunc, providerService, toaster,
+  .controller('PreviewProduceOrderCtrl', function (
+    customShopService, $state, $stateParams, ngDialog, publicFunc, providerService, toaster,
     $scope, tailoringTypes,BREADTH, YARN_COUNT, CRAFT, COMPOSITION, FABRIC_COLOR, FLOWER_PATTERN, DRESSING_STYLE, NET_SIZE_A_PART,
     NET_SIZE_B_PART, NET_SIZE_C_PART, NET_SIZE_D_PART, NET_SIZE_E_PART, SHOULDER_TYPE, ARM_TYPE, ABDOMEN_TYPE,
     NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, FIGURE_A_E_PART, FIGURE_B_PART, FIGURE_C_PART, FIGURE_D_PART, A_STYLE,
@@ -13,19 +13,30 @@ angular.module('tailorApp')
     A_E_POSITION, B_POSITION, C_POSITION, D_POSITION
   ) {
 
-    $scope.order = $scope.ngDialogData.order;
+    if ($state.params.order == undefined && $stateParams.isFactory !== 'factory') {
+      $state.go('tailor.shopManage.productionRecord', {STATUS: 'CONFIRM'}, {inherit: false});
+    }
+
+    if ($state.params.order == undefined && $stateParams.isFactory == 'factory') {
+      $state.go('factory.produceManage.produceOrder', {STATUS: 'PLACED'}, {inherit: false});
+    }
+
+    $scope.isFactory = $stateParams.isFactory == 'factory';
+    $scope.order = $state.params.order;
     $scope.tailoringTypes = tailoringTypes;
     $scope.produceDetails = {};
+    $scope.isNaN = isNaN;
+    $scope._ = _;
 
     $scope.bodySize = {};
-    if ($scope.ngDialogData.order && $scope.ngDialogData.order.bodySize) {
-      $scope.bodySize = $scope.ngDialogData.order.bodySize.upperBody;
-      angular.extend($scope.bodySize, $scope.ngDialogData.order.bodySize.lowerBody);
+    if ($scope.order && $scope.order.bodySize) {
+      $scope.bodySize = $scope.order.bodySize.upperBody;
+      angular.extend($scope.bodySize, $scope.order.bodySize.lowerBody);
     }
 
     $scope.bodyFigures = [];
-    if ($scope.ngDialogData.order && $scope.ngDialogData.order.figure) {
-      var figureObj = JSON.parse(JSON.stringify($scope.ngDialogData.order.figure));
+    if ($scope.order && $scope.order.figure) {
+      var figureObj = JSON.parse(JSON.stringify($scope.order.figure));
       $scope.bodyFigures = publicFunc.mapToArray(figureObj);
     }
     console.log($scope.bodyFigures);
@@ -69,6 +80,7 @@ angular.module('tailorApp')
     $scope.types = [{shortName: false, fullName: '净尺寸和成衣尺寸'},{shortName: true, fullName: '净尺寸和号衣调整'}];
 
     $scope.dressingStyles = publicFunc.mapToArray(DRESSING_STYLE);
+    console.log($scope.dressingStyles)
 
 
     $scope.settings = [];
@@ -162,55 +174,7 @@ angular.module('tailorApp')
       }
     });
 
-    $scope.setSpecification = function (specification, set) {
-      var speci = JSON.parse(specification)
-      console.log(specification);
-      set.specificationNumber = speci.number;
-      $scope.standards = speci.standard;
-      set.standardNames = Object.keys($scope.standards);
-    };
 
-    $scope.setStandard = function (standardName, NET_SIZE) {
-      $scope.standard = $scope.standards[standardName];
-      console.log($scope.standard);
-      angular.forEach(NET_SIZE, function (item) {
-        item.clothSize = $scope.standard[item.shortName];
-      });
-    };
-
-    $scope.inputTreatment = function (A) {
-      console.log(A);
-      ngDialog.openConfirm({
-        template: 'views/common/modal/inputModal.html',
-        className: 'ngdialog-theme-default dialogcaseeditor',
-        controller: 'InputModalCtrl',
-        data: {inputText: A.treatment}
-      }).then(
-        function (value) {
-          A.treatment = value;
-        },
-        function () {
-
-        }
-      )
-    };
-
-    $scope.addEmbroidery = function (set) {
-      ngDialog.openConfirm({
-        template: 'views/customShop/shopManage/modal/addEmbroideryModal.html',
-        className: 'ngdialog-theme-default dialogcaseeditor',
-        controller: 'AddEmbroideryModalCtrl',
-        data: {POSITION: set.POSITION}
-      }).then(
-        function (value) {
-          console.log(value)
-          set.stitchworks.push(value);
-        },
-        function () {
-
-        }
-      )
-    };
 
     $scope.validate = function () {
       angular.forEach($scope.settings, function (item) {
@@ -257,5 +221,46 @@ angular.module('tailorApp')
       });
       return true;
     };
+
+    $scope.confirmSize = function (order) {
+      ngDialog.openConfirm({
+        template: "views/customShop/shopManage/modal/confirmSizeModal.html",
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        controller: 'ConfirmSizeModalCtrl',
+        data: {order: order}
+      }).then(function (value) {
+        console.log(value);
+        var param = {};
+        param.bodySize = {};
+        param.bodySize.lowerBody  = order.bodySize.lowerBody;
+        param.bodySize.upperBody  = order.bodySize.upperBody;
+        param.produceDetails = value;
+        param = JSON.parse(JSON.stringify(param));
+        console.log(param);
+        customShopService.confirmSize(param, order.number).then(function (data) {
+          if(data && data.success == true) {
+            toaster.pop('success', '修改尺寸成功！');
+            $state.go('tailor.shopManage.productionRecord', {STATUS: 'CONFIRM'}, {inherit: false});
+          }
+          else if (data && data.error) {
+            toaster.pop('warning', data.error.message);
+          }
+        })
+      }, function (value) {
+
+      })
+    };
+    
+    $scope.submitOrder = function (order) {
+      customShopService.submitProduceOrder(order.number).then(function (data) {
+        if(data && data.success == true) {
+          toaster.pop('success', '提交订单成功！');
+          $state.go('tailor.shopManage.productionRecord', {STATUS: 'CONFIRM'}, {inherit: false});
+        }
+        else if (data && data.error) {
+          toaster.pop('warning', data.error.message);
+        }
+      })
+    }
 
   });

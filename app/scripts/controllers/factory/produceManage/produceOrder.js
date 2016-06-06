@@ -4,18 +4,17 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('ProductionRecordCtrl', function ($scope, $state, $stateParams, ngDialog, commonService, PRODUCE_STATUS, PAGE_SIZE, customShopService, toaster, tailoringTypes) {
+  .controller('ProduceOrderCtrl', function ($scope, $state, $stateParams, ngDialog, commonService, PAGE_SIZE, factoryService, toaster, tailoringTypes) {
     $scope.tailoringTypes = tailoringTypes;
-    $scope.PRODUCE_STATUS = PRODUCE_STATUS;
     $scope.STATUS = $stateParams.STATUS == "" ? undefined : $stateParams.STATUS;
+    $scope.PRODUCE_STATUS = {PLACED: '待下单', PRODUCE: '生产中', DELIVERED: '已发货', SUCCESS: '交易成功'};
 
     var param = {};
     param.page = 0;
     param.pageSize = PAGE_SIZE;
-    param.STATUS = $stateParams.STATUS == "" ? undefined : $stateParams.STATUS;
-    param.clothingType = $stateParams.clothingType == "" ? undefined : $stateParams.clothingType;
+    param.status = $stateParams.STATUS == "" ? undefined : $stateParams.STATUS;
     var queryParams = JSON.parse(JSON.stringify(param));
-    customShopService.produceRecords(queryParams).then(function (data) {
+    factoryService.produceOrders(queryParams).then(function (data) {
       initData(queryParams, data.data)
     });
 
@@ -105,6 +104,7 @@ angular.module('tailorApp')
       }).then(function (value) {
         console.log(value);
         var param = {};
+        //param.NUMBER = order.number;
         param.bodySize = {};
         param.bodySize.lowerBody  = order.bodySize.lowerBody;
         param.bodySize.upperBody  = order.bodySize.upperBody;
@@ -129,7 +129,7 @@ angular.module('tailorApp')
     };
 
     $scope.previewOrder = function (order) {
-      $state.go('previewProduceOrder', {order: order}, {inherit: false});
+      $state.go('previewProduceOrder', {isFactory: 'factory', order: order}, {inherit: false});
     };
 
     $scope.queryExpress = commonService.queryExpress;

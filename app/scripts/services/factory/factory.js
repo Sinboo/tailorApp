@@ -51,6 +51,10 @@ angular.module('tailorApp')
       get_specifications: {
         url: 'factory/specification',
         method: 'GET'
+      },
+      produce_orders: {
+        url: 'factory/produce',
+        method: 'GET'
       }
 
     };
@@ -92,7 +96,10 @@ angular.module('tailorApp')
     };
     this.getSpecifications = function () {
       return httpService.http({}, factoryUrl.get_specifications, {})
-    }
+    };
+    this.produceOrders = function (queryParams) {
+      return httpService.http({}, factoryUrl.produce_orders, queryParams)
+    };
 
 
 

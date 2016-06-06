@@ -29,7 +29,11 @@
       </div>
       <div class="form-group">
         <label>产品:</label>
-        <p class="form-control" >{{order.orderItem.clothingTypes}}</p>
+        <p class="form-control" >{{order.orderItem.clothingTypes=='OTHER'?order.orderItem.otherClothes:tailoringTypes[order.orderItem.clothingTypes.toString()]}}</p>
+      </div>
+      <div class="form-group">
+        <label>数量:</label>
+        <p class="form-control" >{{order.orderItem.quantity}}</p>
       </div>
     </form>
   </div>
@@ -50,7 +54,7 @@
       </div>
       <div class="form-group">
         <label>预定交货日:</label>
-        <p class="form-control" >{{20160321}}</p>
+        <p class="form-control" >{{order.expectDeliveryDay | date: 'yyyy-MM-dd'}}</p>
       </div>
     </form>
   </div>
@@ -59,23 +63,19 @@
     <form class="form-inline">
       <div class="form-group">
         <label>面料货号:</label>
-        <p class="form-control" >{{order.craft}}</p>
+        <p class="form-control" >{{order.orderItem.purchaseOrder.number}}</p>
       </div>
       <div class="form-group">
         <label>面料色号:</label>
-        <p class="form-control" >{{order.orderItem.halfFinished==true?'是':'否'}}</p>
+        <p class="form-control" >{{order.orderItem.purchaseOrder.color}}</p>
       </div>
       <div class="form-group">
         <label>花纹:</label>
-        <p class="form-control" >{{order.orderItem.urgent==true?'是':'否'}}</p>
+        <p class="form-control" >{{order.orderItem.purchaseOrder.figure}}</p>
       </div>
       <div class="form-group">
         <label>颜色:</label>
-        <p class="form-control" >{{20160321}}</p>
-      </div>
-      <div class="form-group">
-        <label>数量:</label>
-        <p class="form-control" >{{20160321}}</p>
+        <p class="form-control" >{{order.orderItem.purchaseOrder.colorDesc}}</p>
       </div>
     </form>
   </div>
@@ -85,8 +85,8 @@
   <legend class="am-text-sm am-text-secondary"><h4>尺寸详情:</h4></legend>
 
   <div class="am-g"  ng-repeat="set in settings">
-    <div class="am-g" style="padding: 20px" ng-if="item.tailoringType.indexOf(set.I) > -1">
-      <legend class="am-text-sm am-text-secondary" style="padding-left: 20px"><h4>{{set.name}}尺寸:</h4></legend>
+    <div class="am-g" style="padding: 20px" ng-if="order.orderItem.clothingTypes.indexOf(set.I) > -1">
+      <legend class="am-text-sm" style="padding-left: 20px"><h4>{{set.name}}尺寸:</h4></legend>
       <div class="am-g">
         <form class="am-form am-form-horizontal">
           <div class="am-form-group">
@@ -107,7 +107,7 @@
             <label  class="am-u-sm-4 am-form-label am-text-sm">尺寸类型:</label>
             <div class="am-u-sm-8">
               <label class="am-checkbox-inline" ng-repeat="type in types">
-                <input type="checkbox" checklist-model="set.useSpecification" checklist-value="type.shortName" ng-click="choose(type, set)"> {{type.fullName}}
+                <input type="checkbox" checklist-model="set.useSpecification" checklist-value="type.shortName" ng-disabled="true"> {{type.fullName}}
               </label>
             </div>
           </div>
@@ -242,7 +242,7 @@
 
       </div>
 
-      <div class="am-g" ng-if="item.tailoringType.indexOf(set.I) > -1">
+      <div class="am-g" ng-if="order.orderItem.clothingTypes.indexOf(set.I) > -1">
         <div class="am-u-sm-6">
           <h6 class="am-text-sm" style="margin-left: 20px">{{set.name}}款式: </h6>
           <form class="am-form am-form-horizontal">
@@ -302,7 +302,7 @@
 
   <div class="ngdialog-buttons">
     <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">取消</button>
-    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(item)">确认</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(produceDetails)">确认</button>
   </div>
 
 
