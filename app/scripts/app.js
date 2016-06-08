@@ -157,6 +157,12 @@ angular
         templateUrl: '/views/factory/otherManage/viewSpecification.html',
         controller: 'ViewSpecificationCtrl'
       })
+      .state('factory.otherManage.processingCraft', {
+        url: '/processingCraft/:STATUS',
+        templateUrl: '/views/factory/otherManage/processingCraft.html',
+        controller: 'ProcessingCraftCtrl'
+      })
+      
 
       .state('factory.fabricReceiveManage', {
         url: '^/3/fabricReceiveManage',

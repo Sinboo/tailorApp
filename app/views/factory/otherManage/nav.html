@@ -11,8 +11,22 @@
         </ul>
       </li>
       <li class="admin-parent">
-        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="factory.otherManage.addSpecification()"><span ng-class="getClass('Specification')">规格单管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
-        <ul class="am-list am-collapse admin-sidebar-sub am-in">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav4'}" ui-sref="factory.otherManage.addSpecification()"><span ng-class="getClass('Specification')">规格单管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav4">
+          <li><a  class="am-text-sm" ui-sref="factory.otherManage.addSpecification()"><span ng-class="getClass('addSpecification')">创建规格单</span></a></li>
+          <li><a  class="am-text-sm" ui-sref="factory.otherManage.viewSpecification()"><span ng-class="getClass('viewSpecification')">查看规格单</span></a></li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav5'}" ui-sref="factory.otherManage.processingCraft({STATUS: 'standard'})"><span ng-class="getClass('processing')">加工费与报价</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav5">
+          <li class="admin-parent">
+            <a  class="am-cf am-text-sm" data-am-collapse="{target: '#collapse-nav55'}" ui-sref="factory.otherManage.processingCraft({STATUS: 'standard'})"><span ng-class="getClass('processingCraft')">工艺管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav55">
+              <li><a  class="am-text-xs" ui-sref="factory.otherManage.processingCraft({STATUS: 'standard'})"><span ng-class="getClass('processingCraft/standard')">标准工艺</span></a></li>
+              <li><a  class="am-text-xs" ui-sref="factory.otherManage.processingCraft({STATUS: 'special'})"><span ng-class="getClass('processingCraft/special')">特殊工艺</span></a></li>
+            </ul>
+          </li>
           <li><a  class="am-text-sm" ui-sref="factory.otherManage.addSpecification()"><span ng-class="getClass('addSpecification')">创建规格单</span></a></li>
           <li><a  class="am-text-sm" ui-sref="factory.otherManage.viewSpecification()"><span ng-class="getClass('viewSpecification')">查看规格单</span></a></li>
         </ul>

@@ -1,0 +1,62 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-12">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="factory.otherManage.fixPWD()">其他管理</a></li>
+        <li class="">加工费与报价</li>
+        <li class="am-active">{{STATUS == 'standard' ? '标准工艺' : '特殊工艺'}}</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="am-g fabric-detail-padding">
+    <div class="am-u-sm-6">
+      <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
+          <label for="doc-ipt-pwd-4" class="am-u-sm-5 am-form-label am-text-sm">新增{{STATUS == 'standard' ? '标准工艺' : '特殊工艺'}}名称:</label>
+          <div class="am-u-sm-7">
+            <input type="text" id="doc-ipt-pwd-4" placeholder="" ng-model="craftName"/>
+          </div>
+        </div>
+        <div class="am-form-group">
+          <div class="am-u-sm-7 am-u-sm-offset-5">
+            <button type="submit" class="am-btn am-btn-primary" ng-click="addCraft(craftName)">确认增加</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="am-g fabric-detail-padding">
+    <legend><span class="am-text-secondary am-text-sm">现在所有{{STATUS == 'standard' ? '标准工艺' : '特殊工艺'}}如下，你可以进行删除操作。增加工艺请在上面进行操作。</span></legend>
+    <div class="am-u-sm-12" >
+      <table class="am-table am-table-striped am-table-hover table-main">
+        <thead>
+        <tr>
+          <th class="table-title">序号</th>
+          <th class="table-title">工艺名称</th>
+          <th class="table-title"></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="processingCraft in processingCrafts">
+          <td>{{$index + 1}}</td>
+          <td>{{processingCraft}}</td>
+          <td><a href="" ng-click="deleteRow(processingCraft)"><span class="am-text-warning am-icon-trash-o"></span></a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>

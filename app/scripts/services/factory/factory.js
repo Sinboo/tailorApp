@@ -55,6 +55,18 @@ angular.module('tailorApp')
       produce_orders: {
         url: 'factory/produce',
         method: 'GET'
+      },
+      get_crafts: {
+        url: 'factory/quotation/craft',
+        method: 'GET'
+      },
+      delete_craft: {
+        url: 'factory/quotation/craft',
+        method: 'DELETE'
+      },
+      add_craft: {
+        url: 'factory/quotation/craft',
+        method: 'POST'
       }
 
     };
@@ -99,6 +111,15 @@ angular.module('tailorApp')
     };
     this.produceOrders = function (queryParams) {
       return httpService.http({}, factoryUrl.produce_orders, queryParams)
+    };
+    this.getCrafts = function () {
+      return httpService.http({}, factoryUrl.get_crafts, {})
+    };
+    this.deleteCraft = function (queryParams) {
+      return httpService.http({}, factoryUrl.delete_craft, queryParams)
+    };
+    this.addCraft = function (queryParams) {
+      return httpService.http({}, factoryUrl.add_craft, queryParams)
     };
 
 
