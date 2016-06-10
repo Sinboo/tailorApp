@@ -67,6 +67,10 @@ angular.module('tailorApp')
       add_craft: {
         url: 'factory/quotation/craft',
         method: 'POST'
+      },
+      get_shops: {
+        url: 'factory/produce/overview',
+        method: 'GET'
       }
 
     };
@@ -120,6 +124,9 @@ angular.module('tailorApp')
     };
     this.addCraft = function (queryParams) {
       return httpService.http({}, factoryUrl.add_craft, queryParams)
+    };
+    this.getShops = function (status) {
+      return httpService.http({}, factoryUrl.get_shops, {status: status})
     };
 
 

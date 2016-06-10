@@ -181,7 +181,7 @@ angular
         controller: 'ProduceManageNavCtrl'
       })
       .state('factory.produceManage.produceOrder', {
-        url: '/produceOrder/:STATUS',
+        url: '/produceOrder/:STATUS/:shopNumber',
         templateUrl: '/views/factory/produceManage/produceOrder.html',
         controller: 'ProduceOrderCtrl'
       })

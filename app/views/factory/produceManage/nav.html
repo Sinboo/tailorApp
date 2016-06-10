@@ -1,14 +1,34 @@
-<div class="am-cf admin-main">
+<div class="am-cf admin-main" xmlns="http://www.w3.org/1999/html">
   <!-- sidebar start -->
   <div class="admin-sidebar">
     <ul class="am-list admin-sidebar-list">
       <li class="admin-parent">
-        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="factory.produceManage.produceOrder({STATUS:'PLACED'})"><span ng-class="getClass('produceOrder')">生产管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="factory.produceManage.produceOrder({STATUS:'PLACED', shopNumber: ''})"><span ng-class="getClass('produceOrder')">生产管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
         <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav3">
-          <li><a  class="am-text-sm" ui-sref="factory.produceManage.produceOrder({STATUS:'PLACED'})"><span ng-class="getClass('PLACED')">待下单</span></a></li>
-          <li><a  class="am-text-sm" ui-sref="factory.produceManage.produceOrder({STATUS:'PRODUCE'})"><span ng-class="getClass('PRODUCE')">生产中</span></a></li>
-          <li><a  class="am-text-sm" ui-sref="factory.produceManage.produceOrder({STATUS:'DELIVERED'})"><span ng-class="getClass('DELIVERED')">已发货</span></a></li>
-          <li><a  class="am-text-sm" ui-sref="factory.produceManage.produceOrder({STATUS:'SUCCESS'})"><span ng-class="getClass('SUCCESS')">生产交易成功</span></a></li>
+          <li class="admin-parent">
+            <a  class="am-text-sm" data-am-collapse="{target: '#collapse-nav31'}" ui-sref="factory.produceManage.produceOrder({STATUS:'PLACED', shopNumber: ''})"><span ng-class="getClass('PLACED')">待下单</span></a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav31">
+              <li ng-repeat="shop in PLACED_shops" ng-if="shop.orderCount > 0"><a ui-sref="factory.produceManage.produceOrder({STATUS:'PLACED', shopNumber: shop.shopNumber})" class="am-text-xs"><span ng-class="getClass('PLACED/'+shop.shopNumber)">{{shop.shopName}}<span class="am-text-primary">[{{shop.orderCount}}]</span></span></a></li>
+            </ul>
+          </li>
+          <li class="admin-parent">
+            <a  class="am-text-sm" data-am-collapse="{target: '#collapse-nav32'}" ui-sref="factory.produceManage.produceOrder({STATUS:'PRODUCE', shopNumber: ''})"><span ng-class="getClass('PRODUCE')">生产中</span></a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav32">
+              <li ng-repeat="shop in PRODUCE_shops" ng-if="shop.orderCount > 0"><a ui-sref="factory.produceManage.produceOrder({STATUS:'PRODUCE', shopNumber: shop.shopNumber})" class="am-text-xs"><span ng-class="getClass('PRODUCE/'+shop.shopNumber)">{{shop.shopName}}<span class="am-text-primary">[{{shop.orderCount}}]</span></span></a></li>
+            </ul>
+          </li>
+          <li class="admin-parent">
+            <a  class="am-text-sm" data-am-collapse="{target: '#collapse-nav33'}" ui-sref="factory.produceManage.produceOrder({STATUS:'DELIVERED', shopNumber: ''})"><span ng-class="getClass('DELIVERED')">已发货</span></a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav33">
+              <li ng-repeat="shop in DELIVERED_shops" ng-if="shop.orderCount > 0"><a ui-sref="factory.produceManage.produceOrder({STATUS:'DELIVERED', shopNumber: shop.shopNumber})" class="am-text-xs"><span ng-class="getClass('DELIVERED/'+shop.shopNumber)">{{shop.shopName}}<span class="am-text-primary">[{{shop.orderCount}}]</span></span></a></li>
+            </ul>
+          </li>
+          <li class="admin-parent">
+            <a  class="am-text-sm" data-am-collapse="{target: '#collapse-nav34'}" ui-sref="factory.produceManage.produceOrder({STATUS:'SUCCESS', shopNumber: ''})"><span ng-class="getClass('SUCCESS')">生产交易成功</span></a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav34">
+              <li ng-repeat="shop in SUCCESS_shops" ng-if="shop.orderCount > 0"><a ui-sref="factory.produceManage.produceOrder({STATUS:'SUCCESS', shopNumber: shop.shopNumber})" class="am-text-xs"><span ng-class="getClass('SUCCESS/'+shop.shopNumber)">{{shop.shopName}}<span class="am-text-primary">[{{shop.orderCount}}]</span></span></a></li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>
