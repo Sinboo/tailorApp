@@ -71,6 +71,34 @@ angular.module('tailorApp')
       get_shops: {
         url: 'factory/produce/overview',
         method: 'GET'
+      },
+      add_standardPrice: {
+        url: 'factory/quotation',
+        method: 'POST'
+      },
+      add_specialPrice: {
+        url: 'factory/quotation/spec',
+        method: 'POST'
+      },
+      get_prices: {
+        url: 'factory/quotation',
+        method: 'GET'
+      },
+      delete_standardPrice: {
+        url: 'factory/quotation/{ID}',
+        method: 'DELETE'
+      },
+      delete_specialPrice: {
+        url: 'factory/quotation/spec/{ID}',
+        method: 'DELETE'
+      },
+      update_standardPrice: {
+        url: 'factory/quotation/{ID}',
+        method: 'PUT'
+      },
+      update_specialPrice: {
+        url: 'factory/quotation/spec/{ID}',
+        method: 'PUT'
       }
 
     };
@@ -128,6 +156,29 @@ angular.module('tailorApp')
     this.getShops = function (status) {
       return httpService.http({}, factoryUrl.get_shops, {status: status})
     };
+    this.addStandardPrice = function (postData) {
+      return httpService.http(postData, factoryUrl.add_standardPrice, {})
+    };
+    this.addSpecialPrice = function (postData) {
+      return httpService.http(postData, factoryUrl.add_specialPrice, {})
+    };
+    this.getPrices = function () {
+      return httpService.http({}, factoryUrl.get_prices, {})
+    };
+    this.deleteStandardPrices = function (ID) {
+      return httpService.http({}, factoryUrl.delete_standardPrice, {ID: ID})
+    };
+    this.deleteSpecialPrices = function (ID) {
+      return httpService.http({}, factoryUrl.delete_specialPrice, {ID: ID})
+    };
+    this.updateStandardPrices = function (postData, ID) {
+      return httpService.http(postData, factoryUrl.update_standardPrice, {ID: ID})
+    };
+    this.updateSpecialPrices = function (postData, ID) {
+      return httpService.http(postData, factoryUrl.update_specialPrice, {ID: ID})
+    };
+
+    
 
 
 

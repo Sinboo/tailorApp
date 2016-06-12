@@ -162,6 +162,11 @@ angular
         templateUrl: '/views/factory/otherManage/processingCraft.html',
         controller: 'ProcessingCraftCtrl'
       })
+      .state('factory.otherManage.inputPrice', {
+        url: '/inputPrice/:STATUS',
+        templateUrl: '/views/factory/otherManage/inputPrice.html',
+        controller: 'InputPriceCtrl'
+      })
       
 
       .state('factory.fabricReceiveManage', {

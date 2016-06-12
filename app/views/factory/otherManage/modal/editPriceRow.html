@@ -1,0 +1,81 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 450px;
+    height: auto;
+    margin-top:-150px;
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">修改工艺报价</span></legend>
+  <div class="am-u-sm-12" style="margin-bottom: 40px">
+    <form class="am-form am-form-horizontal">
+      <div class="am-form-group" ng-if="STATUS == 'standard'">
+        <label class="am-u-sm-5 am-form-label am-text-sm">定制项目:</label>
+        <div class="am-u-sm-7">
+          <ui-select ng-model="item.tailoringType" id="_clothing">
+            <ui-select-match placeholder="选择定制项目，或手动输入">{{$select.selected}}</ui-select-match>
+            <ui-select-choices repeat="tailoringType in getTailoringTypes($select.search) | filter: $select.search">
+              <div ng-bind="tailoringType"></div>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+
+      <div class="am-form-group">
+        <label class="am-u-sm-5 am-form-label am-text-sm">工艺类型:</label>
+        <div class="am-u-sm-7">
+          <select class="form-control " style="font-size: smaller" ng-model="item.craft" id="_craft">
+            <option ng-selected="craft === item.craft"
+                    ng-repeat="craft in crafts"
+                    value="{{craft}}">
+              {{craft}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="am-form-group" ng-if="STATUS == 'standard'">
+        <label class="am-u-sm-5 am-form-label am-text-sm">交期:</label>
+        <div class="am-u-sm-7">
+          <select class="form-control "  style="font-size: smaller" ng-model="item.days" id="_days">
+            <option ng-selected="day === item.days"
+                    ng-repeat="day in days"
+                    value="{{day}}">
+              {{day}}
+            </option>
+          </select>
+          <span class="am-text-xs am-text-warning" style="float: right">此处为工作日</span>
+        </div>
+      </div>
+
+      <div class="am-form-group">
+        <label for="doc-ipt-pwd-4" class="am-u-sm-5 am-form-label am-text-sm">价格:</label>
+        <div class="am-u-sm-7">
+          <input type="number" id="doc-ipt-pwd-4" placeholder="" ng-model="item.price" id="_price"/>
+        </div>
+      </div>
+
+      <div class="am-form-group">
+        <label for="doc-ipt-pwd-45" class="am-u-sm-5 am-form-label am-text-sm">说明:</label>
+        <div class="am-u-sm-7">
+          <input type="text" id="doc-ipt-pwd-45" placeholder="" ng-model="item.detail" id="_detail"/>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click=closeThisDialog()>取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(item)">确认</button>
+  </div>
+
+
+</div>
