@@ -14,7 +14,8 @@
   }
 </style>
 <div class="am-g">
-  <legend><span class="am-text-primary am-text-sm">设置生成任务</span></legend>
+  <legend ng-if="!ngDialogData.editFlag"><span class="am-text-primary am-text-sm">设置生产任务</span></legend>
+  <legend ng-if="ngDialogData.editFlag"><span class="am-text-primary am-text-sm">修改生产任务</span></legend>
 
   <table class="am-table am-table-striped am-table-hover">
     <thead>

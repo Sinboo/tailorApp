@@ -28,6 +28,18 @@ angular.module('tailorApp')
     ];
 
     $scope.isFirstHalfs = [{shortName: true, fullName: '上半月'}, {shortName: false, fullName: '下半月'}];
+    
+    var dateNow = new Date();
+    var month = dateNow.getMonth();
+    var year;
+    if (parseInt(month) + 1 == 12) {
+      $scope.months = [12, 1];
+      year = dateNow.getFullYear() + 1;
+    }
+    else {
+      $scope.months = [parseInt(month) + 1, parseInt(month) + 2];
+      year = dateNow.getFullYear();
+    }
 
     $scope.addTask = function (item) {
       console.log(item)
@@ -45,19 +57,16 @@ angular.module('tailorApp')
         }
         delete item.tailoringType;
         
-        var dateNow = new Date();
-        var month = dateNow.getMonth();
-        var year = dateNow.getFullYear();
-        var daysInOneMonth = commonService.getDaysInOneMonth(year, parseInt(month) + 1);
+        var daysInOneMonth = commonService.getDaysInOneMonth(year, item.month);
         $scope.daysList = [];
         if (item.isFirstHalf == 'true') {
           for (var i=1; i<=15; i++) {
-            $scope.daysList.push(parseInt(month) + 1 + '月' + i + '日');
+            $scope.daysList.push(item.month + '月' + i + '日');
           }
         }
         if (item.isFirstHalf == 'false') {
           for (var i=15; i<=daysInOneMonth; i++) {
-            $scope.daysList.push(parseInt(month) + 1 + '月' + i + '日');
+            $scope.daysList.push(item.month + '月' + i + '日');
           }
         }
         console.log($scope.daysList);
@@ -72,7 +81,8 @@ angular.module('tailorApp')
             var postData = {};
             postData.clothingType = item.clothingTypes;
             postData.isFirstHalf = item.isFirstHalf;
-            postData.month = $filter('date')(dateNow, 'yyyyMM');
+            var month2 = item.month < 10 ? '0' + item.month : item.month;
+            postData.month = year.toString() + month2;
             postData.taskNum = [];
             angular.forEach(value, function (day) {
               postData.taskNum.push(day.count);

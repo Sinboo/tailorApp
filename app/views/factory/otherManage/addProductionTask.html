@@ -34,6 +34,19 @@
           </div>
 
           <div class="am-form-group">
+            <label class="am-u-sm-5 am-form-label am-text-sm">月份:</label>
+            <div class="am-u-sm-7">
+              <select class="form-control " style="font-size: smaller" ng-model="item.month" id="_month">
+                <option ng-selected="month === item.month"
+                        ng-repeat="month in months"
+                        value="{{month}}">
+                  {{month}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="am-form-group">
             <label class="am-u-sm-5 am-form-label am-text-sm">上半月或下半月:</label>
             <div class="am-u-sm-7">
               <select class="form-control " style="font-size: smaller" ng-model="item.isFirstHalf" id="_isFirstHalf">

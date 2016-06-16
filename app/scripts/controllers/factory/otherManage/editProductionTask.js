@@ -26,7 +26,6 @@ angular.module('tailorApp')
               $scope.tasks.push(item)
             }
           });
-          console.log($scope.tasks);
         }
         else if (data && data.success == false) {
           toaster.pop('error', data.error.message);
@@ -37,20 +36,18 @@ angular.module('tailorApp')
 
 
     $scope.editRow = function (item) {
-
-      var dateNow = new Date();
-      var month = dateNow.getMonth();
-      var year = dateNow.getFullYear();
-      var daysInOneMonth = commonService.getDaysInOneMonth(year, parseInt(month) + 1);
+      var month = item.month.toString().slice(-2);
+      var year = item.month.toString().substring(0,4);
+      var daysInOneMonth = commonService.getDaysInOneMonth(year, month);
       $scope.daysList = [];
       if (item.isFirstHalf == true) {
         for (var i=1; i<=15; i++) {
-          $scope.daysList.push(parseInt(month) + 1 + '月' + i + '日');
+          $scope.daysList.push(month + '月' + i + '日');
         }
       }
       if (item.isFirstHalf == false) {
         for (var i=15; i<=daysInOneMonth; i++) {
-          $scope.daysList.push(parseInt(month) + 1 + '月' + i + '日');
+          $scope.daysList.push(month + '月' + i + '日');
         }
       }
       console.log($scope.daysList);

@@ -151,6 +151,10 @@ angular.module('tailorApp')
       submit_produceOrder: {
         url: 'order/produce/{NUMBER}/place2factory',
         method: 'PUT'
+      },
+      search_order: {
+        url: 'order/tailoring/search',
+        method: 'GET'
       }
 
     };
@@ -282,6 +286,9 @@ angular.module('tailorApp')
     };
     this.submitProduceOrder = function (NUMBER) {
       return httpService.http({}, customShopUrl.submit_produceOrder, {NUMBER: NUMBER})
+    };
+    this.searchOrder = function (queryParams) {
+      return httpService.http({}, customShopUrl.search_order, queryParams)
     };
 
 

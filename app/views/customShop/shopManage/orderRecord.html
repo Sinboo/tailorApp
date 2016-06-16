@@ -18,6 +18,15 @@
       </ol>
     </div>
     <div class="am-u-sm-3 more-button">
+      <div class="am-input-group am-input-group-primary">
+        <input type="text" class="am-form-field" ng-model="customerName" placeholder="根据客户姓名查找"/>
+        <span class="am-input-group-btn">
+          <button class="am-btn am-btn-primary" type="button" ng-click="searchName(customerName)"><span class="am-icon-search"></span></button>
+        </span>
+      </div>
+    </div>
+
+    <div class="am-u-sm-3 more-button">
       <a class="am-btn am-btn-primary am-radius" ng-click="addOrderChoose()" >新增订单<span class="am-icon-angle-double-right"></span></a>
     </div>
   </div>
@@ -95,7 +104,7 @@
     </div>
   </div>
 
-  <div class="am-g" style="margin-top: 40px">
+  <div class="am-g" style="margin-top: 40px" ng-if="!searchFlag">
     <legend></legend>
     <div class="am-u-sm-12">
       <span class="am-text-secondary am-text-sm" style="margin-left: 5px">*共 {{total}} 条记录</span>

@@ -100,6 +100,16 @@ angular.module('tailorApp')
         }
       )
     }
-
-
+    
+    $scope.searchName = function (customerName) {
+      $scope.searchFlag = true;
+      var queryParams = {};
+      queryParams.customerName = customerName;
+      queryParams.state = $stateParams.STATUS == "" ? undefined : $stateParams.STATUS;
+      queryParams = JSON.parse(JSON.stringify(queryParams));
+      customShopService.searchOrder(queryParams).then(function (data) {
+        $scope.orders = data.content;
+      })
+    }
+    
   });
