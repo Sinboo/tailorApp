@@ -99,6 +99,18 @@ angular.module('tailorApp')
       update_specialPrice: {
         url: 'factory/quotation/spec/{ID}',
         method: 'PUT'
+      },
+      add_Task: {
+        url: 'factory/schedule',
+        method: 'POST'
+      },
+      get_Task: {
+        url: 'factory/schedule',
+        method: 'GET'
+      },
+      edit_Task: {
+        url: 'factory/schedule/{ID}',
+        method: 'PUT'
       }
 
     };
@@ -177,7 +189,15 @@ angular.module('tailorApp')
     this.updateSpecialPrices = function (postData, ID) {
       return httpService.http(postData, factoryUrl.update_specialPrice, {ID: ID})
     };
-
+    this.addTask = function (postData) {
+      return httpService.http(postData, factoryUrl.add_Task, {})
+    };
+    this.getTask = function () {
+      return httpService.http({}, factoryUrl.get_Task, {})
+    };
+    this.editTask = function (data, ID) {
+      return httpService.http(data, factoryUrl.edit_Task, {ID: ID})
+    };
     
 
 

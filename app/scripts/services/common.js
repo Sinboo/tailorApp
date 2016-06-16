@@ -32,6 +32,11 @@ angular.module('gitdao')
 
             return Y + M + D ;
         };
+        this.getDaysInOneMonth =  function(year, month){
+          month = parseInt(month, 10);
+          var d= new Date(year, month, 0);
+          return d.getDate();
+        };
         this.reload = function(hideContent) {
             return $state.transitionTo($state.current, $stateParams, {
                 reload: true

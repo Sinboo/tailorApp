@@ -39,7 +39,7 @@ angular.module('tailorApp')
         if ($scope.STATUS == 'standard') {
           factoryService.addStandardPrice(item).then(function (data) {
             if (data && data.success == true) {
-              toaster.pop('success', '增加工艺报价成功！');
+              toaster.pop('success', '增加标准工艺报价成功！');
               $scope.item = {};
               initData();
             }
@@ -51,7 +51,7 @@ angular.module('tailorApp')
         if ($scope.STATUS == 'special') {
           factoryService.addSpecialPrice(item).then(function (data) {
             if (data && data.success == true) {
-              toaster.pop('success', '增加工艺报价成功！');
+              toaster.pop('success', '增加特殊工艺报价成功！');
               $scope.item = {};
               initData();
             }
@@ -73,7 +73,7 @@ angular.module('tailorApp')
           if ($scope.STATUS == 'standard') {
             factoryService.deleteStandardPrices(price.number).then(function (data) {
               if (data && data.success == true) {
-                toaster.pop('success', '删除工艺报价成功！');
+                toaster.pop('success', '删除标准工艺报价成功！');
                 initData();
               }
               else if (data && data.success == false) {
@@ -84,7 +84,7 @@ angular.module('tailorApp')
           if ($scope.STATUS == 'special') {
             factoryService.deleteSpecialPrices(price.number).then(function (data) {
               if (data && data.success == true) {
-                toaster.pop('success', '删除工艺报价成功！');
+                toaster.pop('success', '删除特殊工艺报价成功！');
                 initData();
               }
               else if (data && data.success == false) {
@@ -108,9 +108,17 @@ angular.module('tailorApp')
       }).then(
         function(value) {
           if ($scope.STATUS == 'standard') {
+            if ($scope.tailoringTypes.indexOf(value.tailoringType) === -1) {
+              value.clothingTypes = 'OTHER';
+              value.otherClothes = item.tailoringType;
+            }
+            else {
+              value.clothingTypes = CLOTHING_TYPE[value.tailoringType];
+            }
+            delete value.tailoringType;
             factoryService.updateStandardPrices(value, price.number).then(function (data) {
               if (data && data.success == true) {
-                toaster.pop('success', '修改工艺报价成功！');
+                toaster.pop('success', '修改标准工艺报价成功！');
                 initData();
               }
               else if (data && data.success == false) {
@@ -121,7 +129,7 @@ angular.module('tailorApp')
           if ($scope.STATUS == 'special') {
             factoryService.updateSpecialPrices(value, price.number).then(function (data) {
               if (data && data.success == true) {
-                toaster.pop('success', '修改工艺报价成功！');
+                toaster.pop('success', '修改特殊工艺报价成功！');
                 initData();
               }
               else if (data && data.success == false) {

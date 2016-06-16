@@ -47,7 +47,7 @@ angular.module('tailorApp')
         template: 'views/customShop/shopManage/modal/confirmReceivedModal.html',
         className: 'ngdialog-theme-default dialogcaseeditor',
         controller: 'ConfirmReceivedModalCtrl',
-        data: order
+        data: {order: order, detailFlag: false}
       }).then(
         function(value) {
           customShopService.receiveOrder(order.number).then(function (data) {
@@ -68,6 +68,15 @@ angular.module('tailorApp')
         }
       );
 
+    };
+    
+    $scope.showOrderDetail = function (order) {
+      ngDialog.openConfirm({
+        template: 'views/customShop/shopManage/modal/confirmReceivedModal.html',
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        controller: 'ConfirmReceivedModalCtrl',
+        data: {order: order, detailFlag: true}
+      })
     };
 
     $scope.confirmExpressFee = function (order) {

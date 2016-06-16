@@ -7,5 +7,7 @@ angular.module('tailorApp')
   .controller('ConfirmReceivedModalCtrl', function ($scope, FABRIC_UNIT, tailoringTypes) {
     $scope.FABRIC_UNIT = FABRIC_UNIT;
     $scope.tailoringTypes = tailoringTypes;
+    $scope.order = $scope.ngDialogData.order;
+    $scope.detailFlag = $scope.ngDialogData.detailFlag;
 
   });

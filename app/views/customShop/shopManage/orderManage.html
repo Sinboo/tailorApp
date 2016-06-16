@@ -68,7 +68,7 @@
           <tbody>
           <tr ng-repeat="order in orders">
             <td>{{(bigCurrentPage-1)*20 + $index + 1}}</td>
-            <td>{{order.number}}</td>
+            <td><a href="" ng-click="showOrderDetail(order)">{{order.number}}</a></td>
             <td>{{order.supplierName}}</td>
             <td>{{order.subject}}</td>
             <td>{{order.createTime | date: 'yyyy-MM-dd HH:mm'}}</td>

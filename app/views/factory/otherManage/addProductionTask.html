@@ -1,0 +1,61 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-12">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="factory.otherManage.fixPWD()">其他管理</a></li>
+        <li class="">生产任务管理</li>
+        <li class="am-active">设置生产任务</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding">
+    <legend><span class="am-text-secondary am-text-sm">提示：你可以设置未来半个月的生产任务（设置时间间隔为到每个月1日至15日，16日至当月底，分别命名为201605A，201605B这样的格式）.</span></legend>
+    <div class="am-g">
+      <div class="am-u-sm-6" >
+        <form class="am-form am-form-horizontal">
+          <div class="am-form-group">
+            <label class="am-u-sm-5 am-form-label am-text-sm">生产服装类型选择:</label>
+            <div class="am-u-sm-7">
+              <ui-select ng-model="item.tailoringType" id="_clothing">
+                <ui-select-match placeholder="选择定制项目，或手动输入">{{$select.selected}}</ui-select-match>
+                <ui-select-choices repeat="tailoringType in getTailoringTypes($select.search) | filter: $select.search">
+                  <div ng-bind="tailoringType"></div>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label class="am-u-sm-5 am-form-label am-text-sm">上半月或下半月:</label>
+            <div class="am-u-sm-7">
+              <select class="form-control " style="font-size: smaller" ng-model="item.isFirstHalf" id="_isFirstHalf">
+                <option ng-selected="isFirstHalf.shortName === item.isFirstHalf"
+                        ng-repeat="isFirstHalf in isFirstHalfs"
+                        value="{{isFirstHalf.shortName}}">
+                  {{isFirstHalf.fullName}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <div class="am-u-sm-7 am-u-sm-offset-5">
+              <button type="submit" class="am-btn am-btn-primary" ng-click="addTask(item)">确认增加生产任务</button>
+            </div>
+          </div>
+
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

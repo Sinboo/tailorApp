@@ -1,0 +1,45 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 400px;
+    height: auto;
+    margin-top:-150px;
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">设置生成任务</span></legend>
+
+  <table class="am-table am-table-striped am-table-hover">
+    <thead>
+    <tr>
+      <th style="width: 100px;" class="am-text-sm am-text-center">日期</th>
+      <th style="width: 100px;" class="am-text-sm am-text-center" ng-if="!ngDialogData.editFlag"><span class="am-text-warning">{{item.tailoringType}}</span>任务(件)</th>
+      <th style="width: 100px;" class="am-text-sm am-text-center" ng-if="ngDialogData.editFlag"><span class="am-text-warning">{{ClothingTypes[item.clothingType]}}</span>任务(件)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="day in daysList">
+      <td class="am-text-sm am-text-center">
+        {{day.day}}
+      </td>
+      <td>
+        <input type="number" class="am-form-field am-text-sm am-text-center" ng-model="day.count" />
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <legend></legend>
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(daysList)">确认</button>
+  </div>
+</div>

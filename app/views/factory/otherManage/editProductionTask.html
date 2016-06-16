@@ -1,0 +1,44 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-12">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="factory.otherManage.fixPWD()">其他管理</a></li>
+        <li class="">生产任务管理</li>
+        <li class="am-active">修改生产任务</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding">
+    <legend><span class="am-text-secondary am-text-sm">提示：此处只出现还没有完成的生产周期，在某些事件点，有可能存在两个同时的生产周期可供修改.</span></legend>
+    <div class="am-g">
+      <div class="am-u-sm-6" >
+        <table class="am-table am-table-striped am-table-hover">
+          <thead>
+          <tr>
+            <th style="width: 100px;" class="am-text-sm am-text-center">可供修改的生产任务</th>
+            <th style="width: 100px;" class="am-text-sm am-text-center"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="task in tasks">
+            <td class="am-text-sm am-text-center">
+              {{task.month}}{{task.isFirstHalf == true ? 'A' : 'B'}}的生产任务
+            </td>
+            <td>
+              <a href="" ng-click="editRow(task)"><span class="am-text-warning am-icon-edit"></span></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

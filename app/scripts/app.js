@@ -167,6 +167,16 @@ angular
         templateUrl: '/views/factory/otherManage/inputPrice.html',
         controller: 'InputPriceCtrl'
       })
+      .state('factory.otherManage.addProductionTask', {
+        url: '/addProductionTask',
+        templateUrl: '/views/factory/otherManage/addProductionTask.html',
+        controller: 'AddProductionTaskCtrl'
+      })
+      .state('factory.otherManage.editProductionTask', {
+        url: '/editProductionTask',
+        templateUrl: '/views/factory/otherManage/editProductionTask.html',
+        controller: 'EditProductionTaskCtrl'
+      })
       
 
       .state('factory.fabricReceiveManage', {
