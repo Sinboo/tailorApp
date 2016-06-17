@@ -109,7 +109,7 @@ angular.module('tailorApp')
         item.model = $scope.order.produceDetails[i].model;
         item.NET_SIZE = $scope['NET_SIZE_' + i + '_PART'];
         angular.forEach(item.NET_SIZE, function (it) {
-          it.clothSize = $scope.order.produceDetails[i].garmentLowerSize[it.shortName] || $scope.order.produceDetails[i].garmentUpperSize[it.shortName.toLowerCase().indexOf('wrist') == -1 ? it.shortName : 'wrist'];
+          it.clothSize = $scope.order.produceDetails[i].garmentLowerSize[it.shortName] || $scope.order.produceDetails[i].garmentUpperSize[it.shortName];
         })
       }
 

@@ -108,7 +108,12 @@ angular.module('tailorApp')
       queryParams.state = $stateParams.STATUS == "" ? undefined : $stateParams.STATUS;
       queryParams = JSON.parse(JSON.stringify(queryParams));
       customShopService.searchOrder(queryParams).then(function (data) {
-        $scope.orders = data.content;
+        if (data && data.success == true) {
+          $scope.orders = data.data;
+        }
+        else if (data && data.success == false) {
+          toaster.pop('error', data.error.message);
+        }
       })
     }
     
