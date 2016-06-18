@@ -111,7 +111,11 @@ angular.module('tailorApp')
       edit_Task: {
         url: 'factory/schedule/{ID}',
         method: 'PUT'
-      }
+      },
+      partner: {
+        url: 'factory/partner',
+        method: 'GET'
+      },
 
     };
     return publicFunc.urlAddPrefix(url, prefix);
@@ -197,6 +201,9 @@ angular.module('tailorApp')
     };
     this.editTask = function (data, ID) {
       return httpService.http(data, factoryUrl.edit_Task, {ID: ID})
+    };
+    this.getAllPartners = function (queryParams) {
+      return httpService.http({}, factoryUrl.partner, queryParams)
     };
     
 

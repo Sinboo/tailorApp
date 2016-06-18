@@ -121,6 +121,16 @@ angular
         controller: 'FactoryCooperationApplicationDetailCtrl',
         params: {apply: null}
       })
+      .state('factory.customShop.myCustomShops', {
+        url: '/myCustomShops/:business',
+        templateUrl: '/views/factory/customShop/myCustomShops.html',
+        controller: 'FactoryMyCustomShopsCtrl',
+        resolve: {
+          newApplyCount: function (factoryService) {
+            return factoryService.newApplyCount();
+          }
+        }
+      })
 
       .state('factory.otherManage', {
         url: '^/3/otherManage',

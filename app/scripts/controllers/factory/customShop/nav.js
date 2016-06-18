@@ -19,6 +19,15 @@ angular.module('tailorApp')
       $scope.businesses.push(typeItem);
     });
 
+    $scope.choose = function (business, $index) {
+      angular.forEach($scope.businesses, function (item) {
+        item.active = $scope.businesses[$index] == item;
+      });
+
+      $state.go('factory.customShop.myCustomShops', {business: business.value});
+
+    };
+
     $scope.getClass = function (path) {
       return $location.path().indexOf(path) !== -1  ? 'am-text-primary' : '';
     };
