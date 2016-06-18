@@ -116,6 +116,10 @@ angular.module('tailorApp')
         url: 'factory/partner',
         method: 'GET'
       },
+      search_partner: {
+        url: 'factory/partner/search',
+        method: 'GET'
+      }
 
     };
     return publicFunc.urlAddPrefix(url, prefix);
@@ -204,6 +208,9 @@ angular.module('tailorApp')
     };
     this.getAllPartners = function (queryParams) {
       return httpService.http({}, factoryUrl.partner, queryParams)
+    };
+    this.searchPartner = function (key) {
+      return httpService.http({}, factoryUrl.search_partner, {key: key})
     };
     
 
