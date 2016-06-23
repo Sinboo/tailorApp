@@ -31,14 +31,16 @@
       <li class="admin-parent">
         <a class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY'})"><span ng-class="getClass('productionRecord')">生产管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
         <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav2">
-          <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: ''})" class="am-text-sm"><span ng-class="getClass('productionRecord/READY')">未下单</span></a></li>
           <li class="admin-parent">
-            <a class="am-cf am-text-sm" data-am-collapse="{target: '#collapse-nav66'}" ui-sref="tailor.shopManage.productionRecord({STATUS: 'CONFIRM', clothingType: ''})" > <span ng-class="getClass('productionRecord/CONFIRM')">确认,未下单</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+            <a class="am-cf am-text-sm" data-am-collapse="{target: '#collapse-nav66'}" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: ''})" > <span ng-class="getClass('productionRecord/READY')">未下单</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
             <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav66">
-              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'CONFIRM', clothingType: 'D'})" ><span ng-class="getClass('productionRecord/CONFIRM/D')" >衬衫</span></a></li>
-              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'CONFIRM', clothingType: 'A'})" ><span ng-class="getClass('productionRecord/CONFIRM/A')" >西服</span></a></li>
-              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'CONFIRM', clothingType: 'E'})" ><span ng-class="getClass('productionRecord/CONFIRM/E')" >大衣</span></a></li>
-              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'CONFIRM', clothingType: 'F'})" ><span ng-class="getClass('productionRecord/CONFIRM/F')" >夹克</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: 'D'})" ><span ng-class="getClass('productionRecord/READY/D')" >衬衫</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: 'A'})" ><span ng-class="getClass('productionRecord/READY/A')" >西服</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: 'B'})" ><span ng-class="getClass('productionRecord/READY/B')" >裤子</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: 'C'})" ><span ng-class="getClass('productionRecord/READY/C')" >马甲</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: 'E'})" ><span ng-class="getClass('productionRecord/READY/E')" >大衣</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: 'F'})" ><span ng-class="getClass('productionRecord/READY/F')" >夹克</span></a></li>
+              <li ><a href="" style="font-size: 10px" ui-sref="tailor.shopManage.productionRecord({STATUS: 'READY', clothingType: 'G'})" ><span ng-class="getClass('productionRecord/READY/G')" >礼服</span></a></li>
             </ul>
           </li>
           <li ><a ui-sref="tailor.shopManage.productionRecord({STATUS: 'PLACED', clothingType: ''})" class="am-text-sm"><span ng-class="getClass('productionRecord/PLACED')">已下单,未生产</span></a></li>

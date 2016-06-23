@@ -7,7 +7,7 @@ angular.module('tailorApp')
   .controller('ProduceOrderCtrl', function ($scope, $state, $stateParams, ngDialog, commonService, PAGE_SIZE, factoryService, toaster, tailoringTypes) {
     $scope.tailoringTypes = tailoringTypes;
     $scope.STATUS = $stateParams.STATUS == "" ? undefined : $stateParams.STATUS;
-    $scope.PRODUCE_STATUS = {PLACED: '待下单', PRODUCE: '生产中', DELIVERED: '已发货', SUCCESS: '交易成功'};
+    $scope.PRODUCE_STATUS = {READYPLACED: '待下单', PRODUCE: '生产中', DELIVERED: '已发货', SUCCESS: '交易成功'};
 
     var param = {};
     param.page = 0;

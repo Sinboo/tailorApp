@@ -1,0 +1,62 @@
+<style>
+  .ngdialog.dialogcaseeditor .ngdialog-content
+  {
+    width : 650px;
+    height: auto;
+    margin-top:-150px;
+    padding-top:10px;
+    background: #fff;
+    border: 1px solid grey;
+    /* for IE */
+    filter:alpha(opacity=92);
+    /* CSS3 standard */
+    opacity:0.92;
+  }
+</style>
+<div class="am-g">
+  <legend><span class="am-text-primary am-text-sm">开始安排生产:</span></legend>
+  <div class="am-u-sm-12" style="margin-bottom: 40px">
+    <div class="am-u-sm-12">
+      <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
+          <label  class="am-u-sm-4 am-form-label">预计交货日:</label>
+          <div class="am-u-sm-8">
+            <div   class="am-input-group">
+              <p style="margin-top: 10px">系统安排的交货日为:<span class="am-text-warning">{{systemDate}}</span></p>
+              <span class="am-input-group-btn">
+                <button class="am-btn am-btn-default am-text-secondary" href="" ng-click="updateDate()" ><span class="am-text-primary">修改</span></button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label  class="am-u-sm-4 am-form-label">加工费:</label>
+          <div class="am-u-sm-8">
+            <div   class="am-input-group">
+              <p style="margin-top: 10px">系统计算加工费为:<span class="am-text-warning">{{systemProduceFee}}</span></p>
+              <span class="am-input-group-btn">
+                <button class="am-btn am-btn-default am-text-secondary" href="" ng-click="updateFee()" ><span class="am-text-primary">修改</span></button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="am-form-group">
+          <label  class="am-u-sm-4 am-form-label">备注:</label>
+          <div class="am-u-sm-8">
+            <textarea type="text" class="am-form-field"  placeholder="输入备注..." ng-model="remark"></textarea>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click=closeThisDialog()>取消</button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="validate() && confirm(formData)">确认</button>
+  </div>
+
+
+</div>

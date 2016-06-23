@@ -119,6 +119,22 @@ angular.module('tailorApp')
       search_partner: {
         url: 'factory/partner/search',
         method: 'GET'
+      },
+      reject_order: {
+        url: 'factory/produce/{ID}/reject',
+        method: 'PUT'
+      },
+      schedule_free: {
+        url: 'factory/schedule/free',
+        method: 'GET'
+      },
+      produce_fee: {
+        url: 'factory/produce/{ID}/fee',
+        method: 'GET'
+      },
+      produce_order: {
+        url: 'factory/produce/{ID}/product',
+        method: 'PUT'
       }
 
     };
@@ -212,7 +228,18 @@ angular.module('tailorApp')
     this.searchPartner = function (key) {
       return httpService.http({}, factoryUrl.search_partner, {key: key})
     };
-    
+    this.rejectOrder = function (ID) {
+      return httpService.http({}, factoryUrl.reject_order, {ID: ID})
+    };
+    this.scheduleFree = function (queryParams) {
+      return httpService.http({}, factoryUrl.schedule_free, queryParams)
+    };
+    this.produceFee = function (ID) {
+      return httpService.http({}, factoryUrl.produce_fee, {ID: ID})
+    };
+    this.productOrder = function (queryParams) {
+      return httpService.http({}, factoryUrl.produce_order, queryParams)
+    }
 
 
 

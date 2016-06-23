@@ -5,7 +5,7 @@
 
 angular.module('tailorApp')
   .controller('PreviewProduceOrderCtrl', function (
-    customShopService, $state, $stateParams, ngDialog, publicFunc, providerService, toaster,
+    customShopService, $state, $stateParams, ngDialog, publicFunc, providerService, toaster, factoryService,
     $scope, tailoringTypes,BREADTH, YARN_COUNT, CRAFT, COMPOSITION, FABRIC_COLOR, FLOWER_PATTERN, DRESSING_STYLE, NET_SIZE_A_PART,
     NET_SIZE_B_PART, NET_SIZE_C_PART, NET_SIZE_D_PART, NET_SIZE_E_PART, SHOULDER_TYPE, ARM_TYPE, ABDOMEN_TYPE,
     NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, FIGURE_A_E_PART, FIGURE_B_PART, FIGURE_C_PART, FIGURE_D_PART, A_STYLE,
@@ -18,7 +18,7 @@ angular.module('tailorApp')
     }
 
     if ($state.params.order == undefined && $stateParams.isFactory == 'factory') {
-      $state.go('factory.produceManage.produceOrder', {STATUS: 'PLACED'}, {inherit: false});
+      $state.go('factory.produceManage.produceOrder', {STATUS: 'READY,PLACED'}, {inherit: false});
     }
 
     $scope.isFactory = $stateParams.isFactory == 'factory';
@@ -119,7 +119,7 @@ angular.module('tailorApp')
         item.model = $scope.order.produceDetails[i].model;
         item.NET_SIZE = $scope['NET_SIZE_' + i + '_PART'];
         angular.forEach(item.NET_SIZE, function (it) {
-          it.clothSize = $scope.order.produceDetails[i].garmentLowerSize[it.shortName] || $scope.order.produceDetails[i].garmentUpperSize[it.shortName.toLowerCase().indexOf('wrist') == -1 ? it.shortName : 'wrist'];
+          it.clothSize = $scope.order.produceDetails[i].garmentLowerSize[it.shortName] || $scope.order.produceDetails[i].garmentUpperSize[it.shortName];
         })
       }
 
@@ -255,7 +255,53 @@ angular.module('tailorApp')
       customShopService.submitProduceOrder(order.number).then(function (data) {
         if(data && data.success == true) {
           toaster.pop('success', '提交订单成功！');
-          $state.go('tailor.shopManage.productionRecord', {STATUS: 'CONFIRM'}, {inherit: false});
+          $state.go('tailor.shopManage.productionRecord', {STATUS: 'READY'}, {inherit: false});
+        }
+        else if (data && data.error) {
+          toaster.pop('warning', data.error.message);
+        }
+      })
+    };
+    
+    $scope.rejectOrder = function (number) {
+      ngDialog.openConfirm({
+        template: 'views/common/modal/confirmModal.html',
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        data: {message: '退回此订单？'}
+      }).then(function () {
+        factoryService.rejectOrder(number).then(function (data) {
+          if (data && data.success == true) {
+            toaster.pop('success', '退回订单成功！');
+            $state.go('factory.produceManage.produceOrder', {STATUS: 'READY,PLACED'}, {inherit: false});
+          }
+          else if (data && data.error) {
+            toaster.pop('warning', data.error.message);
+          }
+        })
+      })
+    };
+
+    $scope.passOrder = function () {
+      ngDialog.openConfirm({
+        template: 'views/factory/produceManage/modal/startToProduceModal.html',
+        controller: 'StartToProduceModalCtrl',
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        data: {order: $scope.order}
+      }).then(function (value) {
+        $scope.produceOrderParams = value;
+        $scope.passedOrder = true;
+      })
+    }
+    
+    $scope.submitFactoryOrder = function (number) {
+      var parameters = {};
+      angular.copy($scope.produceOrderParams, parameters);
+      parameters.ID = number;
+      parameters = JSON.parse(JSON.stringify(parameters));
+      factoryService.productOrder(parameters).then(function (data) {
+        if (data && data.success == true) {
+          toaster.pop('success', '下单成功！');
+          $state.go('factory.produceManage.produceOrder', {STATUS: 'READY,PLACED'}, {inherit: false});
         }
         else if (data && data.error) {
           toaster.pop('warning', data.error.message);
