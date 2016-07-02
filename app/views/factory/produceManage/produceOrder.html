@@ -48,8 +48,8 @@
             <td>{{order.orderItem.purchaseOrder.colorDesc}}</td>
             <td>{{order.orderItem.purchaseOrder.figure}}</td>
             <td>{{order.orderItem.deliveryDate == null ? "—" : (order.orderItem.deliveryDate) | date: 'yyyy-MM-dd'}}</td>
-            <td ng-if="STATUS!=='DELIVERED'">{{order.expectDeliveryDay == null ? "—" : (order.expectDeliveryDay-3*24*3600*1000) | date: 'yyyy-MM-dd'}}</td>
-            <td ng-if="STATUS!=='DELIVERED'">{{order.expectDeliveryDay == null ? "—" : (order.expectDeliveryDay-24*3600*1000) | date: 'yyyy-MM-dd'}}</td>
+            <td ng-if="STATUS!=='DELIVERED'">{{order.createTime == null ? "—" : order.createTime | date: 'yyyy-MM-dd'}}</td>
+            <td ng-if="STATUS!=='DELIVERED'">{{order.expectDeliveryDay == null ? "—" : order.expectDeliveryDay | date: 'yyyy-MM-dd'}}</td>
             <td ng-if="STATUS=='DELIVERED'">{{order.actualDeliveryTime == null ? "—" : (order.actualDeliveryTime) | date: 'yyyy-MM-dd'}}</td>
             <td ng-if="STATUS=='DELIVERED'">{{order.express.company == null ? "—" : order.express.company}}</td>
             <td ng-if="STATUS=='DELIVERED'"><a href="" ng-click="queryExpress(order.express)">{{order.express.number == null ? "—" : order.express.number}}</a></td>
@@ -58,6 +58,11 @@
               <div class="am-btn-group am-btn-group-xs">
                 <button ng-if="order.hasConfirmSize && order.status == 'PLACED'" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="previewOrder(order)" ><span class="am-text-primary">已确认尺寸及款式</span></button>
                 <button ng-if="order.status == 'READY'  " class="am-btn am-btn-default am-btn-xs am-text-secondary" ><span class="am-text-primary">未确认尺寸及款式</span></button>
+              </div>
+            </td>
+            <td ng-if="STATUS=='PRODUCE'">
+              <div class="am-btn-group am-btn-group-xs">
+                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ng-click="sendProduct(order)"><span class="am-text-primary">录入发货信息</span></button>
               </div>
             </td>
           </tr>

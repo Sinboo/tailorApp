@@ -279,7 +279,7 @@ void function () {
       },
       NET_SIZE_A_PART: {
         length: '衣长', frontLength: '前长', backLength: '后长', chest: '胸围', middleChest: '中腰',
-        lowerHem: '下摆', shoulder: '肩宽', sleeve: '袖长', frontWidth: '前宽', backWidth: '后宽',
+        lowerHem: '下摆', shoulder: '肩宽', leftSleeve: '左袖长', rightSleeve: '右袖长', frontWidth: '前宽', backWidth: '后宽',
         sleeveWidth: '袖肥', cuff: '袖口', firstButton: '首扣距肩', neck: '领围'
       },
       OTHER_A_PART: [
@@ -313,7 +313,7 @@ void function () {
       NET_SIZE_D_PART: {
         frontLength: '前长', backLength: '后长', chest: '胸围', middleChest: '中腰', lowerHem: '下摆',
         shoulder: '肩宽', leftSleeve: '左袖长', rightSleeve: '右袖长', neck: '领围', leftWrist: '左手腕围', rightWrist: '右手腕围',
-        upperArm: '上臂围', frontWaist: '前腰节', backWaist: '后腰节'
+        upperArm: '上臂围', frontWaist: '前胸宽', backWaist: '后背宽'
       },
       OTHER_D_PART: [
         '后领窝', '袖山高', '领高'
@@ -371,6 +371,8 @@ void function () {
       },
       D_STYLE: {
         领型: ['中八6cm', '中八6.5cm', '中八7cm', '中八7.5cm', '小方领', '温莎7cm', '立领', '尖领7cm', '尖领扣7cm', '尖领暗扣7cm', '礼服领', '一字领7.5cm', '下领双扣', '其他备注注明'],
+        领子厚度: ['标准厚度', '硬领', '软领'],
+        领插片: ['明插片', '暗插片', '无插片'],
         袖口: ['圆角一粒(共两粒扣)', '圆角竖排二粒(共四粒扣)', '截角竖排二粒(共四粒扣)', '截角一粒(共两粒扣)'],
         门襟: ['明门襟', '暗门襟', '无门襟'],
         口袋: ['截角', '圆角', '尖角', '无口袋'],

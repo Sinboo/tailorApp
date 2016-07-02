@@ -174,6 +174,9 @@ angular.module('tailorApp')
       $scope.settings = [];
       angular.forEach(['A','B','C','D','E'], function (i) {
         var item = {};
+        if ($scope.ngDialogData.order && $scope.ngDialogData.order.dressingStyle) {
+          item.dressingStyle = $scope.ngDialogData.order.dressingStyle;
+        }
         item.figure_part = [];
         item.I = i;
         item.name = nameMap[i];

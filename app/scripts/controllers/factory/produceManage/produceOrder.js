@@ -13,6 +13,7 @@ angular.module('tailorApp')
     param.page = 0;
     param.pageSize = PAGE_SIZE;
     param.status = $stateParams.STATUS == "" ? undefined : $stateParams.STATUS;
+    param.shopNumber = $stateParams.shopNumber == "" ? undefined : $stateParams.shopNumber;
     var queryParams = JSON.parse(JSON.stringify(param));
     factoryService.produceOrders(queryParams).then(function (data) {
       initData(queryParams, data.data)
@@ -55,7 +56,7 @@ angular.module('tailorApp')
           if(data && data.success == true) {
             toaster.pop('success', '订单更新成功！');
             var queryParams = JSON.parse(JSON.stringify(param))
-            customShopService.produceRecords(queryParams).then(function(data){
+            factoryService.produceOrders(queryParams).then(function(data){
               initData(queryParams, data.data)
             });
           }
@@ -82,7 +83,7 @@ angular.module('tailorApp')
           if(data && data.success == true) {
             toaster.pop('success', '订单更新成功！');
             var queryParams = JSON.parse(JSON.stringify(param))
-            customShopService.produceRecords(queryParams).then(function(data){
+            factoryService.produceOrders(queryParams).then(function(data){
               initData(queryParams, data.data)
             });
           }
@@ -115,7 +116,7 @@ angular.module('tailorApp')
           if(data && data.success == true) {
             toaster.pop('success', '确认尺寸成功！');
             var queryParams = JSON.parse(JSON.stringify(param))
-            customShopService.produceRecords(queryParams).then(function(data){
+            factoryService.produceOrders(queryParams).then(function(data){
               initData(queryParams, data.data)
             });
           }
@@ -128,9 +129,41 @@ angular.module('tailorApp')
       })
     };
 
+
+    $scope.sendProduct = function (order) {
+      ngDialog.openConfirm({
+        template: "views/factory/produceManage/modal/sendProductModal.html",
+        className: 'ngdialog-theme-default dialogcaseeditor',
+        controller: 'SendProductModalCtrl'
+      }).then(function (value) {
+        var postData = {}
+        postData.company = value.company;
+        postData.number = value.number;
+        postData.remark = value.remark == "" ? undefined : value.remark;
+        postData.orderNumbers = order.number;
+        var queryParams = JSON.parse(JSON.stringify(postData));
+        factoryService.sendProduct(queryParams).then(function (data) {
+          if(data && data.success == true) {
+            toaster.pop('success', '发货成功！');
+            var queryParams = JSON.parse(JSON.stringify(param))
+            customShopService.produceRecords(queryParams).then(function(data){
+              initData(queryParams, data.data)
+            });
+          }
+          else if (data && data.error) {
+            toaster.pop('warning', data.error.message);
+          }
+        })
+      })
+
+    };
+
     $scope.previewOrder = function (order) {
       $state.go('previewProduceOrder', {isFactory: 'factory', order: order}, {inherit: false});
     };
+
+
+
 
     $scope.queryExpress = commonService.queryExpress;
 

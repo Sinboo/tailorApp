@@ -135,6 +135,10 @@ angular.module('tailorApp')
       produce_order: {
         url: 'factory/produce/{ID}/product',
         method: 'PUT'
+      },
+      send_product: {
+        url: 'factory/produce/deliver',
+        method: 'POST'
       }
 
     };
@@ -239,7 +243,10 @@ angular.module('tailorApp')
     };
     this.productOrder = function (queryParams) {
       return httpService.http({}, factoryUrl.produce_order, queryParams)
-    }
+    };
+    this.sendProduct = function (queryParams) {
+      return httpService.http({}, factoryUrl.send_product, queryParams)
+    };
 
 
 

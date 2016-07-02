@@ -42,7 +42,7 @@
             <td>{{$index + 1}}</td>
             <td>{{bill.shopName}}</td>
             <td>{{bill.shopAtProvince + bill.shopAtCity}}</td>
-            <td>{{bill.amount/100}}</td>
+            <td>{{bill.amount}}</td>
             <td>
               <div class="am-btn-group am-btn-group-xs" ng-if="STATUS == 'DELIVERED'">
                 <button class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="sendPayment(bill)"><span class="am-text-primary">发送付款凭证</span></button>
