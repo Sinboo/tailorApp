@@ -57,7 +57,8 @@
             <td ng-if="STATUS=='READY,PLACED'">
               <div class="am-btn-group am-btn-group-xs">
                 <button ng-if="order.hasConfirmSize && order.status == 'PLACED'" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="" ng-click="previewOrder(order)" ><span class="am-text-primary">已确认尺寸及款式</span></button>
-                <button ng-if="order.status == 'READY'  " class="am-btn am-btn-default am-btn-xs am-text-secondary" ><span class="am-text-primary">未确认尺寸及款式</span></button>
+                <button ng-if="order.status == 'READY' && (order.bodySize !== undefined || order.bodySize !== {} )" class="am-btn am-btn-default am-btn-xs am-text-secondary" ><span class="am-text-primary">未确认尺寸及款式</span></button>
+                <button ng-if="order.status == 'PLACED' && (order.bodySize == undefined || order.bodySize == {} )" class="am-btn am-btn-default am-btn-xs am-text-secondary" ><span class="am-text-primary">已通过其他方式收到尺寸<br/>和款式，开始生产安排</span></button>
               </div>
             </td>
             <td ng-if="STATUS=='PRODUCE'">
