@@ -27,7 +27,8 @@ void function () {
       SHOP_TYPE: {
         BRAND: '成衣品牌定制部',
         STORE: '定制店',
-        CHAIN: '连锁品牌',
+        CHAIN: '定制连锁品牌',
+        TAILOR: '裁缝/量体师',
         OTHER: '其他'
       },
       CUSTOMCLOTHING_TYPE: {
@@ -57,7 +58,7 @@ void function () {
         JQ: '进口其他类型面料'
       },
       FACTORY_TYPE: {
-        SUIT: '西服大衣裤子加工', SHIRT: '衬衫加工', JACKET: '夹克加工', CASHMERE: '羊绒衫加工',
+        SUIT: '西服大衣裤子加工', SHIRT: '衬衫加工', JACKET: '夹克加工', CASHMERE: '羊绒衫加工', CHEONGSAM: '旗袍',
         DOWNJACKET: '羽绒服加工', TEE: 'T恤衫加工', POLO: 'Polo衫加工', OTHER: '其他'
       },
       ACCESSORY_TYPE: {
