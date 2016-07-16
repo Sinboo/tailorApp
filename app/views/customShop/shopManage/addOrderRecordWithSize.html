@@ -450,12 +450,11 @@
             <br />
 
             <div style="width: 1000px">
-              <div class="img-container" style="float: left;" ng-click="deleteImage($index)" ng-repeat="img in uploadImages track by $index">
+              <div class="img-container" style="float: left;" ng-click="click($index)" md-mouse-hold="deleteImage(ticks, $index)" ng-repeat="img in uploadImages track by $index">
                 <img  ng-src="{{img}}" style="width: 100%;height: 100%" />
-                <div class="button-container">点击删除</div>
+                <div class="button-container" style="font-size: 12px">点击放大, 长按删除</div>
               </div>
             </div>
-
             <!--<pre id="console"></pre>-->
           </div>
         </div>

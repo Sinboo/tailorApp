@@ -13,14 +13,6 @@
         </ul>
       </li>
       <li class="admin-parent">
-        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}"><span class=""></span> 辅料 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
-        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav2">
-          <li><a  class="am-text-sm">领带丝巾</a></li>
-          <li><a  class="am-text-sm">扣子</a></li>
-          <li><a  class="am-text-sm">衬布</a></li>
-        </ul>
-      </li>
-      <li class="admin-parent">
         <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav4'}" ui-sref="tailor.providers.factories()"><span ng-class="getClass('factories')">生产商</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
         <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav4">
           <li ng-repeat="business in factoryBusiness" >
@@ -28,6 +20,14 @@
               <span ng-class="{true: 'am-text-primary', false: ''}[business.active]"> {{business.name}} </span>
             </a>
           </li>
+        </ul>
+      </li>
+      <li class="admin-parent">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}"><span class=""></span> 辅料 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav2">
+          <li><a  class="am-text-sm">领带丝巾</a></li>
+          <li><a  class="am-text-sm">扣子</a></li>
+          <li><a  class="am-text-sm">衬布</a></li>
         </ul>
       </li>
       <li class="admin-parent">

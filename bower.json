@@ -28,7 +28,8 @@
     "underscore": "~1.8.3",
     "angular-big": "~1.0.0",
     "angular-plupload": "~0.1.5",
-    "angularPrint": "angular-print#~0.3.8"
+    "angularPrint": "angular-print#~0.3.8",
+    "md-mouse-hold": "~1.0.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

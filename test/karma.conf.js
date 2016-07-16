@@ -52,6 +52,7 @@ module.exports = function(config) {
       'bower_components/underscore/underscore.js',
       'bower_components/angular-plupload/dist/angular-plupload.min.js',
       'bower_components/angularPrint/angularPrint.js',
+      'bower_components/md-mouse-hold/dist/md-mouse-hold.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

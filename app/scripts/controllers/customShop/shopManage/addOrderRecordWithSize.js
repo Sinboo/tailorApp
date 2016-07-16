@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('AddOrderRecordWithSizeCtrl', function ($scope, ngDialog, $state, publicFunc, $stateParams, CLOTHING_TYPE, tailoringTypes, commonService, customShopService, providerService, toaster, DRESSING_STYLE, FIGURE_TYPE, SHOULDER_TYPE, ARM_TYPE, ABDOMEN_TYPE, NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, SPECIAL_TYPE, SPECIFICATION_GENDER) {
+  .controller('AddOrderRecordWithSizeCtrl', function ($scope, ngDialog, $state, publicFunc, $stateParams, CLOTHING_TYPE, tailoringTypes, Lightbox, commonService, customShopService, providerService, toaster, DRESSING_STYLE, FIGURE_TYPE, SHOULDER_TYPE, ARM_TYPE, ABDOMEN_TYPE, NECK_TYPE, HIP_TYPE, WAIST_HEIGHT, SPECIAL_TYPE, SPECIFICATION_GENDER) {
     if ($stateParams.ID) {
       $scope.editFlag = true;
       customShopService.orderDetail($stateParams.ID).then(function (data) {
@@ -396,22 +396,30 @@ angular.module('tailorApp')
 
     uploader.init();
 
-    $scope.deleteImage = function (index) {
-      ngDialog.openConfirm({
-        template: 'views/common/modal/confirmModal.html',
-        className: 'ngdialog-theme-default dialogcaseeditor',
-        data: {message: '您确定要删除此张图片？'}
-      }).then(
-        function(value) {
-          $scope.uploadImages.splice(index, 1);
-          document.getElementById('filelist').innerHTML = '';
-        },
-        function(value) {
-          //Cancel or do nothing
-        }
-      );
+    $scope.deleteImage = function (ticks, index) {
+      if (ticks == 120) {
+        ngDialog.openConfirm({
+          template: 'views/common/modal/confirmModal.html',
+          className: 'ngdialog-theme-default dialogcaseeditor',
+          data: {message: '您确定要删除此张图片？'}
+        }).then(
+          function(value) {
+            $scope.uploadImages.splice(index, 1);
+            document.getElementById('filelist').innerHTML = '';
+          },
+          function(value) {
+            //Cancel or do nothing
+          }
+        );
+      }
+    };
+
+    $scope.click = function (index) {
+      $scope.LightboxImages = [];
+      angular.forEach($scope.uploadImages, function (item) {
+        $scope.LightboxImages.push({'url': item, 'thumbUrl': item})
+      });
+      Lightbox.openModal($scope.LightboxImages, index);
     }
-
-
-
+    
   });

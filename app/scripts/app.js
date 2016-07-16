@@ -27,6 +27,7 @@ angular
     'uuid',
     'angular-plupload',
     'AngularPrint',
+    'md.mouseHold',
     'Big',
     'ui.date',
     'ui.router',
