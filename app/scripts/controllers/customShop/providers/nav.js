@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('ProvidersNavCtrl', function ($scope, $location, $state, FABRIC_TYPE, FACTORY_TYPE ) {
+  .controller('ProvidersNavCtrl', function ($scope, $location, $state, FABRIC_TYPE, FACTORY_TYPE, ACCESSORY_TYPE ) {
 
     $scope.$on('to-providers-nav', function (e, d) {
       angular.forEach($scope.fabricBusiness, function (item) {
@@ -41,6 +41,23 @@ angular.module('tailorApp')
       });
       $state.go('tailor.providers.factories', {business: business.value})
     };
+
+    $scope.accessoryBusiness = [];
+    $.each(ACCESSORY_TYPE, function (key, value) {
+      var typeItem = {};
+      typeItem.value = key;
+      typeItem.name = value;
+      $scope.accessoryBusiness.push(typeItem);
+    });
+
+    $scope.accessoryChoose = function (business, $index) {
+      angular.forEach($scope.accessoryBusiness, function (item) {
+        item.active = $scope.accessoryBusiness[$index] == item;
+      });
+      $state.go('tailor.providers.accessories', {business: business.value})
+    };
+    
+    
 
 
     $scope.getClass = function (path) {

@@ -472,6 +472,16 @@ angular
         templateUrl: '/views/customShop/providers/factoryDetail.html',
         controller: 'FactoryDetailCtrl'
       })
+      .state('tailor.providers.accessories', {
+        url: '/accessories/:business',
+        templateUrl: '/views/customShop/providers/accessories.html',
+        controller: 'AccessoriesCtrl'
+      })
+      .state('tailor.providers.accessoryDetail', {
+        url: '/accessoryDetail/:id',
+        templateUrl: '/views/customShop/providers/accessoryDetail.html',
+        controller: 'AccessoryDetailCtrl'
+      })
 
       .state('tailor.provider', {
         url: '^/1/provider',

@@ -20,6 +20,14 @@ angular.module('tailorApp')
         url: 'factory/{id}',
         method: 'GET'
       },
+      accessory: {
+        url: 'accessory',
+        method: 'GET'
+      },
+      accessory_detail: {
+        url: 'accessory/{id}',
+        method: 'GET'
+      },
       partner: {
         url: 'partner',
         method: 'GET'
@@ -156,6 +164,12 @@ angular.module('tailorApp')
     };
     this.getFactoryDetailById = function (id) {
       return httpService.http({}, providerUrl.factory_detail, {id: id})
+    };
+    this.getAllAccessories = function (queryParams) {
+      return httpService.http({}, providerUrl.accessory, queryParams)
+    };
+    this.getAccessoryDetailById = function (id) {
+      return httpService.http({}, providerUrl.accessory_detail, {id: id})
     };
     this.getAllPartners = function (queryParams) {
       return httpService.http({}, providerUrl.partner, queryParams)
