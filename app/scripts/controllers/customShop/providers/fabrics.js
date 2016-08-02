@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('FabricsCtrl', function ($scope, $rootScope, dataSetterGetter, $location, providerService, $stateParams, PAGE_SIZE) {
+  .controller('FabricsCtrl', function ($scope, $rootScope, dataSetterGetter, $location, providerService, $stateParams, PAGE_SIZE, FABRIC_TYPE) {
     $rootScope.$watch(function () {return $location.path()}, function (newLocation, oldLocation) {
       //console.log('new:' + newLocation);
       //console.log('old:' + oldLocation);
@@ -15,6 +15,9 @@ angular.module('tailorApp')
         param.page = dataSetterGetter.get('page') ? dataSetterGetter.get('page') : 0;
       }
     });
+    
+    $scope.FABRIC_TYPE = FABRIC_TYPE;
+    $scope.type = $stateParams.business;
 
     var param = {};
     param.page = dataSetterGetter.get('page') ? dataSetterGetter.get('page') : 0;

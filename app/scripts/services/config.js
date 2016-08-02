@@ -62,7 +62,7 @@ void function () {
         DOWNJACKET: '羽绒服加工', TEE: 'T恤衫加工', POLO: 'Polo衫加工', OTHER: '其他'
       },
       ACCESSORY_TYPE: {
-        TIE: '领带', ACC: '丝巾、领带等配饰', BUTTON: '扣子', SEWINGTHREAD: '缝纫线',
+        ACC: '丝巾、领带等配饰', BUTTON: '扣子', SEWINGTHREAD: '缝纫线',
         LINING: '衬布、里布等辅料', NEEDLES: '机针', PROPS:'人台、道具等', OTHER: '其他'
       },
       tailoringTypes: {

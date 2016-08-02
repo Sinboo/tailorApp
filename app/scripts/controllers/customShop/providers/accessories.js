@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('AccessoriesCtrl', function ($scope, $rootScope, dataSetterGetter, $location, providerService, $stateParams, PAGE_SIZE) {
+  .controller('AccessoriesCtrl', function ($scope, $rootScope, dataSetterGetter, $location, providerService, $stateParams, PAGE_SIZE, ACCESSORY_TYPE) {
     $rootScope.$watch(function () {return $location.path()}, function (newLocation, oldLocation) {
       if (newLocation.indexOf('accessoryDetail') && oldLocation.indexOf('accessories')) {
         dataSetterGetter.set('accessoryPage', param.page);
@@ -14,6 +14,9 @@ angular.module('tailorApp')
       }
     });
 
+    $scope.ACCESSORY_TYPE = ACCESSORY_TYPE;
+    $scope.type = $stateParams.business;
+    
     var param = {};
     param.page = dataSetterGetter.get('accessoryPage') ? dataSetterGetter.get('accessoryPage') : 0;
     param.business = $stateParams.business == "" ? undefined : $stateParams.business;

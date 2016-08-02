@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('FactoriesCtrl', function ($scope, $rootScope, dataSetterGetter, $location, providerService, $stateParams, PAGE_SIZE) {
+  .controller('FactoriesCtrl', function ($scope, $rootScope, dataSetterGetter, $location, providerService, $stateParams, PAGE_SIZE, FACTORY_TYPE) {
     $rootScope.$watch(function () {return $location.path()}, function (newLocation, oldLocation) {
       if (newLocation.indexOf('factoryDetail') && oldLocation.indexOf('factories')) {
         dataSetterGetter.set('factoryPage', param.page);
@@ -14,6 +14,9 @@ angular.module('tailorApp')
       }
     });
 
+    $scope.FACTORY_TYPE = FACTORY_TYPE;
+    $scope.type = $stateParams.business;
+    
     var param = {};
     param.page = dataSetterGetter.get('factoryPage') ? dataSetterGetter.get('factoryPage') : 0;
     param.business = $stateParams.business == "" ? undefined : $stateParams.business;
