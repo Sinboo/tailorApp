@@ -327,6 +327,16 @@ angular
         templateUrl: '/views/provider/moreManage/changeContact.html',
         controller: 'ChangeContactCtrl'
       })
+      .state('provider.moreManage.addSubAccount', {
+        url: '/addSubAccount',
+        templateUrl: '/views/customShop/otherManage/addSubAccount.html',
+        controller: 'CustomerAddSubAccountCtrl'
+      })
+      .state('provider.moreManage.modifySubAccount', {
+        url: '/modifySubAccount',
+        templateUrl: '/views/customShop/otherManage/modifySubAccount.html',
+        controller: 'CustomerModifySubAccountCtrl'
+      })
 
 
       .state('tailor', {
@@ -360,6 +370,16 @@ angular
         url: '/changePassword',
         templateUrl: '/views/customShop/otherManage/changePassword.html',
         controller: 'ChangePasswordCtrl'
+      })
+      .state('tailor.otherManage.addSubAccount', {
+        url: '/addSubAccount',
+        templateUrl: '/views/customShop/otherManage/addSubAccount.html',
+        controller: 'CustomerAddSubAccountCtrl'
+      })
+      .state('tailor.otherManage.modifySubAccount', {
+        url: '/modifySubAccount',
+        templateUrl: '/views/customShop/otherManage/modifySubAccount.html',
+        controller: 'CustomerModifySubAccountCtrl'
       })
 
 
@@ -492,6 +512,11 @@ angular
         url: '/fabric',
         templateUrl: '/views/customShop/provider/fabric.html',
         controller: 'FabricCtrl'
+      })
+      .state('tailor.provider.factoryDetail', {
+        url: '/factoryDetail/:id',
+        templateUrl: '/views/customShop/providers/factoryDetail.html',
+        controller: 'FactoryDetailCtrl'
       })
       .state('tailor.provider.myApplicaiton', {
         url: '/myApplication/:status',

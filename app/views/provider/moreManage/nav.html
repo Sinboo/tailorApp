@@ -6,6 +6,13 @@
       <li ng-if="providerCurrency !== 'CNY'"><a class="am-text-md" ui-sref="provider.moreManage.fixExchangeRate()" ><span class=""></span> <span ng-class="getClass('fixExchangeRate')"> 变更汇率</span></a></li>
       <li><a class="am-text-md" ui-sref="provider.moreManage.changeContact()" ><span class=""></span> <span ng-class="getClass('changeContact')"> 变更联系人</span></a></li>
 
+      <li class="admin-parent" ng-if="admin">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="provider.moreManage.addSubAccount()"><span ng-class="getClass('SubAccount')">子账户管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav3">
+          <li><a  class="am-text-sm" ui-sref="provider.moreManage.addSubAccount()"><span ng-class="getClass('addSubAccount')">增加账号</span></a></li>
+          <li><a  class="am-text-sm" ui-sref="provider.moreManage.modifySubAccount()"><span ng-class="getClass('modifySubAccount')">子账号修改</span></a></li>
+        </ul>
+      </li>
     </ul>
   </div>
   <!-- sidebar end -->

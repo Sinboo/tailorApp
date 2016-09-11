@@ -3,8 +3,7 @@
   <div class="admin-sidebar">
     <ul class="am-list admin-sidebar-list">
       <li><a class="am-text-md" ui-sref="tailor.otherManage.changePassword()" > <span ng-class="getClass('changePassword')">修改密码</span></a></li>
-
-      <li class="admin-parent">
+      <li class="admin-parent" ng-if="admin || privilege.ADDRESS[0] == 'ALL'">
         <a class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav4'}" ui-sref="tailor.otherManage.addPosition()"><span ng-class="getClass('addPosition')"></span> 地址管理 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
         <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav4">
           <li ><a ui-sref="tailor.otherManage.addPosition()" class="am-text-sm"><span class=""></span><span ng-class="getClass('addPosition')">新增地址</span></a></li>
@@ -13,6 +12,13 @@
           <li ><a href="" ng-click="go('factory')" ui-sref="tailor.otherManage.positionManage({type: 'factory', addressType: undefined})" class="am-text-sm"><span ng-class="getClass('positionManage/factory')">工厂地址</span></a></li>
           <li ><a href="" ng-click="choose(1)" class="am-text-sm"><span ng-class="{true: 'am-text-primary', false: ''}[addressType == 1]">我的地址</span></a></li>
           <li ><a href="" ng-click="choose(2)" class="am-text-sm"><span ng-class="{true: 'am-text-primary', false: ''}[addressType == 2]">其他地址</span></a></li>
+        </ul>
+      </li>
+      <li class="admin-parent" ng-if="admin">
+        <a  class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav3'}" ui-sref="tailor.otherManage.addSubAccount()"><span ng-class="getClass('SubAccount')">子账户管理</span>  <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in " id="collapse-nav3">
+          <li><a  class="am-text-sm" ui-sref="tailor.otherManage.addSubAccount()"><span ng-class="getClass('addSubAccount')">增加账号</span></a></li>
+          <li><a  class="am-text-sm" ui-sref="tailor.otherManage.modifySubAccount()"><span ng-class="getClass('modifySubAccount')">子账号修改</span></a></li>
         </ul>
       </li>
     </ul>

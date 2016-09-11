@@ -32,7 +32,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="subAccount in subAccounts" ng-if="subAccount.merchantType == 'FACTORY'">
+        <tr ng-repeat="subAccount in subAccounts" >
           <td>{{$index + 1}}</td>
           <td>{{subAccount.accountNumber}}</td>
           <td>{{subAccount.accountName}}</td>

@@ -29,8 +29,8 @@
       <ul class="am-nav am-nav-pills am-topbar-nav">
         <li class="tailor-padding" ng-class="getLayoutClass('shopManage')"><a ui-sref="tailor.shopManage.orderRecord({STATUS: 'DOING'})">店内管理</a></li>
         <li class="tailor-padding" ng-class="getLayoutClass('otherManage')"><a ui-sref="tailor.otherManage.addPosition()">其他业务管理</a></li>
-        <li class="tailor-padding" ng-class="getLayoutClass('provider')" ><a ui-sref="tailor.provider.fabric()"><span  class="">我的供应商</span></a></li>
-        <li class="tailor-padding" ng-class="getLayoutClass('all')"><a href="" ng-click="allProviderClicked()">全部供应商</a></li>
+        <li ng-if="admin || privilege.PARTNER[0] == 'ALL'" class="tailor-padding" ng-class="getLayoutClass('provider')" ><a ui-sref="tailor.provider.fabric()"><span  class="">我的供应商</span></a></li>
+        <li ng-if="admin || privilege.PARTNER[0] == 'ALL'" class="tailor-padding" ng-class="getLayoutClass('all')"><a href="" ng-click="allProviderClicked()">全部供应商</a></li>
       </ul>
 
       <div class="am-topbar-right">

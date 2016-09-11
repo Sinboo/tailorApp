@@ -6,6 +6,9 @@
 angular.module('tailorApp')
   .controller('MoreManageNavCtrl', function ($scope, $location, localStorageService) {
 
+    $scope.privilege = localStorageService.cookie.get('user').privilege;
+    $scope.admin = localStorageService.cookie.get('user').admin;
+    
     $scope.providerCurrency = localStorageService.cookie.get('user').currency;
 
     $scope.getClass = function (path) {

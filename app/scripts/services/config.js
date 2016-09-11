@@ -231,6 +231,20 @@ void function () {
         PARTNER: '确认业务合作关系',
         PRODUCE: '下单分配'
       },
+      PRIVILEGE_CUSTOMER: {
+        ORDER: '订单管理',
+        PURCHASE: '面料管理',
+        PRODUCE: '生产管理',
+        IN: '出入库管理',
+        ADDRESS: '地址管理',
+        PARTNER: '供应商管理'
+      },
+      PRIVILEGE_FABRIC: {
+        ORDER: '订单管理',
+        PRODUCE: '产品管理',
+        PARTNER: '商户管理',
+        IN: '其他管理'
+      },
       FABRIC_RECEIVE_STATUS: {
         DELIVERED: '待收货',
         SUCCESS: '已收货'

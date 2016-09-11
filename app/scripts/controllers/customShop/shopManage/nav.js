@@ -4,8 +4,11 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('ShopManageNavCtrl', function ($scope, $location) {
+  .controller('ShopManageNavCtrl', function ($scope, $location, localStorageService) {
 
+    $scope.privilege = localStorageService.cookie.get('user').privilege;
+    $scope.admin = localStorageService.cookie.get('user').admin;
+    
     $scope.$on('to-shopManageNav', function(e, d) {
       if ($location.path().indexOf('INIT') !== -1 || $location.path().indexOf('OUT') !== -1) {
         $scope.unNotiHighLight = '';

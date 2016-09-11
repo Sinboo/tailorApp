@@ -4,7 +4,10 @@
 'use strict';
 
 angular.module('tailorApp')
-  .controller('OtherManageNavCtrl', function ($scope, $location, $state) {
+  .controller('OtherManageNavCtrl', function ($scope, $location, $state, localStorageService) {
+
+    $scope.privilege = localStorageService.cookie.get('user').privilege;
+    $scope.admin = localStorageService.cookie.get('user').admin;
 
     $scope.getClass = function (path) {
       return $location.path().indexOf(path) !== -1  ? 'am-text-primary' : '';

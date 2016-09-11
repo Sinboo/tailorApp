@@ -8,11 +8,11 @@
           <li ng-repeat="fabric in fabrics"><a ui-sref="tailor.repertory.quickQuery({fabricId: fabric.number, shortName: fabric.shortName})" class="am-text-sm"><span class=""></span>{{fabric.shortName}}</a></li>
         </ul>
       </li>
-      <li><a class="am-text-md"  ><span class=""></span> <span ng-class="getClass('leader')"> 辅料供应商</span></a></li>
+      <!--<li><a class="am-text-md"  ><span class=""></span> <span ng-class="getClass('leader')"> 辅料供应商</span></a></li>-->
       <li class="admin-parent">
         <a class="am-cf am-text-md" data-am-collapse="{target: '#collapse-nav2'}"><span class=""></span> 生产供应商 <span class="am-icon-angle-down am-fr am-margin-right"></span></a>
         <ul class="am-list am-collapse admin-sidebar-sub am-out " id="collapse-nav2">
-          <li ><a href="#" class="am-text-sm"><span class="am-icon-dist"></span>开发中，敬请期待</a></li>
+          <li ng-repeat="factory in factories"><a ui-sref="tailor.provider.factoryDetail({id: factory.number})" class="am-text-sm"><span class=""></span>{{factory.shortName}}</a></li>
         </ul>
       </li>
       <li class="admin-parent">

@@ -1,0 +1,65 @@
+<style>
+  .fabric-detail-padding {
+    padding: 40px;
+  }
+</style>
+<div class="admin-content">
+
+  <div class="am-g am-u-sm-12">
+    <div class="am-u-sm-12">
+      <ol class="am-breadcrumb">
+        <li><a ui-sref="factory.otherManage.fixPWD()">其他管理</a></li>
+        <li class="">子账户管理</li>
+        <li class="am-active">增加账号</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="am-g fabric-detail-padding">
+    <legend><span class="am-text-secondary am-text-sm">提示：你可以设置多个子账号，每个子账号有不同的管理权限，这样便于业务管理及责任明确。</span></legend>
+    <div class="am-g">
+      <div class="am-u-sm-6" >
+        <form class="am-form am-form-horizontal">
+          <div class="am-form-group">
+            <label for="doc-ipt-pwd-4" class="am-u-sm-4 am-form-label am-text-sm">子账号名称:</label>
+            <div class="am-u-sm-8">
+              <input type="text" id="doc-ipt-pwd-4" placeholder="" ng-model="account.accountName"/>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-pwd-2" class="am-u-sm-4 am-form-label am-text-sm">密码:</label>
+            <div class="am-u-sm-8">
+              <input type="password" id="doc-ipt-pwd-2" placeholder="" ng-model="account.passwd"/>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="doc-ipt-pwd-3" class="am-u-sm-4 am-form-label am-text-sm">确认密码:</label>
+            <div class="am-u-sm-8">
+              <input type="password" id="doc-ipt-pwd-3" placeholder="" ng-model="account.confirmPasswd"/>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label class="am-u-sm-4 am-form-label am-text-sm">权限分配:</label>
+            <div class="am-u-sm-8">
+              <div class="am-form-group" style="width: 500px" id="permission_assignment">
+                <label class="am-checkbox-inline" ng-repeat="permission in permissions">
+                  <input type="checkbox" checklist-model="account.permission" checklist-value="permission.shortName" > {{permission.fullName}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <div class="am-u-sm-2 am-u-sm-offset-10">
+              <button type="submit" class="am-btn am-btn-primary" ng-click="validate() && confirm()">确认</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
