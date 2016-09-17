@@ -243,7 +243,7 @@ void function () {
         ORDER: '订单管理',
         PRODUCE: '产品管理',
         PARTNER: '商户管理',
-        IN: '其他管理'
+        OTHER: '其他管理'
       },
       FABRIC_RECEIVE_STATUS: {
         DELIVERED: '待收货',

@@ -30,7 +30,7 @@
         <li ng-if="admin || privilege.ORDER[0] == 'ALL'" class="tailor-padding" ng-class="getLayoutClass('orderManage')"><a ui-sref="provider.orderManage.myOrderManage({STATUS: 'PAYED'})">订单管理</a></li>
         <li ng-if="admin || privilege.PRODUCE[0] == 'ALL'" class="tailor-padding" ng-class="getLayoutClass('businessManage')"><a ui-sref="provider.businessManage.addProduct()">产品管理</a></li>
         <li ng-if="admin || privilege.PARTNER[0] == 'ALL'" class="tailor-padding" ng-class="getLayoutClass('customShop')" ><a href="" ng-click="customShopClicked()"><span  class="">定制合作商户</span></a></li>
-        <li ng-if="admin || privilege.IN[0] == 'ALL'" class="tailor-padding" ng-class="getLayoutClass('moreManage')"><a ui-sref="provider.moreManage.fixPWD()">其他管理</a></li>
+        <li ng-if="admin || privilege.OTHER[0] == 'ALL'" class="tailor-padding" ng-class="getLayoutClass('moreManage')"><a ui-sref="provider.moreManage.fixPWD()">其他管理</a></li>
       </ul>
 
       <div class="am-topbar-right" >
