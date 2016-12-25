@@ -34,7 +34,6 @@ angular.module('tailorApp')
     var year;
     if (parseInt(month) + 1 == 12) {
       $scope.months = [12, 1];
-      year = dateNow.getFullYear() + 1;
     }
     else {
       $scope.months = [parseInt(month) + 1, parseInt(month) + 2];
@@ -56,8 +55,18 @@ angular.module('tailorApp')
           })
         }
         delete item.tailoringType;
-        
+
+        if (parseInt(month) + 1 == 12) {
+          if (item.month == 1) {
+            year = dateNow.getFullYear() + 1;
+          }
+          else {
+            year = dateNow.getFullYear();
+          }
+        }
         var daysInOneMonth = commonService.getDaysInOneMonth(year, item.month);
+        console.log(item.month, year);
+
         $scope.daysList = [];
         if (item.isFirstHalf == 'true') {
           for (var i=1; i<=15; i++) {
@@ -65,7 +74,7 @@ angular.module('tailorApp')
           }
         }
         if (item.isFirstHalf == 'false') {
-          for (var i=15; i<=daysInOneMonth; i++) {
+          for (var i=16; i<=daysInOneMonth; i++) {
             $scope.daysList.push(item.month + '月' + i + '日');
           }
         }
@@ -80,9 +89,9 @@ angular.module('tailorApp')
             console.log(value);
             var postData = {};
             postData.clothingType = item.clothingTypes;
-            postData.isFirstHalf = item.isFirstHalf;
+            postData.isFirstHalf = item.isFirstHalf === 'true';
             var month2 = item.month < 10 ? '0' + item.month : item.month;
-            postData.month = year.toString() + month2;
+            postData.month = parseInt(year.toString() + month2);
             postData.taskNum = [];
             angular.forEach(value, function (day) {
               postData.taskNum.push(day.count);
