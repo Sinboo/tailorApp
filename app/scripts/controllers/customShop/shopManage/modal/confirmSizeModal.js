@@ -17,9 +17,12 @@ angular.module('tailorApp')
     $scope.tailoringTypes = tailoringTypes;
     $scope.produceDetails = {};
 
+    console.log($scope.order)
     $scope.bodySize = {};
     if ($scope.ngDialogData.order && $scope.ngDialogData.order.bodySize) {
-      $scope.bodySize = $scope.ngDialogData.order.bodySize.upperBody;
+      if ($scope.ngDialogData.order.bodySize.upperBody) {
+        $scope.bodySize = $scope.ngDialogData.order.bodySize.upperBody;
+      }
       angular.extend($scope.bodySize, $scope.ngDialogData.order.bodySize.lowerBody);
     }
 
