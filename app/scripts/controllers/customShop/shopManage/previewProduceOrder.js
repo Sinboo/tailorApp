@@ -30,7 +30,9 @@ angular.module('tailorApp')
 
     $scope.bodySize = {};
     if ($scope.order && $scope.order.bodySize) {
-      $scope.bodySize = $scope.order.bodySize.upperBody;
+      if ($scope.order.bodySize.upperBody) {
+        $scope.bodySize = $scope.order.bodySize.upperBody;
+      }
       angular.extend($scope.bodySize, $scope.order.bodySize.lowerBody);
     }
 
